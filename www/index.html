@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta http-equiv="Content-Security-Policy" content="script-src * 'unsafe-eval';connect-src * 'unsafe-eval';object-src 'self';style-src * 'unsafe-inline';img-src *">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+	
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="cordova.js"></script>
+
+	 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBv0LKFuWL9wFdOsT_hHjoQIknA7FoAGM4&sensor=true"></script>
+	<script src="lib/ngCordova/ng-cordova.min.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/AppCtrl.js"></script>
+    <script src="js/controllers/MenuCtrl.js"></script>
+    <script src="js/controllers/LoginCtrl.js"></script>
+    <script src="js/controllers/LoginComercialCtrl.js"></script>
+    <script src="js/controllers/CadastroCtrl.js"></script>
+    <script src="js/controllers/CadastroComercialCtrl.js"></script>
+    <script src="js/controllers/HomeCtrl.js"></script>
+    <script src="js/controllers/CategoriasCtrl.js"></script>
+    <script src="js/controllers/AgendaCtrl.js"></script>
+    <script src="js/controllers/ConversasCtrl.js"></script>
+    <script src="js/controllers/EasyBeautyCtrl.js"></script>
+    <script src="js/controllers/EasyClubCtrl.js"></script>
+    <script src="js/controllers/PerfilCtrl.js"></script>
+    <script src="js/controllers/AtendimentosCtrl.js"></script>
+    <script src="js/controllers/MapaCtrl.js"></script>
+    <script src="js/controllers/ListaCtrl.js"></script>
+    <script src="js/controllers/PertoCtrl.js"></script>
+    <script src="js/controllers/PortipoCtrl.js"></script>
+    <script src="js/controllers/SugestoesCtrl.js"></script>
+    <script src="js/controllers/ConfiguracoesCtrl.js"></script>
+    <script src="js/controllers/ChatCtrl.js"></script>
+    <script src="js/controllers/RotaCtrl.js"></script>
+  </head>
+
+  <body ng-app="easyspa" ng-controller="AppCtrl">
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>
