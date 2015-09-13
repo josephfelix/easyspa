@@ -38,7 +38,7 @@
 						<input type="password" ng-model="cadastro.senha" placeholder="Senha" />
 					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
-						<input type="text" ng-model="cadastro.cpf" placeholder="Digite seu CPF" />
+						<input type="tel" ng-model="cadastro.cpf" mask='999.999.999-99' mask-clean="true" placeholder="Digite seu CPF" />
 					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
 						<input type="text" ng-model="cadastro.razaosocial" placeholder="Raz&atilde;o social" />
@@ -47,7 +47,7 @@
 						<input type="text" ng-model="cadastro.nomefantasia" placeholder="Nome fantasia" />
 					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
-						<input type="text" ng-model="cadastro.cnpj" placeholder="Digite seu CNPJ" />
+						<input type="tel" ng-model="cadastro.cnpj" mask="99.999.999/9999-99" mask-clean="true" placeholder="Digite seu CNPJ" />
 					</label>
 				</div>
 				<div class="list list-inset card">
@@ -70,13 +70,13 @@
 						<input type="text" ng-model="cadastro.estado" placeholder="Estado" ng-disabled="localizou" />
 					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
-						<input type="text" ng-model="cadastro.celcpf" placeholder="Telefone celular" />
+						<input type="tel" ng-model="cadastro.celcpf" mask="(99) 9?9999-9999" mask-clean="true" placeholder="Telefone celular" />
 					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
-						<input type="text" ng-model="cadastro.telcnpj" placeholder="Telefone fixo" />
+						<input type="tel" ng-model="cadastro.telcnpj" mask="(99) 9?9999-9999" mask-clean="true" placeholder="Telefone fixo" />
 					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
-						<input type="text" ng-model="cadastro.celcnpj" placeholder="Telefone celular" />
+						<input type="tel" ng-model="cadastro.celcnpj" mask="(99) 9?9999-9999" mask-clean="true" placeholder="Telefone celular" />
 					</label>
 				</div>
 				<div class="list">

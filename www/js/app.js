@@ -1,9 +1,10 @@
 angular.module('easyspa.controllers', []);
 angular.module('easyspa', [
-			'ionic', 
-			'easyspa.directives', 
+			'ionic',
+			'easyspa.directives',
 			'easyspa.controllers',
-			'ngCordova'
+			'ngCordova',
+			'ngMask'
 		])
 
 .run(function($ionicPlatform) {
@@ -25,32 +26,32 @@ angular.module('easyspa', [
     templateUrl: 'templates/login.html',
 	controller: 'LoginCtrl'
   })
-  
+
   .state('logincomercial', {
     url: '/logincomercial',
     templateUrl: 'templates/logincomercial.html',
 	controller: 'LoginComercialCtrl'
   })
-  
+
   .state('cadastro', {
     url: '/cadastro',
     templateUrl: 'templates/cadastro.html',
 	controller: 'CadastroCtrl'
   })
-  
+
   .state('cadastrocomercial', {
     url: '/cadastrocomercial',
     templateUrl: 'templates/cadastrocomercial.html',
 	controller: 'CadastroComercialCtrl'
   })
-  
+
   .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-  
+
   .state('app.home', {
     url: "/home",
     views: {
@@ -60,7 +61,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.todascategorias', {
     url: "/todascategorias",
     views: {
@@ -70,7 +71,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.configuracoes', {
     url: "/configuracoes",
     views: {
@@ -80,7 +81,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.agenda', {
     url: "/agenda",
     views: {
@@ -90,7 +91,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.easyclub', {
     url: "/easyclub",
     views: {
@@ -100,7 +101,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.easybeauty', {
     url: "/easybeauty",
     views: {
@@ -110,7 +111,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.conversas', {
     url: "/conversas",
     views: {
@@ -120,7 +121,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.mapa', {
     url: "/mapa",
     views: {
@@ -130,7 +131,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.lista', {
     url: "/lista",
     views: {
@@ -140,7 +141,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.perfil', {
     url: "/perfil/:id",
     views: {
@@ -150,7 +151,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.chat', {
     url: "/chat/:id",
     views: {
@@ -163,7 +164,7 @@ angular.module('easyspa', [
 		funcionaria: null
 	}
   })
-  
+
   .state('app.rota', {
     url: "/rota/:id",
     views: {
@@ -176,7 +177,7 @@ angular.module('easyspa', [
 		funcionaria: null
 	}
   })
-  
+
   .state('app.perto', {
     url: "/perto",
     views: {
@@ -186,7 +187,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.portipo', {
     url: "/portipo",
     views: {
@@ -196,7 +197,7 @@ angular.module('easyspa', [
       }
     }
   })
-  
+
   .state('app.sugestoes', {
     url: "/sugestoes",
     views: {
@@ -206,8 +207,8 @@ angular.module('easyspa', [
       }
     }
   })
-  
-  
+
+
   .state('app.atendimentos', {
     url: "/atendimentos",
     views: {
@@ -217,8 +218,8 @@ angular.module('easyspa', [
       }
     }
   })
-  
-  
+
+
 	if ( !localStorage.hasOwnProperty('login_easyspa') )
 	{
 		$urlRouterProvider.otherwise('/login');

@@ -147,7 +147,7 @@ angular.module('easyspa.controllers')
 			$ionicScrollDelegate.scrollTop();
       $ionicScrollDelegate.resize();
     }, 50);
-		
+
 	}
 
 
@@ -462,5 +462,14 @@ angular.module('easyspa.controllers')
 	   $ionicSlideBoxDelegate.enableSlide(false);
 	};
 
+	function validStage(index){
+
+		if(index === 0){ // Valida a parte inicial
+			if(cadastro.tipo == "PF"){ // Validando pessoa fisica
+					
+			}
+		}
+
+	}
 
 });
