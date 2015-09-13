@@ -1,23 +1,24 @@
 angular.module('easyspa.controllers')
 .controller('CadastroComercialCtrl',
-	function( 
-		$scope, 
-		$http, 
-		$location, 
-		$ionicActionSheet, 
-		$ionicPopup, 
+	function(
+		$scope,
+		$http,
+		$location,
+		$ionicActionSheet,
+		$ionicPopup,
 		$rootScope,
 		$ionicLoading,
 		$cordovaCamera,
 		$cordovaGeolocation,
 		$cordovaInAppBrowser,
 		$ionicSlideBoxDelegate,
-		$ionicScrollDelegate
+		$ionicScrollDelegate,
+		$timeout
 	)
 {
 	$scope.escolheufoto = false;
 	$scope.fotoUsuario = '#';
-	
+
 	$scope.segunda_feira = true;
 	$scope.terca_feira = true;
 	$scope.quarta_feira = true;
@@ -25,7 +26,7 @@ angular.module('easyspa.controllers')
 	$scope.sexta_feira = true;
 	$scope.sabado = false;
 	$scope.domingo = false;
-	
+
 	$scope.de_segunda_feira = '09:00:00';
 	$scope.de_terca_feira = '09:00:00';
 	$scope.de_quarta_feira = '09:00:00';
@@ -33,7 +34,7 @@ angular.module('easyspa.controllers')
 	$scope.de_sexta_feira = '09:00:00';
 	$scope.de_sabado = '09:00:00';
 	$scope.de_domingo = '09:00:00';
-	
+
 	$scope.ate_segunda_feira = '18:00:00';
 	$scope.ate_terca_feira = '18:00:00';
 	$scope.ate_quarta_feira = '18:00:00';
@@ -41,13 +42,13 @@ angular.module('easyspa.controllers')
 	$scope.ate_sexta_feira = '18:00:00';
 	$scope.ate_sabado = '18:00:00';
 	$scope.ate_domingo = '18:00:00';
-	
+
 	var exclude = /[^@\-\.\w]|^[_@\.\-]|[\._\-]{2}|[@\.]{2}|(@)[^@]*\1/;
 	var check = /@[\w\-]+\./;
 	var checkend = /\.[a-zA-Z]{2,3}$/;
 	$scope.localizou = false;
 	$scope.cadastro = {fbid: '', categoria: 1, tipo: 'PF', categorias:[]};
-	
+
 	$scope.categorias = [
 		{id: 1, nome: 'Pés e Mãos'},
 		{id: 2, nome: 'Massagem'},
@@ -80,7 +81,7 @@ angular.module('easyspa.controllers')
 		$scope.cadastro.email = $rootScope.facebook.email;
 		$scope.fotoUsuario = $rootScope.facebook.picture;
 	}
-	
+
 	$scope.marcarCategoria = function( id, nome )
 	{
 		$scope.cadastro.categorias.push( {id: id, nome:nome} );
@@ -97,12 +98,12 @@ angular.module('easyspa.controllers')
 			for ( var ind = 10; ind <= $scope.categorias.length; ind++ )
 			{
 				$scope.categorias[ind].oculto = true;
-			}	
+			}
 			$scope.categoriasocultas = false;
-		}	
+		}
 		$scope.$apply();
 	}
-	
+
 	$scope.removerCategoria = function( categoria )
 	{
 		$scope.cadastro.categorias.splice( $scope.cadastro.categorias.indexOf( categoria ), 1 );
@@ -119,25 +120,37 @@ angular.module('easyspa.controllers')
 			for ( var ind = 10; ind <= $scope.categorias.length; ind++ )
 			{
 				$scope.categorias[ind].oculto = false;
-			}	
+			}
 			$scope.categoriasocultas = false;
-		}	
+		}
 		$scope.$apply();
 	}
-	
+
+	$scope.data = {};
+	$scope.data.currSlide = 0;
 	$scope.anterior = function()
 	{
+		$scope.data.currSlide = $scope.data.currSlide - 1;
 		$ionicSlideBoxDelegate.previous();
-		$ionicScrollDelegate.scrollTop();
+		$timeout( function() {
+			$ionicScrollDelegate.scrollTop();
+      $ionicScrollDelegate.resize();
+    }, 50);
 	}
-	
+
 	$scope.proximo = function()
 	{
+
+		$scope.data.currSlide = $scope.data.currSlide + 1;
 		$ionicSlideBoxDelegate.next();
-		$ionicScrollDelegate.scrollTop();
+		$timeout( function() {
+			$ionicScrollDelegate.scrollTop();
+      $ionicScrollDelegate.resize();
+    }, 50);
+		
 	}
-  
-  
+
+
 	$cordovaGeolocation.getCurrentPosition({enableHightAccuracy: false})
 	.then(function(pos)
 	{
@@ -162,14 +175,14 @@ angular.module('easyspa.controllers')
 			}
 		});
 	});
-	
+
 	$scope.selecionarFoto = function()
 	{
 		var fonte = [
 			Camera.PictureSourceType.CAMERA,
 			Camera.PictureSourceType.PHOTOLIBRARY
 		];
-	
+
 		var options = {
 			'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT,
 			'title': 'Selecione a origem da foto',
@@ -179,17 +192,17 @@ angular.module('easyspa.controllers')
 			'addCancelButtonWithLabel': 'Cancelar',
 			'position': [20, 40]
 		};
-		
+
 		window.plugins.actionsheet.show(options, function( opc )
 		{
 			if ( opc != 3 )
 			{
 				$cordovaCamera.getPicture(
-				{ 
-					quality: 100, 
-					destinationType: Camera.DestinationType.FILE_URI, 
+				{
+					quality: 100,
+					destinationType: Camera.DestinationType.FILE_URI,
 					allowEdit: true,
-					encodingType: 0, 
+					encodingType: 0,
 					sourceType: fonte[opc-1],
 					mediaType: Camera.MediaType.PICTURE,
 					correctOrientation: true,
@@ -199,17 +212,17 @@ angular.module('easyspa.controllers')
 				{
 					$scope.fotoUsuario = imageData;
 					$scope.escolheufoto = true;
-				}); 
+				});
 				return true;
 			}
 		});
 	}
-	
+
 	$scope.verTermos = function()
 	{
 		$cordovaInAppBrowser.open( URL_ASSETS_EASYSPA + 'termos', '_blank');
 	}
-	
+
 	$scope.finalizarCadastro = function( cadastro )
 	{
 		if ( $rootScope.offline )
@@ -220,7 +233,7 @@ angular.module('easyspa.controllers')
 			});
 			return;
 		}
-		
+
 		if ( !cadastro.aceitou_termos )
 		{
 			$ionicPopup.alert({
@@ -229,66 +242,66 @@ angular.module('easyspa.controllers')
 			});
 			return;
 		}
-		
+
 		if ( !cadastro.nome )
 		{
 			$ionicPopup.alert({
 				title: 'Erro!',
 				template: 'ERRO: Preencha seu nome para continuar!'
-			});   
+			});
 			return;
 		}
-		
+
 		if ( !cadastro.email )
 		{
 			$ionicPopup.alert({
 				title: 'Erro!',
 				template: 'ERRO: Preencha um e-mail válido para continuar!'
-			});   
+			});
 			return;
 		}
-		
-		if ( ( ( cadastro.email.search(exclude) != -1) || 
+
+		if ( ( ( cadastro.email.search(exclude) != -1) ||
 			   ( cadastro.email.search(check) ) == -1) ||
 			   ( cadastro.email.search(checkend) == -1) )
 		{
 			$ionicPopup.alert({
 				title: 'Erro!',
 				template: 'ERRO: E-mail inválido, insira um e-mail no formato exemplo@gmail.com'
-			});   
+			});
 			return;
 		}
-		
+
 		if ( !cadastro.senha )
 		{
 			$ionicPopup.alert({
 				title: 'Erro!',
 				template: 'ERRO: Insira uma senha para continuar'
-			});   
+			});
 			return;
 		}
-		
-		
+
+
 		if ( !cadastro.rua || !cadastro.complemento || !cadastro.bairro || !cadastro.cidade || !cadastro.estado )
 		{
 			$ionicPopup.alert({
 				title: 'Erro!',
 				template: 'ERRO: Preencha corretamente os campos de endere&ccedil;o para continuar!'
-			});   
+			});
 			return;
 		}
-		
+
 		if ( !$scope.segunda_feira && !$scope.terca_feira && !$scope.quarta_feira &&
 			 !$scope.quinta_feira && !$scope.sexta_feira && !$scope.sabado && !$scope.domingo )
 		{
 			$ionicPopup.alert({
 				title: 'Erro!',
 				template: 'ERRO: Marque pelo menos 1 dia da semana para continuar!'
-			});   
+			});
 			return;
 		}
-		
-		
+
+
 		var dadosEnviar = {
 			nome: cadastro.nome,
 			email: cadastro.email,
@@ -313,7 +326,7 @@ angular.module('easyspa.controllers')
 			sexta_feira: $scope.sexta_feira,
 			sabado: $scope.sabado,
 			domingo: $scope.domingo,
-			
+
 			de_segunda_feira: $scope.de_segunda_feira,
 			de_terca_feira: $scope.de_terca_feira,
 			de_quarta_feira: $scope.de_quarta_feira,
@@ -321,7 +334,7 @@ angular.module('easyspa.controllers')
 			de_sexta_feira: $scope.de_sexta_feira,
 			de_sabado: $scope.de_sabado,
 			de_domingo: $scope.de_domingo,
-			
+
 			ate_segunda_feira: $scope.ate_segunda_feira,
 			ate_terca_feira: $scope.ate_terca_feira,
 			ate_quarta_feira: $scope.ate_quarta_feira,
@@ -330,10 +343,10 @@ angular.module('easyspa.controllers')
 			ate_sabado: $scope.ate_sabado,
 			ate_domingo: $scope.ate_domingo
 		};
-		
+
 		if ( $rootScope.facebook )
 			dadosEnviar.fbid = $rootScope.facebook.id;
-			
+
 		if ( $scope.escolheufoto )
 		{
 			$ionicLoading.show({
@@ -345,11 +358,11 @@ angular.module('easyspa.controllers')
 			options.fileName = imagem.substr(imagem.lastIndexOf('/')+1);
 			options.mimeType = "image/jpeg";
 			options.params = dadosEnviar;
-			
+
 			var ft = new FileTransfer();
-			ft.upload( 
-				imagem, 
-				encodeURI( URL_EASYSPA + 'registrarfuncionaria/?cache=' + Math.random() ), 
+			ft.upload(
+				imagem,
+				encodeURI( URL_EASYSPA + 'registrarfuncionaria/?cache=' + Math.random() ),
 				function( result )
 				{
 					var json = JSON.parse( result.response );
@@ -387,7 +400,7 @@ angular.module('easyspa.controllers')
 							template: 'ERRO: ' + json.msg
 						});
 					}
-				}, 
+				},
 				function(e)
 				{
 					$ionicLoading.hide();
@@ -401,7 +414,7 @@ angular.module('easyspa.controllers')
 			$ionicLoading.show({
 				content: 'Cadastrando...'
 			});
-		
+
 			dadosEnviar.foto = $scope.fotoUsuario;
 			$http.post( URL_EASYSPA + 'registrarfuncionaria', dadosEnviar )
 			.then(function(result)
@@ -443,4 +456,11 @@ angular.module('easyspa.controllers')
 			});
 		}
 	}
+
+
+	$scope.disableSwipe = function() {
+	   $ionicSlideBoxDelegate.enableSlide(false);
+	};
+
+
 });

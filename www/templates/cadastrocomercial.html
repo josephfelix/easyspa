@@ -5,8 +5,8 @@
 		</ion-nav-back-button>
 	</ion-nav-bar>
 	<ion-content class="gray-background">
-		<ion-slide-box show-pager="false" auto-play="false">
-			<ion-slide>
+		<ion-slide-box show-pager="false" auto-play="false" ng-init="disableSwipe()">
+			<ion-slide ng-if="data.currSlide == 0">
 				<div class="list list-inset card">
 					<div class="item item-divider">
 						<h2>Tipo</h2>
@@ -93,7 +93,7 @@
 					</div>
 				</div>
 			</ion-slide>
-			<ion-slide>
+			<ion-slide ng-if="data.currSlide == 1">
 				<div class="list list-inset card">
 					<div class="item item-divider">
 						<h2>Sobre voc&ecirc;</h2>
@@ -124,7 +124,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="item item-checkbox">
 							<label class="checkbox">
 								<input type="checkbox" ng-model="terca_feira" checked="checked" />
@@ -141,7 +141,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="item item-checkbox">
 							<label class="checkbox">
 								<input type="checkbox" ng-model="quarta_feira" checked="checked" />
@@ -158,7 +158,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="item item-checkbox">
 							<label class="checkbox">
 								<input type="checkbox" ng-model="quinta_feira" checked="checked" />
@@ -175,7 +175,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="item item-checkbox">
 							<label class="checkbox">
 								<input type="checkbox" ng-model="sexta_feira" checked="checked" />
@@ -192,7 +192,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="item item-checkbox">
 							<label class="checkbox">
 								<input type="checkbox" ng-model="sabado">
@@ -209,7 +209,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="item item-checkbox">
 							<label class="checkbox">
 								<input type="checkbox" ng-model="domingo">
@@ -228,7 +228,7 @@
 						</li>
 					</ul>
 				</div>
-				
+
 				<div class="list">
 					<div class="item">
 						<div class="row">
@@ -246,7 +246,7 @@
 					</div>
 				</div>
 			</ion-slide>
-			<ion-slide>
+			<ion-slide ng-if="data.currSlide == 2">
 				<div class="list list-inset card">
 					<div class="item item-divider" ng-show="cadastro.categorias.length">
 						<h2>Especialidades</h2>
@@ -255,16 +255,16 @@
 						<button class="button icon button-icon ion-minus-circled" ng-click="removerCategoria(categoria)"></button>
 						{{categoria.nome}}
 					</div>
-					
+
 					<div class="item item-divider" ng-show="!categoriasocultas">
 						<h2>Selecione sua especialidade</h2>
 					</div>
-					
+
 					<a class="item" href="#" ng-repeat="categoria in categorias" ng-click="marcarCategoria(categoria.id, categoria.nome)" ng-show="!categoria.oculto">
 						{{categoria.nome}}
 					</a>
 				</div>
-				
+
 				<div class="list">
 					<div class="item">
 						<div class="row">
@@ -282,20 +282,20 @@
 					</div>
 				</div>
 			</ion-slide>
-			<ion-slide>
+			<ion-slide ng-if="data.currSlide == 3">
 				<div class="list list-inset card">
 					<div class="item item-divider">
 						<h2>Foto de perfil</h2>
 					</div>
-					
+
 					<div class="item item-thumbnail-left">
 						<img ng-src="{{fotoUsuario}}" error-src="img/foto_cadastro.png" />
 						<button type="button" class="button button-hardpink button-block" ng-click="selecionarFoto()">
 							<i class="ion-camera"></i>&nbsp;Selecionar foto
 						</button>
 					</div>
-					
-					
+
+
 					<div class="item item-divider">
 						<h2>Termos de uso</h2>
 					</div>
@@ -314,7 +314,7 @@
 						 </label>
 					</div>
 				</div>
-				
+
 				<div class="list">
 					<div class="item">
 						<div class="row">
