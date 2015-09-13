@@ -49,6 +49,10 @@
 					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
 						<input type="tel" ng-model="cadastro.cnpj" mask="99.999.999/9999-99" mask-clean="true" placeholder="Digite seu CNPJ" />
 					</label>
+					<label class="item item-input">
+						<input type="number" ng-model="cadastro.codFiliado" placeholder="Código do afiliado (caso tenha)" />
+					</label>
+
 				</div>
 				<div class="list list-inset card">
 					<div class="item item-divider">
@@ -99,10 +103,10 @@
 						<h2>Sobre voc&ecirc;</h2>
 					</div>
 					<label class="item item-input">
-						<textarea rows="7" ng-model="cadastro.apresentacao" placeholder="Apresenta&ccedil;&atilde;o"></textarea>
+						<textarea rows="7" ng-model="cadastro.apresentacao.value" placeholder="Apresenta&ccedil;&atilde;o"></textarea>
 					</label>
 					<label class="item item-input item-text-wrap">
-						<textarea rows="7" ng-model="cadastro.especialidades" placeholder="Escreva sobre suas especialidades"></textarea>
+						<textarea rows="7" ng-model="cadastro.especialidades.value" placeholder="Escreva sobre suas especialidades"></textarea>
 					</label>
 					<div class="item item-divider">
 						<h2>Atendimento</h2>
@@ -110,119 +114,119 @@
 					<ul class="list">
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="segunda_feira" checked="checked" />
+								<input type="checkbox" ng-model="segunda_feira.value" checked="checked" />
 							</label>
 							Segunda-feira
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_segunda_feira" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_segunda_feira.value" ng-blur="alert(de_segunda_feira)" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_segunda_feira" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_segunda_feira.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>
 
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="terca_feira" checked="checked" />
+								<input type="checkbox" ng-model="terca_feira.value" checked="checked" />
 							</label>
 							Ter&ccedil;a-feira
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_terca_feira" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_terca_feira.value" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_terca_feira" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_terca_feira.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>
 
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="quarta_feira" checked="checked" />
+								<input type="checkbox" ng-model="quarta_feira.value" checked="checked" />
 							</label>
 							Quarta-feira
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_quarta_feira" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_quarta_feira.value" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_quarta_feira" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_quarta_feira.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>
 
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="quinta_feira" checked="checked" />
+								<input type="checkbox" ng-model="quinta_feira.value" checked="checked" />
 							</label>
 							Quinta-feira
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_quinta_feira" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_quinta_feira.value" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_quinta_feira" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_quinta_feira.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>
 
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="sexta_feira" checked="checked" />
+								<input type="checkbox" ng-model="sexta_feira.value" checked="checked" />
 							</label>
 							Sexta-feira
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_sexta_feira" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_sexta_feira.value" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_sexta_feira" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_sexta_feira.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>
 
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="sabado">
+								<input type="checkbox" ng-model="sabado.value">
 							</label>
 							S&aacute;bado
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_sabado" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_sabado.value" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_sabado" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_sabado.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>
 
 						<li class="item item-checkbox">
 							<label class="checkbox">
-								<input type="checkbox" ng-model="domingo">
+								<input type="checkbox" ng-model="domingo.value">
 							</label>
 							Domingo
 						</li>
 						<li class="item no-padding">
 							<div class="row">
 								<div class="col">
-									De: <input type="time" class="inline-normal" ng-model="de_domingo" value="09:00:00" />
+									De: <input type="time" class="inline-normal" ng-model="de_domingo.value" placeholder="09:00" />
 								</div>
 								<div class="col">
-									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_domingo" value="18:00:00" />
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_domingo.value" placeholder="18:00" />
 								</div>
 							</div>
 						</li>

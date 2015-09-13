@@ -16,32 +16,37 @@ angular.module('easyspa.controllers')
 		$timeout
 	)
 {
-	$scope.escolheufoto = false;
-	$scope.fotoUsuario = '#';
+			$scope.escolheufoto = false;
+			$scope.fotoUsuario = '#';
 
-	$scope.segunda_feira = true;
-	$scope.terca_feira = true;
-	$scope.quarta_feira = true;
-	$scope.quinta_feira = true;
-	$scope.sexta_feira = true;
-	$scope.sabado = false;
-	$scope.domingo = false;
 
-	$scope.de_segunda_feira = '09:00:00';
-	$scope.de_terca_feira = '09:00:00';
-	$scope.de_quarta_feira = '09:00:00';
-	$scope.de_quinta_feira = '09:00:00';
-	$scope.de_sexta_feira = '09:00:00';
-	$scope.de_sabado = '09:00:00';
-	$scope.de_domingo = '09:00:00';
+			$scope.cadastro  = {}
+			$scope.cadastro.apresentacao = { value : ""}
+			$scope.cadastro.especialidades = { value : ""}
 
-	$scope.ate_segunda_feira = '18:00:00';
-	$scope.ate_terca_feira = '18:00:00';
-	$scope.ate_quarta_feira = '18:00:00';
-	$scope.ate_quinta_feira = '18:00:00';
-	$scope.ate_sexta_feira = '18:00:00';
-	$scope.ate_sabado = '18:00:00';
-	$scope.ate_domingo = '18:00:00';
+			$scope.segunda_feira =  $scope.segunda_feira ||   { value:true};
+			$scope.terca_feira =  $scope.terca_feira ||   { value:true};
+			$scope.quarta_feira =  $scope.quarta_feira ||   { value:true};
+			$scope.quinta_feira =  $scope.quinta_feira ||   { value:true};
+			$scope.sexta_feira =  $scope.sexta_feira ||   { value:true};
+			$scope.sabado =  $scope.sabado ||   { value:false};
+			$scope.domingo =  $scope.domingo ||   { value:false};
+
+			$scope.de_segunda_feira = $scope.de_segunda_feira ||  {value : ''};
+			$scope.de_terca_feira = $scope.de_terca_feira ||  {value:''};
+			$scope.de_quarta_feira = $scope.de_quarta_feira ||  {value:''};
+			$scope.de_quinta_feira = $scope.de_quinta_feira ||  {value:''};
+			$scope.de_sexta_feira = $scope.de_sexta_feira ||  {value:''};
+			$scope.de_sabado = $scope.de_sabado ||  {value:''};
+			$scope.de_domingo = $scope.de_domingo ||  {value:''};
+
+			$scope.ate_segunda_feira = $scope.ate_segunda_feira ||  {value:''};
+			$scope.ate_terca_feira = $scope.ate_terca_feira ||  {value:''};
+			$scope.ate_quarta_feira = $scope.ate_quarta_feira ||  {value:''};
+			$scope.ate_quinta_feira = $scope.ate_quinta_feira ||  {value:''};
+			$scope.ate_sexta_feira = $scope.ate_sexta_feira ||  {value:''};
+			$scope.ate_sabado = $scope.ate_sabado ||  {value:''};
+			$scope.ate_domingo = $scope.ate_domingo ||  {value:''};
 
 	var exclude = /[^@\-\.\w]|^[_@\.\-]|[\._\-]{2}|[@\.]{2}|(@)[^@]*\1/;
 	var check = /@[\w\-]+\./;
@@ -127,26 +132,27 @@ angular.module('easyspa.controllers')
 	}
 
 	$scope.data = {};
-	$scope.data.currSlide = 0;
+	$scope.data.currSlide = 2;
 	$scope.anterior = function()
 	{
 		$scope.data.currSlide = $scope.data.currSlide - 1;
 		$ionicSlideBoxDelegate.previous();
-		$timeout( function() {
-			$ionicScrollDelegate.scrollTop();
-      $ionicScrollDelegate.resize();
-    }, 50);
+		$ionicScrollDelegate.resize();
+		$ionicScrollDelegate.scrollTop();
+		console.log($scope);
+
 	}
 
 	$scope.proximo = function()
 	{
-
+		console.log($scope);
+		if(!validStage($scope.data.currSlide)) { return ;}
 		$scope.data.currSlide = $scope.data.currSlide + 1;
 		$ionicSlideBoxDelegate.next();
-		$timeout( function() {
-			$ionicScrollDelegate.scrollTop();
-      $ionicScrollDelegate.resize();
-    }, 50);
+		$ionicScrollDelegate.resize();
+		$ionicScrollDelegate.scrollTop();
+
+
 
 	}
 
@@ -306,8 +312,8 @@ angular.module('easyspa.controllers')
 			nome: cadastro.nome,
 			email: cadastro.email,
 			senha: cadastro.senha,
-			apresentacao: cadastro.apresentacao,
-			especialidades: cadastro.especialidades,
+			apresentacao: cadastro.apresentacao.value,
+			especialidades: cadastro.especialidades.value,
 			cpf: cadastro.cpf,
 			cnpj: cadastro.cnpj,
 			tipo: cadastro.tipo,
@@ -319,29 +325,30 @@ angular.module('easyspa.controllers')
 			estado: cadastro.estado,
 			latitude: cadastro.latitude,
 			longitude: cadastro.longitude,
-			segunda_feira: $scope.segunda_feira,
-			terca_feira: $scope.terca_feira,
-			quarta_feira: $scope.quarta_feira,
-			quinta_feira: $scope.quinta_feira,
-			sexta_feira: $scope.sexta_feira,
-			sabado: $scope.sabado,
-			domingo: $scope.domingo,
 
-			de_segunda_feira: $scope.de_segunda_feira,
-			de_terca_feira: $scope.de_terca_feira,
-			de_quarta_feira: $scope.de_quarta_feira,
-			de_quinta_feira: $scope.de_quinta_feira,
-			de_sexta_feira: $scope.de_sexta_feira,
-			de_sabado: $scope.de_sabado,
-			de_domingo: $scope.de_domingo,
+			segunda_feira: $scope.segunda_feira.value,
+			terca_feira: $scope.terca_feira.value,
+			quarta_feira: $scope.quarta_feira.value,
+			quinta_feira: $scope.quinta_feira.value,
+			sexta_feira: $scope.sexta_feira.value,
+			sabado: $scope.sabado.value,
+			domingo: $scope.domingo.value,
 
-			ate_segunda_feira: $scope.ate_segunda_feira,
-			ate_terca_feira: $scope.ate_terca_feira,
-			ate_quarta_feira: $scope.ate_quarta_feira,
-			ate_quinta_feira: $scope.ate_quinta_feira,
-			ate_sexta_feira: $scope.ate_sexta_feira,
-			ate_sabado: $scope.ate_sabado,
-			ate_domingo: $scope.ate_domingo
+			de_segunda_feira: $scope.de_segunda_feira.value,
+			de_terca_feira: $scope.de_terca_feira.value,
+			de_quarta_feira: $scope.de_quarta_feira.value,
+			de_quinta_feira: $scope.de_quinta_feira.value,
+			de_sexta_feira: $scope.de_sexta_feira.value,
+			de_sabado: $scope.de_sabado.value,
+			de_domingo: $scope.de_domingo.value,
+
+			ate_segunda_feira: $scope.ate_segunda_feira.value,
+			ate_terca_feira: $scope.ate_terca_feira.value,
+			ate_quarta_feira: $scope.ate_quarta_feira.value,
+			ate_quinta_feira: $scope.ate_quinta_feira.value,
+			ate_sexta_feira: $scope.ate_sexta_feira.value,
+			ate_sabado: $scope.ate_sabado.value,
+			ate_domingo: $scope.ate_domingo.value
 		};
 
 		if ( $rootScope.facebook )
@@ -461,15 +468,86 @@ angular.module('easyspa.controllers')
 	$scope.disableSwipe = function() {
 	   $ionicSlideBoxDelegate.enableSlide(false);
 	};
+	function InvalidAlert(text){
+		$ionicPopup.alert({
+     title: 'Atenção',
+     template: text === "" ? "Preencha todos os Campos" : text
+   });
+	}
 
 	function validStage(index){
 
 		if(index === 0){ // Valida a parte inicial
-			if(cadastro.tipo == "PF"){ // Validando pessoa fisica
-					
+			console.log($scope.cadastro.tipo);
+			if(!$scope.cadastro.nome 			  ||$scope.cadastro.nome          === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.email 			||$scope.cadastro.email         === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.senha       ||$scope.cadastro.senha         === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.rua         ||$scope.cadastro.rua           === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.complemento ||$scope.cadastro.complemento   === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.bairro      ||$scope.cadastro.bairro        === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.cidade      ||$scope.cadastro.cidade        === ""){ InvalidAlert(""); return false;}
+			if(!$scope.cadastro.estado      ||$scope.cadastro.estado        === ""){ InvalidAlert(""); return false;}
+
+			if($scope.cadastro.tipo == "PF"){ // Validando pessoa fisica
+					if($scope.cadastro.cpf          === "") { InvalidAlert(""); return false;}
+					if($scope.cadastro.celcpf       === "") { InvalidAlert(""); return false;}
+			}else{ // Valida pessoa fisica
+					if($scope.cadastro.razaosocial  === "") { InvalidAlert(""); return false;}
+					if($scope.cadastro.nomefantasia === "") { InvalidAlert(""); return false;}
+					if($scope.cadastro.cnpj         === "") { InvalidAlert(""); return false;}
+					if($scope.cadastro.telcnpj      === "") { InvalidAlert(""); return false;}
+					if($scope.cadastro.celcnpj      === "") { InvalidAlert(""); return false;}
 			}
 		}
 
+		if(index === 1){
+
+			if(!$scope.cadastro.apresentacao || $scope.cadastro.apresentacao.value === "")     { InvalidAlert(""); return false;}
+			if(!$scope.cadastro.especialidades || $scope.cadastro.especialidades.value === "") { InvalidAlert(""); return false;}
+
+			var diaSemana = "";
+			if($scope.segunda_feira.value){
+				diaSemana = "Segunda Feira";
+
+				if(!$scope.de_segunda_feira.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_segunda_feira.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+			if($scope.terca_feira.value){
+				diaSemana = "Terça Feira";
+				if(!$scope.de_terca_feira.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_terca_feira.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+			if($scope.quarta_feira.value){
+				diaSemana = "Quarta Feira";
+				if(!$scope.de_quarta_feira.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_quarta_feira.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+			if($scope.quinta_feira.value){
+				diaSemana = "Quinta Feira";
+				if(!$scope.de_quinta_feira.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_quinta_feira.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+			if($scope.sexta_feira.value){
+				diaSemana = "Sexta Feira";
+				if(!$scope.de_sexta_feira.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_sexta_feira.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+			if($scope.sabado.value){
+				diaSemana = "Sábado";
+				if(!$scope.de_sabado.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_sabado.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+			if($scope.domingo.value){
+				diaSemana = "Domingo";
+				if(!$scope.de_domingo.value) { InvalidAlert("Determine um horário inicial de atendimento para "+diaSemana); return false;}
+				if(!$scope.ate_domingo.value){ InvalidAlert("Determine um horário final de atendimento para "+diaSemana); return false;}
+			}
+
+		}
+
+		if(index === 2){}
+
+		return true;
 	}
 
 });
