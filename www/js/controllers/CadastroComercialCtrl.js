@@ -16,37 +16,36 @@ angular.module('easyspa.controllers')
 		$timeout
 	)
 {
-			$scope.escolheufoto = false;
-			$scope.fotoUsuario = '#';
+	$scope.escolheufoto = {value : false};
+	$scope.fotoUsuario = {value: '#'};
 
+	$scope.cadastro  = {}
+	$scope.cadastro.apresentacao = { value : ""}
+	$scope.cadastro.especialidades = { value : ""}
 
-			$scope.cadastro  = {}
-			$scope.cadastro.apresentacao = { value : ""}
-			$scope.cadastro.especialidades = { value : ""}
+	$scope.segunda_feira =  $scope.segunda_feira ||   { value:true};
+	$scope.terca_feira =  $scope.terca_feira ||   { value:true};
+	$scope.quarta_feira =  $scope.quarta_feira ||   { value:true};
+	$scope.quinta_feira =  $scope.quinta_feira ||   { value:true};
+	$scope.sexta_feira =  $scope.sexta_feira ||   { value:true};
+	$scope.sabado =  $scope.sabado ||   { value:false};
+	$scope.domingo =  $scope.domingo ||   { value:false};
 
-			$scope.segunda_feira =  $scope.segunda_feira ||   { value:true};
-			$scope.terca_feira =  $scope.terca_feira ||   { value:true};
-			$scope.quarta_feira =  $scope.quarta_feira ||   { value:true};
-			$scope.quinta_feira =  $scope.quinta_feira ||   { value:true};
-			$scope.sexta_feira =  $scope.sexta_feira ||   { value:true};
-			$scope.sabado =  $scope.sabado ||   { value:false};
-			$scope.domingo =  $scope.domingo ||   { value:false};
+	$scope.de_segunda_feira = $scope.de_segunda_feira ||  {value : ''};
+	$scope.de_terca_feira = $scope.de_terca_feira ||  {value:''};
+	$scope.de_quarta_feira = $scope.de_quarta_feira ||  {value:''};
+	$scope.de_quinta_feira = $scope.de_quinta_feira ||  {value:''};
+	$scope.de_sexta_feira = $scope.de_sexta_feira ||  {value:''};
+	$scope.de_sabado = $scope.de_sabado ||  {value:''};
+	$scope.de_domingo = $scope.de_domingo ||  {value:''};
 
-			$scope.de_segunda_feira = $scope.de_segunda_feira ||  {value : ''};
-			$scope.de_terca_feira = $scope.de_terca_feira ||  {value:''};
-			$scope.de_quarta_feira = $scope.de_quarta_feira ||  {value:''};
-			$scope.de_quinta_feira = $scope.de_quinta_feira ||  {value:''};
-			$scope.de_sexta_feira = $scope.de_sexta_feira ||  {value:''};
-			$scope.de_sabado = $scope.de_sabado ||  {value:''};
-			$scope.de_domingo = $scope.de_domingo ||  {value:''};
-
-			$scope.ate_segunda_feira = $scope.ate_segunda_feira ||  {value:''};
-			$scope.ate_terca_feira = $scope.ate_terca_feira ||  {value:''};
-			$scope.ate_quarta_feira = $scope.ate_quarta_feira ||  {value:''};
-			$scope.ate_quinta_feira = $scope.ate_quinta_feira ||  {value:''};
-			$scope.ate_sexta_feira = $scope.ate_sexta_feira ||  {value:''};
-			$scope.ate_sabado = $scope.ate_sabado ||  {value:''};
-			$scope.ate_domingo = $scope.ate_domingo ||  {value:''};
+	$scope.ate_segunda_feira = $scope.ate_segunda_feira ||  {value:''};
+	$scope.ate_terca_feira = $scope.ate_terca_feira ||  {value:''};
+	$scope.ate_quarta_feira = $scope.ate_quarta_feira ||  {value:''};
+	$scope.ate_quinta_feira = $scope.ate_quinta_feira ||  {value:''};
+	$scope.ate_sexta_feira = $scope.ate_sexta_feira ||  {value:''};
+	$scope.ate_sabado = $scope.ate_sabado ||  {value:''};
+	$scope.ate_domingo = $scope.ate_domingo ||  {value:''};
 
 	var exclude = /[^@\-\.\w]|^[_@\.\-]|[\._\-]{2}|[@\.]{2}|(@)[^@]*\1/;
 	var check = /@[\w\-]+\./;
@@ -132,7 +131,7 @@ angular.module('easyspa.controllers')
 	}
 
 	$scope.data = {};
-	$scope.data.currSlide = 2;
+	$scope.data.currSlide = 0;
 	$scope.anterior = function()
 	{
 		$scope.data.currSlide = $scope.data.currSlide - 1;
@@ -145,12 +144,15 @@ angular.module('easyspa.controllers')
 
 	$scope.proximo = function()
 	{
-		console.log($scope);
+
 		if(!validStage($scope.data.currSlide)) { return ;}
-		$scope.data.currSlide = $scope.data.currSlide + 1;
-		$ionicSlideBoxDelegate.next();
-		$ionicScrollDelegate.resize();
-		$ionicScrollDelegate.scrollTop();
+		if($scope.invalidStage){ return;}
+
+			$scope.data.currSlide = $scope.data.currSlide + 1;
+			$ionicSlideBoxDelegate.next();
+			$ionicScrollDelegate.resize();
+			$ionicScrollDelegate.scrollTop();
+
 
 
 
@@ -171,6 +173,7 @@ angular.module('easyspa.controllers')
 					$scope.cadastro.latitude = pos.coords.latitude;
 					$scope.cadastro.longitude = pos.coords.longitude;
 					var endereco = results[0].address_components;
+					console.log(endereco);
 					$scope.cadastro.rua = endereco[1].long_name;
 					$scope.cadastro.bairro = endereco[2].long_name;
 					$scope.cadastro.cidade = endereco[3].long_name;
@@ -216,8 +219,9 @@ angular.module('easyspa.controllers')
 					targetHeight: 175
 				}).then(function(imageData)
 				{
-					$scope.fotoUsuario = imageData;
-					$scope.escolheufoto = true;
+					console.log(imageData);
+					$scope.fotoUsuario = { value : imageData };
+					$scope.escolheufoto = { value : true} ;
 				});
 				return true;
 			}
@@ -354,12 +358,12 @@ angular.module('easyspa.controllers')
 		if ( $rootScope.facebook )
 			dadosEnviar.fbid = $rootScope.facebook.id;
 
-		if ( $scope.escolheufoto )
+		if ( $scope.escolheufoto.value )
 		{
 			$ionicLoading.show({
 				content: 'Cadastrando...'
 			});
-			var imagem = $scope.fotoUsuario;
+			var imagem = $scope.fotoUsuario.value;
 			var options = new FileUploadOptions();
 			options.fileKey = "file";
 			options.fileName = imagem.substr(imagem.lastIndexOf('/')+1);
@@ -392,14 +396,17 @@ angular.module('easyspa.controllers')
 						$rootScope.$apply();
 						localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
 						localStorage.login_easyspa = true;
-						$ionicPopup.alert({
-							title: 'Sucesso!',
-							template: json.msg
+						cadastroCategorias().then(function (response) {
+							$ionicPopup.alert({
+								title: 'Sucesso!',
+								template: json.msg
+							})
+							.then(function()
+							{
+								$location.path("/app/home");
+							});
 						})
-						.then(function()
-						{
-							$location.path("/app/home");
-						});
+
 					} else
 					{
 						$ionicPopup.alert({
@@ -422,7 +429,7 @@ angular.module('easyspa.controllers')
 				content: 'Cadastrando...'
 			});
 
-			dadosEnviar.foto = $scope.fotoUsuario;
+			dadosEnviar.foto = $scope.fotoUsuario.value;
 			$http.post( URL_EASYSPA + 'registrarfuncionaria', dadosEnviar )
 			.then(function(result)
 			{
@@ -448,11 +455,14 @@ angular.module('easyspa.controllers')
 					$rootScope.$apply();
 					localStorage.login_easyspa = true;
 					localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
-					$ionicPopup.alert({
-						title: 'Sucesso!',
-						template: json.msg
-					});
-					$location.path("/app/home");
+					cadastroCategorias().then(function (response) {
+						$ionicPopup.alert({
+							title: 'Sucesso!',
+							template: json.msg
+						});
+						$location.path("/app/home");
+					})
+
 				} else
 				{
 					$ionicPopup.alert({
@@ -464,6 +474,17 @@ angular.module('easyspa.controllers')
 		}
 	}
 
+	function cadastroCategorias(){
+		return new Promise(function(resolve, reject) {
+			resolve()
+		});
+		// $http({
+		// 	url:URL_EASYSPA
+		// 	data: {
+		// 		categorias : $scope.cadastro.categorias
+		// 	}
+		// })
+	}
 
 	$scope.disableSwipe = function() {
 	   $ionicSlideBoxDelegate.enableSlide(false);
@@ -474,11 +495,30 @@ angular.module('easyspa.controllers')
      template: text === "" ? "Preencha todos os Campos" : text
    });
 	}
+	$scope.invalidStage = null;
 
+	$scope.validOnServer = function (type,data) {
+		if(!data){return ;}
+		$http({
+			url: "http://easyspa.club/app/checkfuncionaria/"
+			,method: "GET"
+			,params : {  tipo :type , data: data   }
+		})
+		.then(function (response) {
+				if(response.data.status != "OK"){
+					type =  type == "email"? "E-mail" : "CPF ou CNPJ"
+					var msg = type+ " já cadastrado"
+					InvalidAlert(msg);
+					$scope.invalidStage = true;
+				}else{
+					$scope.invalidStage = false;
+				}
+		})
+	}
 	function validStage(index){
 
 		if(index === 0){ // Valida a parte inicial
-			console.log($scope.cadastro.tipo);
+
 			if(!$scope.cadastro.nome 			  ||$scope.cadastro.nome          === ""){ InvalidAlert(""); return false;}
 			if(!$scope.cadastro.email 			||$scope.cadastro.email         === ""){ InvalidAlert(""); return false;}
 			if(!$scope.cadastro.senha       ||$scope.cadastro.senha         === ""){ InvalidAlert(""); return false;}
@@ -487,17 +527,23 @@ angular.module('easyspa.controllers')
 			if(!$scope.cadastro.bairro      ||$scope.cadastro.bairro        === ""){ InvalidAlert(""); return false;}
 			if(!$scope.cadastro.cidade      ||$scope.cadastro.cidade        === ""){ InvalidAlert(""); return false;}
 			if(!$scope.cadastro.estado      ||$scope.cadastro.estado        === ""){ InvalidAlert(""); return false;}
-
 			if($scope.cadastro.tipo == "PF"){ // Validando pessoa fisica
-					if($scope.cadastro.cpf          === "") { InvalidAlert(""); return false;}
-					if($scope.cadastro.celcpf       === "") { InvalidAlert(""); return false;}
+					if(!$scope.cadastro.cpf || $scope.cadastro.cpf          === "") { InvalidAlert(""); return false;}
+					if(!$scope.cadastro.celcpf || $scope.cadastro.celcpf       === "") { InvalidAlert(""); return false;}
 			}else{ // Valida pessoa fisica
-					if($scope.cadastro.razaosocial  === "") { InvalidAlert(""); return false;}
-					if($scope.cadastro.nomefantasia === "") { InvalidAlert(""); return false;}
-					if($scope.cadastro.cnpj         === "") { InvalidAlert(""); return false;}
-					if($scope.cadastro.telcnpj      === "") { InvalidAlert(""); return false;}
-					if($scope.cadastro.celcnpj      === "") { InvalidAlert(""); return false;}
+					if(!$scope.cadastro.razaosocial || $scope.cadastro.razaosocial  === "") { InvalidAlert(""); return false;}
+					if(!$scope.cadastro.nomefantasia || $scope.cadastro.nomefantasia === "") { InvalidAlert(""); return false;}
+					if(!$scope.cadastro.cnpj || $scope.cadastro.cnpj         === "") { InvalidAlert(""); return false;}
+					if(!$scope.cadastro.telcnpj||$scope.cadastro.telcnpj      === "") { InvalidAlert(""); return false;}
+					// if($scope.cadastro.celcnpj      === "") { InvalidAlert(""); return false;}
 			}
+
+
+
+
+
+
+
 		}
 
 		if(index === 1){
