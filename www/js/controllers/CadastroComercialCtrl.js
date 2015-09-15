@@ -19,9 +19,33 @@ angular.module('easyspa.controllers')
 	$scope.escolheufoto = {value : false};
 	$scope.fotoUsuario = {value: '#'};
 
-	$scope.cadastro  = {}
+
+	$scope.cadastro = {};
 	$scope.cadastro.apresentacao = { value : ""}
 	$scope.cadastro.especialidades = { value : ""}
+
+  $scope.cadastro.fbid = ""
+	$scope.cadastro.categoria = 1
+	$scope.cadastro.tipo = "PF"
+	$scope.cadastro.categorias = [];
+	$scope.cadastro.email = "";
+	$scope.cadastro.senha = "";
+	$scope.cadastro.cpf = "";
+	$scope.cadastro.cnpj = "";
+	$scope.cadastro.razaosocial = ""
+	$scope.cadastro.nomefantasia = ""
+	$scope.cadastro.idafiliado = "";
+	$scope.cadastro.celcpf = ""
+	$scope.cadastro.telcnpj = ""
+	$scope.cadastro.celcnpj = ""
+	$scope.cadastro.rua = "";
+	$scope.cadastro.complemento = "";
+	$scope.cadastro.bairro = "";
+	$scope.cadastro.cidade = "";
+	$scope.cadastro.estado = "";
+	$scope.cadastro.latitude = "";
+	$scope.cadastro.longitude = "";
+	$scope.cadastro.idafiliado = null;
 
 	$scope.segunda_feira =  $scope.segunda_feira ||   { value:true};
 	$scope.terca_feira =  $scope.terca_feira ||   { value:true};
@@ -51,7 +75,7 @@ angular.module('easyspa.controllers')
 	var check = /@[\w\-]+\./;
 	var checkend = /\.[a-zA-Z]{2,3}$/;
 	$scope.localizou = false;
-	$scope.cadastro = {fbid: '', categoria: 1, tipo: 'PF', categorias:[]};
+
 
 	$scope.categorias = [
 		{id: 1, nome: 'Pés e Mãos'},
@@ -310,49 +334,56 @@ angular.module('easyspa.controllers')
 			});
 			return;
 		}
+		var categorias = []
+		for (var i = 0; i < cadastro.categorias.length; i++) {
+			categorias.push(cadastro.categorias[i].id)
+		}
+
 
 
 		var dadosEnviar = {
-			nome: cadastro.nome,
-			email: cadastro.email,
-			senha: cadastro.senha,
-			apresentacao: cadastro.apresentacao.value,
-			especialidades: cadastro.especialidades.value,
-			cpf: cadastro.cpf,
-			cnpj: cadastro.cnpj,
-			tipo: cadastro.tipo,
-			categoria: cadastro.categoria,
-			rua: cadastro.rua,
-			complemento: cadastro.complemento,
-			bairro: cadastro.bairro,
-			cidade: cadastro.cidade,
-			estado: cadastro.estado,
-			latitude: cadastro.latitude,
-			longitude: cadastro.longitude,
-
-			segunda_feira: $scope.segunda_feira.value,
-			terca_feira: $scope.terca_feira.value,
-			quarta_feira: $scope.quarta_feira.value,
-			quinta_feira: $scope.quinta_feira.value,
-			sexta_feira: $scope.sexta_feira.value,
-			sabado: $scope.sabado.value,
-			domingo: $scope.domingo.value,
-
-			de_segunda_feira: $scope.de_segunda_feira.value,
-			de_terca_feira: $scope.de_terca_feira.value,
-			de_quarta_feira: $scope.de_quarta_feira.value,
-			de_quinta_feira: $scope.de_quinta_feira.value,
-			de_sexta_feira: $scope.de_sexta_feira.value,
-			de_sabado: $scope.de_sabado.value,
-			de_domingo: $scope.de_domingo.value,
-
-			ate_segunda_feira: $scope.ate_segunda_feira.value,
-			ate_terca_feira: $scope.ate_terca_feira.value,
-			ate_quarta_feira: $scope.ate_quarta_feira.value,
-			ate_quinta_feira: $scope.ate_quinta_feira.value,
-			ate_sexta_feira: $scope.ate_sexta_feira.value,
-			ate_sabado: $scope.ate_sabado.value,
-			ate_domingo: $scope.ate_domingo.value
+			 nome: cadastro.nome
+			,email: cadastro.email
+			,senha: cadastro.senha
+			,apresentacao: cadastro.apresentacao.value
+			,especialidades: cadastro.especialidades.value
+			,cpf: cadastro.cpf
+			,cnpj: cadastro.cnpj
+			,tipo: cadastro.tipo
+			,telefone: cadastro.telcnpj
+			,nomefantasia:cadastro.nomefantasia
+			,razaosocial:cadastro.razaosocial
+			,celular : cadastro.celcpf || cadastro.celcnpj
+			,categorias: categorias
+			,idafiliado: cadastro.idafiliado
+			,endereco: cadastro.rua
+			,complemento: cadastro.complemento
+			,bairro: cadastro.bairro
+			,cidade: cadastro.cidade
+			,estado: cadastro.estado
+			,latitude: cadastro.latitude
+			,longitude: cadastro.longitude
+			,segunda_feira: $scope.segunda_feira.value
+			,terca_feira: $scope.terca_feira.value
+			,quarta_feira: $scope.quarta_feira.value
+			,quinta_feira: $scope.quinta_feira.value
+			,sexta_feira: $scope.sexta_feira.value
+			,sabado: $scope.sabado.value
+			,domingo: $scope.domingo.value
+			,de_segunda_feira: $scope.de_segunda_feira.value
+			,de_terca_feira: $scope.de_terca_feira.value
+			,de_quarta_feira: $scope.de_quarta_feira.value
+			,de_quinta_feira: $scope.de_quinta_feira.value
+			,de_sexta_feira: $scope.de_sexta_feira.value
+			,de_sabado: $scope.de_sabado.value
+			,de_domingo: $scope.de_domingo.value
+			,ate_segunda_feira: $scope.ate_segunda_feira.value
+			,ate_terca_feira: $scope.ate_terca_feira.value
+			,ate_quarta_feira: $scope.ate_quarta_feira.value
+			,ate_quinta_feira: $scope.ate_quinta_feira.value
+			,ate_sexta_feira: $scope.ate_sexta_feira.value
+			,ate_sabado: $scope.ate_sabado.value
+			,ate_domingo: $scope.ate_domingo.value
 		};
 
 		if ( $rootScope.facebook )
@@ -396,16 +427,12 @@ angular.module('easyspa.controllers')
 						$rootScope.$apply();
 						localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
 						localStorage.login_easyspa = true;
-						cadastroCategorias().then(function (response) {
-							$ionicPopup.alert({
-								title: 'Sucesso!',
-								template: json.msg
-							})
-							.then(function()
-							{
-								$location.path("/app/home");
-							});
-						})
+						$ionicPopup.alert({
+							title: 'Sucesso!',
+							template: json.msg
+						}).then(function () {
+							$location.path("/app/home");
+						});
 
 					} else
 					{
@@ -443,6 +470,7 @@ angular.module('easyspa.controllers')
 						celular: dadosEnviar.celular,
 						rua: dadosEnviar.rua,
 						complemento: dadosEnviar.complemento,
+						idafiliado : dadosEnviar.idafiliado,
 						bairro: dadosEnviar.bairro,
 						cidade: dadosEnviar.cidade,
 						estado: dadosEnviar.estado,
@@ -455,13 +483,13 @@ angular.module('easyspa.controllers')
 					$rootScope.$apply();
 					localStorage.login_easyspa = true;
 					localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
-					cadastroCategorias().then(function (response) {
-						$ionicPopup.alert({
-							title: 'Sucesso!',
-							template: json.msg
-						});
+
+					$ionicPopup.alert({
+						title: 'Sucesso!',
+						template: json.msg
+					}).then(function () {
 						$location.path("/app/home");
-					})
+					});
 
 				} else
 				{
@@ -474,17 +502,7 @@ angular.module('easyspa.controllers')
 		}
 	}
 
-	function cadastroCategorias(){
-		return new Promise(function(resolve, reject) {
-			resolve()
-		});
-		// $http({
-		// 	url:URL_EASYSPA
-		// 	data: {
-		// 		categorias : $scope.cadastro.categorias
-		// 	}
-		// })
-	}
+
 
 	$scope.disableSwipe = function() {
 	   $ionicSlideBoxDelegate.enableSlide(false);
@@ -527,10 +545,12 @@ angular.module('easyspa.controllers')
 			if(!$scope.cadastro.bairro      ||$scope.cadastro.bairro        === ""){ InvalidAlert(""); return false;}
 			if(!$scope.cadastro.cidade      ||$scope.cadastro.cidade        === ""){ InvalidAlert(""); return false;}
 			if(!$scope.cadastro.estado      ||$scope.cadastro.estado        === ""){ InvalidAlert(""); return false;}
-			if($scope.cadastro.tipo == "PF"){ // Validando pessoa fisica
+			if($scope.cadastro.tipo == "PF"){
+				  // Validando pessoa fisica
 					if(!$scope.cadastro.cpf || $scope.cadastro.cpf          === "") { InvalidAlert(""); return false;}
 					if(!$scope.cadastro.celcpf || $scope.cadastro.celcpf       === "") { InvalidAlert(""); return false;}
-			}else{ // Valida pessoa fisica
+			}else{
+				  // Valida pessoa fisica
 					if(!$scope.cadastro.razaosocial || $scope.cadastro.razaosocial  === "") { InvalidAlert(""); return false;}
 					if(!$scope.cadastro.nomefantasia || $scope.cadastro.nomefantasia === "") { InvalidAlert(""); return false;}
 					if(!$scope.cadastro.cnpj || $scope.cadastro.cnpj         === "") { InvalidAlert(""); return false;}
