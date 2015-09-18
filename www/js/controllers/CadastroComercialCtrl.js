@@ -45,7 +45,7 @@ angular.module('easyspa.controllers')
 	$scope.cadastro.estado = "";
 	$scope.cadastro.latitude = "";
 	$scope.cadastro.longitude = "";
-	$scope.cadastro.idafiliado = null;
+	$scope.cadastro.idafiliado = "";
 
 	$scope.segunda_feira =  $scope.segunda_feira ||   { value:true};
 	$scope.terca_feira =  $scope.terca_feira ||   { value:true};
@@ -158,27 +158,24 @@ angular.module('easyspa.controllers')
 	$scope.data.currSlide = 0;
 	$scope.anterior = function()
 	{
-		$scope.data.currSlide = $scope.data.currSlide - 1;
-		$ionicSlideBoxDelegate.previous();
-		$ionicScrollDelegate.resize();
-		$ionicScrollDelegate.scrollTop();
-		console.log($scope);
+
+		$ionicScrollDelegate.scrollTop(false);
+			$ionicScrollDelegate.resize();
+			$ionicSlideBoxDelegate.previous();
+			$scope.data.currSlide = $scope.data.currSlide - 1;
 
 	}
 
 	$scope.proximo = function()
 	{
 
-		if(!validStage($scope.data.currSlide)) { return ;}
-		if($scope.invalidStage){ return;}
+		// if(!validStage($scope.data.currSlide)) { return ;}
+		// if($scope.invalidStage){ return;}
 
-			$scope.data.currSlide = $scope.data.currSlide + 1;
-			$ionicSlideBoxDelegate.next();
-			$ionicScrollDelegate.resize();
-			$ionicScrollDelegate.scrollTop();
-
-
-
+		$ionicScrollDelegate.scrollTop(false);
+		$ionicScrollDelegate.resize();
+		$ionicSlideBoxDelegate.next();
+		$scope.data.currSlide = $scope.data.currSlide + 1;
 
 	}
 
@@ -197,17 +194,33 @@ angular.module('easyspa.controllers')
 					$scope.cadastro.latitude = pos.coords.latitude;
 					$scope.cadastro.longitude = pos.coords.longitude;
 					var endereco = results[0].address_components;
-					console.log(endereco);
 					$scope.cadastro.rua = endereco[1].long_name;
 					$scope.cadastro.bairro = endereco[2].long_name;
 					$scope.cadastro.cidade = endereco[3].long_name;
-					$scope.cadastro.estado = endereco[4].long_name;
+					$scope.cadastro.estado = endereco[5].long_name;
 					$scope.localizou = true;
+					if(!$scope.localizou){
+						carregarListaDeEstados();
+					}
 					$scope.$apply();
 				}
 			}
 		});
 	});
+	carregarListaDeEstados();
+	$scope.listarCidade =function (estado) {
+		$http.get(URL_EASYSPA+"cidades",{estado:estado.id}).then(function (result) {
+			console.log(result);
+			$scope.estadosDB = result.data
+		})
+	}
+	function carregarListaDeEstados(){
+
+		$http.get(URL_EASYSPA+"estados").then(function (result) {
+			console.log(result);
+			$scope.estadosDB = result.data
+		})
+	}
 
 	$scope.selecionarFoto = function()
 	{
@@ -355,7 +368,7 @@ angular.module('easyspa.controllers')
 			,razaosocial:cadastro.razaosocial
 			,celular : cadastro.celcpf || cadastro.celcnpj
 			,categorias: categorias
-			,idafiliado: cadastro.idafiliado
+			,idafiliado: cadastro.idafiliado || 0
 			,endereco: cadastro.rua
 			,complemento: cadastro.complemento
 			,bairro: cadastro.bairro
@@ -617,3 +630,31 @@ angular.module('easyspa.controllers')
 	}
 
 });
+
+
+
+angular.module('easyspa.controllers').directive('peeyLevelIonSlides', function ($timeout, $ionicScrollDelegate) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+
+      function resize () {
+        $ionicScrollDelegate.resize()
+      }
+
+      scope.$watch(function () {
+        var activeSlideElement = angular.element(element[0].getElementsByClassName(attrs.slideChildClass + "-active"))
+        activeSlideElement.css('max-height', 'none')
+        return angular.isDefined(activeSlideElement[0]) ? activeSlideElement[0].offsetHeight : 20
+      }, function (newHeight) {
+				console.log(newHeight);
+        var sildeElements = angular.element(element[0].getElementsByClassName(attrs.slideChildClass))
+				console.log(sildeElements);
+        sildeElements.css('max-height', newHeight + 'px')
+        resize()
+        $timeout(resize)
+        $timeout(resize, 50)
+      })
+    }
+  }
+})
