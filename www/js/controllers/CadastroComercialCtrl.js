@@ -169,8 +169,8 @@ angular.module('easyspa.controllers')
 	$scope.proximo = function()
 	{
 
-		// if(!validStage($scope.data.currSlide)) { return ;}
-		// if($scope.invalidStage){ return;}
+		if(!validStage($scope.data.currSlide)) { return ;}
+		if($scope.invalidStage){ return;}
 
 		$ionicScrollDelegate.scrollTop(false);
 		$ionicScrollDelegate.resize();

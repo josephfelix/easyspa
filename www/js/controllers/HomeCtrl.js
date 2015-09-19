@@ -14,17 +14,17 @@ angular.module('easyspa.controllers')
 			$ionicPlatform.onHardwareBackButton(function(){});
 		}
 	});
-			
+
 	if ( !localStorage.hasOwnProperty('login_easyspa') )
 	{
 		$location.path("/login");
 		return;
 	}
-	
+
 	$scope.tituloTela = 'easySpa, ' + $rootScope.usuario.cidade;
-	
+
 	$scope.banners = {"LAND":{"link":"","banner":"#"},"TOP":{"link":"","banner":"#"},"HALF1":{"link":"","banner":"#"},"HALF2":{"link":"","banner":"#"},"HALF3":{"link":"","banner":"#"},"HALF4":{"link":"","banner":"#"},"BOTTOM1":{"link":"","banner":"#"},"BOTTOM2":{"link":"","banner":"#"}};
-	
+
 	$scope.verLink = function( link )
 	{
 		if ( link.length )
@@ -35,15 +35,15 @@ angular.module('easyspa.controllers')
 				$location.path( link );
 		}
 	}
-	
-	
+
+	$scope.usuarioComercial = $rootScope.usuario.tipo ? true : false;
 	$scope.verMapa = function( categoria )
 	{
 		$rootScope.categoria = categoria;
 		$rootScope.$apply();
 		$location.path('/app/mapa');
 	}
-	
+
 	$scope.todasCategorias = function()
 	{
 		$rootScope.categoria = 0;

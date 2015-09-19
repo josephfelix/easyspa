@@ -587,3 +587,21 @@ input[type="time"] {
     background: #703F7E !important;
     border-color: #703F7E !important;
 }
+
+
+/*Inserido por Jorge Rafael*/
+.item-avatar-home{ text-align: center;}
+.item-avatar-home img{
+    width: 200px;
+    height: 200px;
+    border: 3px solid white;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.item-nome-home{ color: white !important; background: #703f7e; border: none;}
+.item-nome-home small { font-size: 12px}
+
+.item-status-home {  padding: 0px;  color: white !important; background: #703f7e; border: none;  text-align: center;}
+.item-notificacoes-home { text-align: center;  }
+.item-notificacoes-home .icon{    font-size: 200%;}

@@ -13,38 +13,57 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-content class="content-menu-easyspa" ng-controller="MenuCtrl">
+    <ion-content class="content-menu-easyspa" ng-controller="MenuCtrl" scroll="true" overflow-scroll="true">
       <ion-list>
-		<ion-item class="item item-avatar item-cover" style="background-image:url('img/cover.png')">
-			<img ng-src="{{fotoPerfil}}" error-src="img/foto_cadastro.png" />
-		</ion-item>
-		<ion-item class="item item-nome">
-			{{nome}}
-		</ion-item>
-        <ion-item menu-close href="#/app/home">
-			<i class="ion-search icon-menu-easyspa"></i>&nbsp;Quero me embelezar
-			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+    		<ion-item class="item item-avatar item-cover" style="background-image:url('img/cover.png')">
+    			<img ng-src="{{fotoPerfil}}" error-src="img/anonimo.jpg" />
+    		</ion-item>
+    		<ion-item class="item item-nome">
+    			{{nome}}
+    		</ion-item>
+        <ion-item menu-close href="#/app/home" ng-if="!usuarioComercial">
+        		<i class="ion-search icon-menu-easyspa"></i>&nbsp;Quero me embelezar
+        		<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/conversas">
-			<i class="ion-chatbox-working icon-menu-easyspa"></i>&nbsp;Conversas
-			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        <ion-item menu-close href="#/app/conversas" ng-if="!usuarioComercial">
+      			<i class="ion-chatbox-working icon-menu-easyspa"></i>&nbsp;Conversas
+      			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/atendimentos">
-			<i class="ion-ios-telephone icon-menu-easyspa"></i>&nbsp;Atendimentos
-			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        <ion-item menu-close href="#/app/atendimentos" ng-if="!usuarioComercial">
+        		<i class="ion-ios-telephone icon-menu-easyspa"></i>&nbsp;Atendimentos
+        		<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/configuracoes">
-			<i class="ion-gear-b icon-menu-easyspa"></i>&nbsp;Configura&ccedil;&otilde;es
-			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        <ion-item menu-close href="#/app/configuracoes" ng-if="!usuarioComercial">
+      			<i class="ion-gear-b icon-menu-easyspa"></i>&nbsp;Configura&ccedil;&otilde;es
+      			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
         </ion-item>
+        <!--  Menu Comercial-->
+        <ion-item menu-close href="#/app/conversas" ng-if="usuarioComercial">
+      			<i class="ion-chatbox-working icon-menu-easyspa"></i>&nbsp;Conversas
+      			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        </ion-item>
+        <ion-item menu-close href="#/app/agenda" ng-if="usuarioComercial">
+        		<i class="ion-ios-telephone icon-menu-easyspa"></i>&nbsp;Agenda
+        		<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        </ion-item>
+        <ion-item menu-close href="#" ng-if="usuarioComercial">
+        		<i class="ion-ios-telephone icon-menu-easyspa"></i>&nbsp;An&uacute;ncios
+        		<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        </ion-item>
+        <ion-item menu-close href="#/app/configuracoes" ng-if="usuarioComercial">
+      			<i class="ion-gear-b icon-menu-easyspa"></i>&nbsp;Configura&ccedil;&otilde;es
+      			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+        </ion-item>
+
+
 		<!-- <ion-item menu-close href="#/app/nossasredes">
 			<i class="ion-at icon-menu-easyspa"></i>&nbsp;Visite nossas redes
 			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
         </ion-item> -->
-		<ion-item menu-close href="#" ng-click="sairApp()">
-			<i class="ion-reply icon-menu-easyspa"></i>&nbsp;Sair
-			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
-		</ion-item>
+    		<ion-item menu-close href="#" ng-click="sairApp()">
+    			<i class="ion-reply icon-menu-easyspa"></i>&nbsp;Sair
+    			<i class="ion-ios-arrow-right pull-right icon-menu-arrow"></i>
+    		</ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
