@@ -603,5 +603,37 @@ input[type="time"] {
 .item-nome-home small { font-size: 12px}
 
 .item-status-home {  padding: 0px;  color: white !important; background: #703f7e; border: none;  text-align: center;}
-.item-notificacoes-home { text-align: center;  }
+
+.item-notificacoes-home,
+.item-boleto-home,
+.item-cupom-home,
+.item-agendamentos-home,
+.item-publicidades-home {   background-color: #f4f6f7; color:white;  border: none;}
+
+.item-notificacoes-home .col{  background-color: #C24CBA;  color: white;  border-radius: 10px;  margin: 1px; text-align: center; }
+.item-notificacoes-home small{    font-size: 60%;}
 .item-notificacoes-home .icon{    font-size: 200%;}
+
+/*.item-notificacoes-home*/
+.item-boleto-home .row{ background: #C24C67; text-transform: uppercase;}
+.item-boleto-home .icon,
+.item-cupom-home .icon,
+.item-agendamentos-home .icon,
+.item-publicidades-home .icon,
+.item-boleto-home .col:nth-child(2){    font-size: 300%; line-height: 1;}
+
+
+.item-boleto-home .col:first-child { border-right: 1px solid rgb(244, 94, 238); }
+
+
+.item-boleto-home .col:last-child,
+.item-cupom-home .col:last-child,
+.item-agendamentos-home .col:last-child
+ { text-align: left;}
+
+
+.item-cupom-home .row{ background: #C2884C; text-transform: uppercase;}
+.item-agendamentos-home .row { background-color: rgb(0, 171, 151) ;  }
+.item-agendamentos-home .col{ line-height: 30px;}
+
+.item-publicidades-home .row { background: rgb(11, 2, 85) ;  text-align: center; }
