@@ -640,16 +640,29 @@ input[type="time"] {
 .item-publicidades-home small { margin-top: 5px; display: block;}
 .item-publicidades-home .row { background: rgb(11, 2, 85) ;     border-radius: 5px;  text-align: center; }
 .item-publicidades-home .row:first-child{    padding-bottom: 20px;}
+.notify-chat {  position: absolute;  top: -12px;  background-color: #703F7E;  padding: 0px;  border-radius: 30px;  height: 30px;  line-height: 3;  color: white;  width: 30px;  box-sizing: content-box;}
 
-.notify-chat {
-  position: absolute;
-  top: -12px;
-  background-color: #703F7E;
-  padding: 0px;
-  border-radius: 30px;
-  height: 30px;
-  line-height: 3;
-  color: white;
-  width: 30px;
-  box-sizing: content-box;
+.content-menu-easyspa ion-list ion-item.item{background-color: #303F6A;}
+.content-menu-easyspa {background-color: #303F6A;}
+.content-menu-easyspa, .content-menu-easyspa ion-list ion-item.item-complex{  background-color: #303F6A !important;  color:white;  text-transform: uppercase;}
+.content-menu-easyspa, .content-menu-easyspa ion-list a.item-content{ background-color: #2F4379;}
+
+.item.active,
+.item.activated,
+.item-complex.active .item-content,
+.item-complex.activated .item-content,
+.item .item-content.active,
+.item .item-content.activated{ background-color: #2F4379; }
+
+.content-menu-easyspa ion-list ion-item{ border-color:transparent; }
+ion-item.item-nome{ color : white;}
+ion-item.item-nome small{
+  font-size: 85%;
+    font-weight: 100;
+    margin-top: 10px;
+    display: block;
+}
+
+.icon-menu-easyspa{
+  color:white !important;
 }
