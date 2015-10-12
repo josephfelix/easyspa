@@ -1,0 +1,62 @@
+<ion-view view-title="{{tituloTela}}" hide-back-button="true">
+
+	<ion-content style="background-color: #f4f6f7;" scroll="true" overflow-scroll="true" id="pagamento-planos">
+    <div class="row plano-basic title-plan">
+      <div class="col">Plano Basic</div>
+    </div>
+    <div class="row plano-basic description-plan">
+      <div class="col">
+        <h1>Sem custo <br> fixo mensal</h1>
+        <p>Você paga apenas pelos atendimentos
+					<br>
+					que realizar em nosso sistema</p>
+      </div>
+    </div>
+    <div class="row plano-basic register-now">
+      <div class="col">
+        <h4>ASSINAR AGORA</h4>
+        <p>Ideal para profissionais autônomos</p>
+      </div>
+    </div>
+		<ul class="collapse-plan-basic">
+			<li ng-click="openCollapse('basic')">Incluso no Plano <i class="icon" ng-class="{'ion-arrow-down-b' : openBasic, 'ion-arrow-up-b' : !openBasic}"></i></li>
+			<li ng-if="openBasic">4 fotos do seu produto ou serviço</li>
+			<li ng-if="openBasic">Chat ( mediante aceitação de chamado )</li>
+			<li ng-if="openBasic">Agendamento de atendimentos</li>
+			<li ng-if="openBasic">Geolocalização para atendimento</li>
+		</ul>
+		<div class="row plano-premium title-plan">
+      <div class="col">Plano Premium</div>
+    </div>
+    <div class="row plano-premium description-plan">
+      <div class="col">
+        <p>Ideal para profissionais que desejam ter todos os benefícios do sistema.
+				Você paga um valor mensal e pode usar sem limites!</p>
+      </div>
+    </div>
+		<ul class="list">
+			<li class="item row item-icon-right">
+				<div class="row">
+					<div class="col col-33">
+		      	<h3>R$ 19,90</h3>
+						<p>PLANO MENSAL</p>
+		      </div>
+					<div class="col col-33">
+						ASSINAR
+						<br>
+						( Sem desconto )
+					</div>
+				</div>
+				<i class="ion-chevron-right icon"></i>
+			</li>
+		</ul>
+
+		<ul class="collapse-plan-premium">
+			<li ng-click="openCollapse('basic')">Incluso no Plano <i class="icon" ng-class="{'ion-arrow-down-b' : openBasic, 'ion-arrow-up-b' : !openBasic}"></i></li>
+			<li ng-if="openBasic">4 fotos do seu produto ou serviço</li>
+			<li ng-if="openBasic">Chat ( mediante aceitação de chamado )</li>
+			<li ng-if="openBasic">Agendamento de atendimentos</li>
+			<li ng-if="openBasic">Geolocalização para atendimento</li>
+		</ul>
+  </ion-content>
+</ion-view>

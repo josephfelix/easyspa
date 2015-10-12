@@ -44,6 +44,12 @@ angular.module('easyspa', [
     templateUrl: 'templates/cadastrocomercial.html',
 	controller: 'CadastroComercialCtrl'
   })
+	
+	.state('pagamentoplanos', {
+    url: '/pagamento/planos',
+    templateUrl: 'templates/pagamento_planos.html',
+		controller: 'PagamentoCtrl'
+  })
 
   .state('app', {
     url: '/app',

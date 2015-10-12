@@ -591,25 +591,12 @@ input[type="time"] {
 
 /*Inserido por Jorge Rafael*/
 .item-avatar-home{ text-align: center;}
-.item-avatar-home img{
-    width: 200px;
-    height: 200px;
-    border: 3px solid white;
-    border-radius: 50%;
-    text-align: center;
-}
+.item-avatar-home img{    width: 200px;    height: 200px;    border: 3px solid white;    border-radius: 50%;    text-align: center;}
 
 .item-nome-home{ color: white !important; background: #703f7e; border: none;}
 .item-nome-home small { font-size: 12px}
-
 .item-status-home {  padding: 0px;  color: white !important; background: #703f7e; border: none;  text-align: center;}
-
-.item-notificacoes-home,
-.item-boleto-home,
-.item-cupom-home,
-.item-agendamentos-home,
-.item-publicidades-home {   background-color: #f4f6f7; color:white;  border: none;}
-
+.item-notificacoes-home,.item-boleto-home,.item-cupom-home,.item-agendamentos-home,.item-publicidades-home {   background-color: #f4f6f7; color:white;  border: none;}
 .item-notificacoes-home .col{  background-color: #C24CBA;  color: white;  border-radius: 5px;  margin: 1px; text-align: center; }
 .item-notificacoes-home small{    font-size: 60%;}
 .item-notificacoes-home .icon{    font-size: 200%;}
@@ -621,15 +608,8 @@ input[type="time"] {
 .item-agendamentos-home .icon,
 .item-publicidades-home .icon,
 .item-boleto-home .col:nth-child(2){    font-size: 300%; line-height: 1;}
-
-
 .item-boleto-home .col:first-child { border-right: 1px solid rgb(244, 94, 238); }
-
-
-.item-boleto-home .col:last-child,
-.item-cupom-home .col:last-child,
-.item-agendamentos-home .col:last-child
- { text-align: left;}
+.item-boleto-home .col:last-child,.item-cupom-home .col:last-child,.item-agendamentos-home .col:last-child { text-align: left;}
 
 
 .item-cupom-home .row{ background: #C2884C; text-transform: uppercase;     border-radius: 5px;}
@@ -647,22 +627,33 @@ input[type="time"] {
 .content-menu-easyspa, .content-menu-easyspa ion-list ion-item.item-complex{  background-color: #303F6A !important;  color:white;  text-transform: uppercase;}
 .content-menu-easyspa, .content-menu-easyspa ion-list a.item-content{ background-color: #2F4379;}
 
-.item.active,
-.item.activated,
-.item-complex.active .item-content,
-.item-complex.activated .item-content,
-.item .item-content.active,
-.item .item-content.activated{ background-color: #2F4379; }
+.item.active,.item.activated,.item-complex.active .item-content,.item-complex.activated .item-content,.item .item-content.active,.item .item-content.activated{ background-color: #2F4379; }
 
 .content-menu-easyspa ion-list ion-item{ border-color:transparent; }
 ion-item.item-nome{ color : white;}
-ion-item.item-nome small{
-  font-size: 85%;
-    font-weight: 100;
-    margin-top: 10px;
-    display: block;
-}
+ion-item.item-nome small{  font-size: 85%;    font-weight: 100;    margin-top: 10px;    display: block;}
+.icon-menu-easyspa{  color:white !important;}
 
-.icon-menu-easyspa{
-  color:white !important;
-}
+
+#pagamento-planos .col{}
+  #pagamento-planos .title-plan .col{  font-size: 30px;  text-align: center;  padding: 20px 0px;  color: white;  font-weight: lighter;}
+  #pagamento-planos .plano-basic{ text-align:  center;}
+  #pagamento-planos .plano-basic.title-plan{ background-color: #33a861}
+  #pagamento-planos .plano-basic.description-plan{  background-color: #55af6c;  color:white;  text-align:center;}
+  #pagamento-planos .plano-basic.description-plan h1{  color:white;  font-size: 42px;  font-weight: bolder;}
+  #pagamento-planos .plano-basic.register-now h4{color:white; font-weight: bold; margin-bottom: 0px;}
+  #pagamento-planos .plano-basic.register-now{  margin-top: 10px;  background-color: #238047;  color:white;  text-align:center;}
+
+#pagamento-planos ul.collapse-plan-basic { margin-bottom: 20px  }
+#pagamento-planos ul.collapse-plan-basic li{ padding: 5px; text-align: center;}
+#pagamento-planos ul.collapse-plan-basic li:first-child { background: #fafbf9; padding: 15px}
+
+#pagamento-planos .plano-premium {text-align:  center;}
+  #pagamento-planos .plano-premium.title-plan { background-color: #4F98CF;}
+  #pagamento-planos .plano-premium.description-plan { background-color: #66aadb; color:white}
+  #pagamento-planos .plano-premium.description-plan p{padding: 5px 10px;}
+  #pagamento-planos .plano-premium.description-plan h1{  color:white;  font-size: 42px;  font-weight: bolder;}
+
+  #pagamento-planos .plano-premium.options-register{background-color: #4F98CF; margin:10px 0px;}
+  #pagamento-planos .plano-premium.options-register h3{margin-bottom: 0px;}
+  #pagamento-planos .plano-premium.options-register p{margin: 0;}

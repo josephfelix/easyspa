@@ -9,18 +9,18 @@ angular.module('easyspa.controllers')
 			$location.path("/app/home");
 			return;
 		}
-		
+
 		$scope.loginFacebook = function()
 		{
 			$cordovaOauth.facebook(FACEBOOK_APPID, ['email']).then(function(result)
 			{
-				$http.get("https://graph.facebook.com/v2.2/me", 
-				{ 
-					params: 
-						{ 
-							access_token: result.access_token, 
-							fields: "id,name,picture,email", 
-							format: "json" 
+				$http.get("https://graph.facebook.com/v2.2/me",
+				{
+					params:
+						{
+							access_token: result.access_token,
+							fields: "id,name,picture,email",
+							format: "json"
 						}
 				}).then(function(result)
 				{
@@ -31,7 +31,7 @@ angular.module('easyspa.controllers')
 						picture: result.data.picture.data.url
 					};
 					$rootScope.$apply();
-					
+
 					$http.post( URL_EASYSPA + 'loginfacebook',
 					{
 						id: $rootScope.facebook.id,
@@ -88,7 +88,7 @@ angular.module('easyspa.controllers')
 				});
 				return;
 			}
-			
+
 			if ( !dados.senha )
 			{
 				$ionicPopup.alert({
@@ -97,14 +97,14 @@ angular.module('easyspa.controllers')
 				});
 				return;
 			}
-			
+
 			$ionicLoading.show({
 				content: 'Entrando...'
 			});
-			
+
 			if ( !$rootScope.offline )
 			{
-				$http.post( URL_EASYSPA + 'login/?cache=' + Math.random(), 
+				$http.post( URL_EASYSPA + 'login/?cache=' + Math.random(),
 				{
 					email: dados.email,
 					senha: dados.senha
@@ -113,6 +113,7 @@ angular.module('easyspa.controllers')
 				{
 					$ionicLoading.hide();
 					var json = response.data;
+					console.log(json);
 					if ( json.status == 'OK' )
 					{
 						$rootScope.usuario = {
