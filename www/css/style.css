@@ -735,3 +735,60 @@ font-weight: bolder;
     font-size: 13px;
     line-height: 15px;
   }
+
+
+  #userMessagesView .bar-subheader .col{padding: 0px;}
+  #userMessagesView .bar-subheader a{ font-size: 30px;
+  text-decoration:  none;
+  color:black;
+  }
+  #userMessagesView .bar-subheader img{
+    width: 35px;
+    border-radius: 50%;
+    vertical-align: bottom;
+  }
+#chat-messages .list{
+  text-align: left;
+}
+#chat-messages .messages{
+  margin: 10px;
+  display: table;
+  padding: 6px 10px;
+  text-align: left;
+}
+#chat-messages .messages.sound{
+  width: 80%;
+  min-height: 34px;
+}
+#chat-messages .messages.sound i{
+  float: left;
+}
+#chat-messages .range-sound{
+  width: 80%;
+  display: block;
+  height: 10px;
+  border-radius: 50px;
+  background: #ABABAB;
+  margin: 5px;
+  float: left;
+}
+#chat-messages .range-sound:before{
+  content: '';
+  display: inherit;
+  background: #703F7E;
+  width: 30%;
+  height: 10px;
+  border-radius: 10px;
+}
+#chat-messages .me-message{
+  margin-right: 0px;
+  border-radius: 10px 0px 0px 10px;
+  float: right;
+  background: rgb(226, 211, 230);
+}
+#chat-messages .you-message{
+  margin-left: 0;
+  border-radius: 0px 10px 10px 0px;
+  float: left;
+
+}

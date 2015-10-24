@@ -10,6 +10,31 @@
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
+    <div class="tabs-striped tabs-color-home" ng-controller="tabs-dinamic-controller" ng-if="!haveMenu">
+  		<div class="tabs tabs-icon-left">
+  			<a class="tab-item active" href="#/app/home">
+  				<i class="icon ion-android-star-outline"></i><br />
+  				DESTAQUE
+  			</a>
+  			<a class="tab-item" href="#/app/easyclub">
+  				<i class="icon ion-person-stalker"></i><br />
+  				EASYCLUB
+  			</a>
+  			<a class="tab-item" href="#/app/easybeauty">
+  				<i class="icon ion-bag"></i><br />
+  				EASYBEAUTY
+  			</a>
+  			<a class="tab-item" href="#/app/conversas">
+  				<i class="icon ion-chatbox-working"></i><br />
+  				CHAT
+  				<span class="notify-chat">{{chatNotificationsCounter}}</span>
+  			</a>
+  			<a class="tab-item" href="#/app/agenda">
+  				<i class="icon ion-calendar"></i><br />
+  				AGENDA
+  			</a>
+  		</div>
+  	</div>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">

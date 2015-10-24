@@ -24,25 +24,25 @@ angular.module('easyspa', [
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-	controller: 'LoginCtrl'
+		controller: 'LoginCtrl'
   })
 
   .state('logincomercial', {
     url: '/logincomercial',
     templateUrl: 'templates/logincomercial.html',
-	controller: 'LoginComercialCtrl'
+		controller: 'LoginComercialCtrl'
   })
 
   .state('cadastro', {
     url: '/cadastro',
     templateUrl: 'templates/cadastro.html',
-	controller: 'CadastroCtrl'
+		controller: 'CadastroCtrl'
   })
 
   .state('cadastrocomercial', {
     url: '/cadastrocomercial',
     templateUrl: 'templates/cadastrocomercial.html',
-	controller: 'CadastroComercialCtrl'
+		controller: 'CadastroComercialCtrl'
   })
 
 	.state('pagamentoplanos', {
@@ -79,7 +79,7 @@ angular.module('easyspa', [
     views: {
       'menuContent': {
         templateUrl: "templates/todas_categorias.html",
-		controller: 'CategoriasCtrl'
+				controller: 'CategoriasCtrl'
       }
     }
   })
@@ -89,7 +89,7 @@ angular.module('easyspa', [
     views: {
       'menuContent': {
         templateUrl: "templates/configuracoes.html",
-		controller: 'ConfiguracoesCtrl'
+				controller: 'ConfiguracoesCtrl'
       }
     }
   })
@@ -98,14 +98,6 @@ angular.module('easyspa', [
     url: "/agenda",
     views: {
       'menuContent': {
-        templateUrl: "templates/agenda.html",
-				controller: 'AgendaCtrl'
-      }
-			,'@tab-agendamento': {
-        template: "<h1>OI</h1>",
-				controller: 'AgendaCtrl'
-      }
-			,'@tab-agendamento-historico': {
         templateUrl: "templates/agenda.html",
 				controller: 'AgendaCtrl'
       }
@@ -177,12 +169,12 @@ angular.module('easyspa', [
     views: {
       'menuContent': {
         templateUrl: "templates/chat.html",
-		controller: 'ChatCtrl'
+		    controller: 'ChatCtrl'
       }
     },
-	params: {
-		funcionaria: null
-	}
+		params: {
+			funcionaria: null
+		}
   })
 
   .state('app.rota', {
@@ -193,9 +185,9 @@ angular.module('easyspa', [
 		controller: 'RotaCtrl'
       }
     },
-	params: {
-		funcionaria: null
-	}
+		params: {
+			funcionaria: null
+		}
   })
 
   .state('app.perto', {
@@ -203,7 +195,7 @@ angular.module('easyspa', [
     views: {
       'menuContent': {
         templateUrl: "templates/perto.html",
-		controller: 'PertoCtrl'
+				controller: 'PertoCtrl'
       }
     }
   })
@@ -227,7 +219,6 @@ angular.module('easyspa', [
       }
     }
   })
-
 
   .state('app.atendimentos', {
     url: "/atendimentos",

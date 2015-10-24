@@ -19,4 +19,10 @@ angular.module('easyspa.controllers')
 			$location.path('/login');
 		}
 	}
-});
+})
+.controller('tabs-dinamic-controller',function ($scope,$rootScope) {
+	console.log("teste");
+	$scope.chatNotificationsCounter = 10;
+	$rootScope.haveMenu = true;
+})
+;

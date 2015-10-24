@@ -1,67 +1,76 @@
+<style>
+  #bar-chat-footer button{
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    padding: 0px;
+    color: #703F7E;
+    font-size: 20px;
+  }
+  #bar-chat-footer input[type="text"]{
+    border: 1px solid #E2D3E6;
+    height: 25px;
+    width: 100%;
+    padding: 0px 10px;
+    border-radius: 5px;
+  }
+</style>
 <ion-view view-title="{{tituloTela}}" align="center" id="userMessagesView" cache-view="false">
-	<div class="tabs-striped tabs-top tabs-background-easyspa tabs-color-white tabs-perfil">
-		<div class="tabs">
-			<a class="tab-item" href="#" ng-click="verPerfil(funcionaria)">
-				INFO
-			</a>
-			<a class="tab-item active" href="#">
-				CHAT
-			</a>
-			<a class="tab-item" href="#" ng-click="verRota(funcionaria)">
-				ROTA
-			</a>
-		</div>
-	</div>
+  <div class="bar bar-subheader row">
+    <div class="col"></div>
+    <div class="col" style="line-height: 40px;">
+      {{contato.nome}}
+    </div>
+    <div class="col">
+      <a href="#">
+        <i class="ion-key"></i>
+      </a>
+      <img ng-src="{{contato.foto}}" error-src="/img/anonimo.jpg" alt="">
+    </div>
+  </div>
 	<div class="loader-center" ng-if="!doneLoading">
 		<div class="loader">
 		  <i class="icon ion-loading-c"></i>
 		</div>
 	</div>
-	<ion-content has-bouncing="true" class="has-header has-footer content-chat" 
-	  delegate-handle="userMessageScroll">
+	<ion-content has-bouncing="true" class="has-header has-subheader has-footer content-chat"   delegate-handle="userMessageScroll" id="chat-messages">
+    <ul class="list">
+      <li class="item item-text-wrap messages" ng-repeat="data in messages" ng-class="{'you-message': 1 != data.userid, 'me-message': 1 == data.userid}">
+        {{data.msg}}
+      </li>
 
-	  <div ng-repeat="message in messages" class="message-wrapper">
-
-		  <div ng-if="toUser.id == message.user1" class="msg-chat-easyspa">
-			  
-			<img class="profile-pic left" ng-src="{{toUser.pic}}" error-src="img/anonimo.jpg" />
-
-			  <div class="chat-bubble left">
-
-				  <div class="message" ng-bind-html="message.mensagem | nl2br" autolinker>
-				  </div>
-
-			  </div>
-		  </div>
-
-		  <div ng-if="user.id == message.user1" class="msg-chat-easyspa">
-			
-			   <img class="profile-pic right" ng-src="{{user.pic}}" error-src="img/anonimo.jpg" />
-			
-			  <div class="chat-bubble right">
-
-				  <div class="message" ng-bind-html="message.mensagem | nl2br" autolinker>
-				  </div>
-
-			  </div>
-			
-		  </div>
-
-		  <div class="cf"></div>
-
-	  </div>
+      <li class="item item-text-wrap me-message messages sound">
+        <i class="ion-play"></i>
+        <i class="ion-pause"></i>
+        <small class="range-sound"></small>
+      </li>
+      <li class="item item-text-wrap me-message messages">
+        <img src="/img/anonimo.jpg" alt="">
+      </li>
+      <li class="item item-text-wrap me-message messages">
+        <img src="/img/anonimo.jpg" alt="">
+      </li>
+      <li class="item item-text-wrap me-message messages">
+        <img src="/img/anonimo.jpg" alt="">
+      </li>
+    </ul>
 	</ion-content>
+  <div class="bar bar-footer row" id="bar-chat-footer">
+    <div class="col col-10">
+      <button ng-click="showMoreOptions()">
+        <i class="ion-android-more-vertical"></i>
+      </button>
+    </div>
+    <div class="col">
+      <input type="text" class="">
+    </div>
+    <div class="col col-20">
+      <button>
+        <i class="ion-paper-airplane"></i>
+      </button>
+    </div>
+  </div>
 
-	<form name="sendMessageForm" ng-submit="sendMessage(sendMessageForm)" novalidate>
-	  <ion-footer-bar style="background:#9A9A98" class="bar-stable item-input-inset message-footer" keyboard-attach>
-		  <label class="item-input-wrapper chat-item-input">
-			  <textarea ng-model="input.message" value="" required minlength="1" maxlength="1500" msd-elastic></textarea>
-		  </label>
-		  <div class="footer-btn-wrap">
-			<button class="button button-icon icon ion-android-send footer-btn" style="color:#fff" type="submit"
-				ng-disabled="!input.message || input.message === ''">
-			</button>
-		  </div>
-	  </ion-footer-bar>
-	</form>
 </ion-view>
