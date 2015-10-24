@@ -28,6 +28,7 @@ angular.module('easyspa.controllers')
 	$scope.cadastro.categoria = 1
 	$scope.cadastro.tipo = "PF"
 	$scope.cadastro.categorias = [];
+	$scope.cadastro.dataNascimento = "";
 	$scope.cadastro.email = "";
 	$scope.cadastro.senha = "";
 	$scope.cadastro.cpf = "";
@@ -55,21 +56,22 @@ angular.module('easyspa.controllers')
 	$scope.sabado =  $scope.sabado ||   { value:false};
 	$scope.domingo =  $scope.domingo ||   { value:false};
 
-	$scope.de_segunda_feira = $scope.de_segunda_feira ||  {value : ''};
-	$scope.de_terca_feira = $scope.de_terca_feira ||  {value:''};
-	$scope.de_quarta_feira = $scope.de_quarta_feira ||  {value:''};
-	$scope.de_quinta_feira = $scope.de_quinta_feira ||  {value:''};
-	$scope.de_sexta_feira = $scope.de_sexta_feira ||  {value:''};
-	$scope.de_sabado = $scope.de_sabado ||  {value:''};
-	$scope.de_domingo = $scope.de_domingo ||  {value:''};
+  $scope.de_segunda_feira = $scope.de_segunda_feira ||   {value: new Date(2015, 0, 1, 9, 0, 0)};
+  $scope.de_terca_feira   = $scope.de_terca_feira ||   {value:new Date(2015, 0, 1, 9, 0, 0)};
+  $scope.de_quarta_feira  = $scope.de_quarta_feira ||    {value:new Date(2015, 0, 1, 9, 0, 0)};
+  $scope.de_quinta_feira  = $scope.de_quinta_feira ||    {value:new Date(2015, 0, 1, 9, 0, 0)};
+  $scope.de_sexta_feira   = $scope.de_sexta_feira ||   {value:new Date(2015, 0, 1, 9, 0, 0)};
+  $scope.de_sabado        = $scope.de_sabado ||    {value:new Date(2015, 0, 1, 9, 0, 0)};
+  $scope.de_domingo       = $scope.de_domingo ||   {value:new Date(2015, 0, 1, 9, 0, 0)};
 
-	$scope.ate_segunda_feira = $scope.ate_segunda_feira ||  {value:''};
-	$scope.ate_terca_feira = $scope.ate_terca_feira ||  {value:''};
-	$scope.ate_quarta_feira = $scope.ate_quarta_feira ||  {value:''};
-	$scope.ate_quinta_feira = $scope.ate_quinta_feira ||  {value:''};
-	$scope.ate_sexta_feira = $scope.ate_sexta_feira ||  {value:''};
-	$scope.ate_sabado = $scope.ate_sabado ||  {value:''};
-	$scope.ate_domingo = $scope.ate_domingo ||  {value:''};
+
+	$scope.ate_segunda_feira  = $scope.ate_segunda_feira ||  {value: new Date(2015, 0, 1, 18, 0, 0)};
+	$scope.ate_terca_feira  = $scope.ate_terca_feira ||  {value:new Date(2015, 0, 1, 18, 0, 0)};
+	$scope.ate_quarta_feira  = $scope.ate_quarta_feira ||  {value:new Date(2015, 0, 1, 18, 0, 0)};
+	$scope.ate_quinta_feira  = $scope.ate_quinta_feira ||  {value:new Date(2015, 0, 1, 18, 0, 0)};
+	$scope.ate_sexta_feira  = $scope.ate_sexta_feira ||  {value:new Date(2015, 0, 1, 18, 0, 0)};
+	$scope.ate_sabado  = $scope.ate_sabado ||  {value:new Date(2015, 0, 1, 18, 0, 0)};
+	$scope.ate_domingo  = $scope.ate_domingo ||  {value:new Date(2015, 0, 1, 18, 0, 0)};
 
 	var exclude = /[^@\-\.\w]|^[_@\.\-]|[\._\-]{2}|[@\.]{2}|(@)[^@]*\1/;
 	var check = /@[\w\-]+\./;
@@ -78,28 +80,28 @@ angular.module('easyspa.controllers')
 
 
 	$scope.categorias = [
-		{id: 1, nome: 'Pés e Mãos'},
-		{id: 2, nome: 'Massagem'},
-		{id: 3, nome: 'Cabelereiro'},
-		{id: 4, nome: 'Maquiagem'},
-		{id: 5, nome: 'Depilação'},
-		{id: 6, nome: 'Design de Sobrancelha'},
-		{id: 7, nome: 'Cílios'},
-		{id: 8, nome: 'Estética facial'},
-		{id: 9, nome: 'Estética corporal'},
-		{id: 10, nome: 'Práticas integrativas'},
-		{id: 11, nome: 'Piercing / Tatuagem'},
-		{id: 12, nome: 'Personal Trainer'},
-		{id: 13, nome: 'Fisioterapia / Pilates / RPG'},
-		{id: 14, nome: 'Nutrição'},
-		{id: 15, nome: 'Odontologia'},
-		{id: 16, nome: 'Salão'},
-		{id: 17, nome: 'Academia'},
-		{id: 18, nome: 'Spa'},
-		{id: 19, nome: 'Clínica de Estética'},
-		{id: 20, nome: 'Hidroterapia/Hidroginástica/Natação'},
-		{id: 21, nome: 'Acupuntura / Auriculoterapia'},
-		{id: 22, nome: 'Yoga / Reike'}
+		{id: 1, nome: 'Pés e Mãos', plano : 1},
+		{id: 2, nome: 'Massagem', plano : 2},
+		{id: 3, nome: 'Cabelereiro',plano : 2},
+		{id: 4, nome: 'Maquiagem', plano: 2},
+		{id: 5, nome: 'Depilação', plano : 1},
+		{id: 6, nome: 'Design de Sobrancelha', plano: 1},
+		{id: 7, nome: 'Cílios', plano : 1},
+		{id: 8, nome: 'Estética facial', plano : 2},
+		{id: 9, nome: 'Estética corporal', plano: 2},
+		{id: 10, nome: 'Práticas integrativas', plano : 2},
+		{id: 11, nome: 'Piercing / Tatuagem',plano: 2},
+		{id: 12, nome: 'Personal Trainer',plano: 2},
+		{id: 13, nome: 'Fisioterapia / Pilates / RPG',plano: 2},
+		{id: 14, nome: 'Nutrição',plano: 2},
+		{id: 15, nome: 'Odontologia',plano: 2},
+		{id: 16, nome: 'Salão',plano: 2},
+		{id: 17, nome: 'Academia',plano: 2},
+		{id: 18, nome: 'Spa',plano: 2},
+		{id: 19, nome: 'Clínica de Estética',plano: 2},
+		{id: 20, nome: 'Hidroterapia/Hidroginástica/Natação',plano: 2},
+		{id: 21, nome: 'Acupuntura / Auriculoterapia',plano: 2},
+		{id: 22, nome: 'Yoga / Reike',plano: 2}
 	];
 	if ( $rootScope.facebook )
 	{
@@ -360,6 +362,7 @@ angular.module('easyspa.controllers')
 			,senha: cadastro.senha
 			,apresentacao: cadastro.apresentacao.value
 			,especialidades: cadastro.especialidades.value
+			,dataNascimento : cadastro.dataNascimento
 			,cpf: cadastro.cpf
 			,cnpj: cadastro.cnpj
 			,tipo: cadastro.tipo
@@ -435,7 +438,8 @@ angular.module('easyspa.controllers')
 							latitude: dadosEnviar.latitude,
 							longitude: dadosEnviar.longitude,
 							id: json.id,
-							foto: URL_ASSETS_EASYSPA + 'upload/' + json.foto
+							foto: URL_ASSETS_EASYSPA + 'upload/' + json.foto,
+							categorias : categorias
 						};
 						$rootScope.$apply();
 						localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
@@ -444,7 +448,8 @@ angular.module('easyspa.controllers')
 							title: 'Sucesso!',
 							template: json.msg
 						}).then(function () {
-							$location.path("/app/home");
+							$location.path('/pagamento/planos');
+							// $location.path("/app/home");
 						});
 
 					} else
@@ -491,7 +496,8 @@ angular.module('easyspa.controllers')
 						latitude: dadosEnviar.latitude,
 						longitude: dadosEnviar.longitude,
 						id: json.id,
-						foto: dadosEnviar.foto
+						foto: dadosEnviar.foto,
+						categorias : categorias
 					};
 					$rootScope.$apply();
 					localStorage.login_easyspa = true;
@@ -501,7 +507,8 @@ angular.module('easyspa.controllers')
 						title: 'Sucesso!',
 						template: json.msg
 					}).then(function () {
-						$location.path("/app/home");
+						$location.path('/pagamento/planos');
+						// $location.path("/app/home");
 					});
 
 				} else
@@ -560,6 +567,7 @@ angular.module('easyspa.controllers')
 			if(!$scope.cadastro.estado      ||$scope.cadastro.estado        === ""){ InvalidAlert(""); return false;}
 			if($scope.cadastro.tipo == "PF"){
 				  // Validando pessoa fisica
+					if(!$scope.cadastro.dataNascimento || new Date($scope.cadastro.dataNascimento) == "Invalid Date") {InvalidAlert("Data Inválida"); return false;}
 					if(!$scope.cadastro.cpf || $scope.cadastro.cpf          === "") { InvalidAlert(""); return false;}
 					if(!$scope.cadastro.celcpf || $scope.cadastro.celcpf       === "") { InvalidAlert(""); return false;}
 			}else{
@@ -630,31 +638,3 @@ angular.module('easyspa.controllers')
 	}
 
 });
-
-
-
-angular.module('easyspa.controllers').directive('peeyLevelIonSlides', function ($timeout, $ionicScrollDelegate) {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-
-      function resize () {
-        $ionicScrollDelegate.resize()
-      }
-
-      scope.$watch(function () {
-        var activeSlideElement = angular.element(element[0].getElementsByClassName(attrs.slideChildClass + "-active"))
-        activeSlideElement.css('max-height', 'none')
-        return angular.isDefined(activeSlideElement[0]) ? activeSlideElement[0].offsetHeight : 20
-      }, function (newHeight) {
-				console.log(newHeight);
-        var sildeElements = angular.element(element[0].getElementsByClassName(attrs.slideChildClass))
-				console.log(sildeElements);
-        sildeElements.css('max-height', newHeight + 'px')
-        resize()
-        $timeout(resize)
-        $timeout(resize, 50)
-      })
-    }
-  }
-})

@@ -41,6 +41,9 @@
 					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
 						<input type="tel" ng-model="cadastro.cpf"  ng-blur="validOnServer('cpfcnpj',cadastro.cpf)" mask='999.999.999-99' placeholder="Digite seu CPF" />
 					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
+						<input type="text" ng-model="cadastro.dataNascimento" mask='39/19/9999' placeholder="00/00/0000"/>
+					</label>
 					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
 						<input type="text" ng-model="cadastro.razaosocial" placeholder="Raz&atilde;o social" />
 					</label>

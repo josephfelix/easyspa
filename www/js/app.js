@@ -44,10 +44,16 @@ angular.module('easyspa', [
     templateUrl: 'templates/cadastrocomercial.html',
 	controller: 'CadastroComercialCtrl'
   })
-	
+
 	.state('pagamentoplanos', {
     url: '/pagamento/planos',
     templateUrl: 'templates/pagamento_planos.html',
+		controller: 'PagamentoCtrl'
+  })
+
+	.state('pagamentocartoes', {
+    url: '/pagamento/cartoes',
+    templateUrl: 'templates/pagamento_cartao.html',
 		controller: 'PagamentoCtrl'
   })
 
@@ -93,7 +99,15 @@ angular.module('easyspa', [
     views: {
       'menuContent': {
         templateUrl: "templates/agenda.html",
-		controller: 'AgendaCtrl'
+				controller: 'AgendaCtrl'
+      }
+			,'@tab-agendamento': {
+        template: "<h1>OI</h1>",
+				controller: 'AgendaCtrl'
+      }
+			,'@tab-agendamento-historico': {
+        templateUrl: "templates/agenda.html",
+				controller: 'AgendaCtrl'
       }
     }
   })
