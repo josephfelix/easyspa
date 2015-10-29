@@ -17,15 +17,17 @@ angular.module('easyspa.directives', ['ngSanitize'])
 .directive('errorSrc', function () {
   var errorSrc = {
     link: function postLink(scope, iElement, iAttrs) {
-      iElement.bind('error', function() {
-        angular.element(this).attr("src", iAttrs.errorSrc);
-      });
+		if (!angular.element(iElement).attr('src'))
+			angular.element(iElement).attr("src", iAttrs.errorSrc);
+		iElement.bind('error', function() {
+			angular.element(this).attr("src", iAttrs.errorSrc);
+		});
     }
    }
    return errorSrc;
-});
+})
 
-angular.module('easyspa.controllers').directive('peeyLevelIonSlides', function ($timeout, $ionicScrollDelegate) {
+.directive('peeyLevelIonSlides', function ($timeout, $ionicScrollDelegate) {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {
@@ -49,4 +51,4 @@ angular.module('easyspa.controllers').directive('peeyLevelIonSlides', function (
       })
     }
   }
-})
+});

@@ -1,7 +1,7 @@
 angular.module('easyspa.controllers')
 .controller('AppCtrl', function($scope, $rootScope, $location, $cordovaGeolocation)
 {
-	if ( localStorage.hasOwnProperty("login_easyspa") === true )
+	if ( localStorage.hasOwnProperty("login_easyspa_usuario") === true )
 	{
 		$rootScope.usuario = JSON.parse( localStorage.usuario_easyspa );
 		$scope.usuario = JSON.parse( localStorage.usuario_easyspa );

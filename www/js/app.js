@@ -20,151 +20,323 @@ angular.module('easyspa', [
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-		controller: 'LoginCtrl'
+  
+  .state('loginusuario', {
+    url: '/loginusuario',
+	templateUrl: 'templates/usuario/login.html',
+	controller: 'LoginUsuarioCtrl'
   })
 
-  .state('logincomercial', {
-    url: '/logincomercial',
-    templateUrl: 'templates/logincomercial.html',
-		controller: 'LoginComercialCtrl'
+  .state('logincliente', {
+    url: '/logincliente',
+    templateUrl: 'templates/cliente/login.html',
+	controller: 'LoginClienteCtrl'
   })
 
-  .state('cadastro', {
-    url: '/cadastro',
-    templateUrl: 'templates/cadastro.html',
-		controller: 'CadastroCtrl'
+  .state('cadastrousuario', {
+    url: '/cadastrousuario',
+    templateUrl: 'templates/usuario/cadastro.html',
+	controller: 'CadastroUsuarioCtrl'
   })
 
-  .state('cadastrocomercial', {
-    url: '/cadastrocomercial',
-    templateUrl: 'templates/cadastrocomercial.html',
-		controller: 'CadastroComercialCtrl'
+  .state('cadastrocliente', {
+    url: '/cadastrocliente',
+    templateUrl: 'templates/cliente/cadastro.html',
+		controller: 'CadastroClienteCtrl'
   })
 
 	.state('pagamentoplanos', {
     url: '/pagamento/planos',
-    templateUrl: 'templates/pagamento_planos.html',
+    templateUrl: 'templates/cliente/pagamento_planos.html',
 		controller: 'PagamentoCtrl'
   })
 
 	.state('pagamentocartoes', {
     url: '/pagamento/cartoes',
-    templateUrl: 'templates/pagamento_cartao.html',
+    templateUrl: 'templates/cliente/pagamento_cartao.html',
 		controller: 'PagamentoCtrl'
   })
-
-  .state('app', {
-    url: '/app',
+  
+  
+  .state('usuario', {
+	url: '',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/usuario/menu.html',
     controller: 'AppCtrl'
   })
+  
+  .state('cliente', {
+	url: '',
+    abstract: true,
+    templateUrl: 'templates/cliente/menu.html',
+    controller: 'AppCtrl'
+  })
+  
+  /**
+  * Rotas para o usuário
+  */
 
-  .state('app.home', {
-    url: "/home",
+   .state('usuario.home', {
+    url: "/usuario/home",
     views: {
       'menuContent': {
-        templateUrl: "templates/home.html",
-		controller: 'HomeCtrl'
+        templateUrl: "templates/usuario/home.html",
+		controller: 'HomeUsuarioCtrl'
       }
     }
   })
 
-  .state('app.todascategorias', {
-    url: "/todascategorias",
+  .state('usuario.todascategorias', {
+    url: "/usuario/todascategorias",
     views: {
       'menuContent': {
-        templateUrl: "templates/todas_categorias.html",
-				controller: 'CategoriasCtrl'
+        templateUrl: "templates/usuario/todas_categorias.html",
+		controller: 'CategoriasUsuarioCtrl'
       }
     }
   })
 
-  .state('app.configuracoes', {
-    url: "/configuracoes",
+  .state('usuario.configuracoes', {
+    url: "/usuario/configuracoes",
     views: {
       'menuContent': {
-        templateUrl: "templates/configuracoes.html",
-				controller: 'ConfiguracoesCtrl'
+        templateUrl: "templates/usuario/configuracoes.html",
+		controller: 'ConfiguracoesUsuarioCtrl'
       }
     }
   })
 
-  .state('app.agenda', {
-    url: "/agenda",
+  .state('usuario.agenda', {
+    url: "/usuario/agenda",
     views: {
       'menuContent': {
-        templateUrl: "templates/agenda.html",
-				controller: 'AgendaCtrl'
+        templateUrl: "templates/usuario/agenda.html",
+		controller: 'AgendaUsuarioCtrl'
       }
     }
   })
 
-  .state('app.easyclub', {
-    url: "/easyclub",
+  .state('usuario.easyclub', {
+    url: "/usuario/easyclub",
     views: {
       'menuContent': {
-        templateUrl: "templates/easyclub.html",
-		controller: 'EasyClubCtrl'
+        templateUrl: "templates/usuario/easyclub.html",
+		controller: 'EasyClubUsuarioCtrl'
       }
     }
   })
 
-  .state('app.easybeauty', {
-    url: "/easybeauty",
+  .state('usuario.easybeauty', {
+    url: "/usuario/easybeauty",
     views: {
       'menuContent': {
-        templateUrl: "templates/easybeauty.html",
-		controller: 'EasyBeautyCtrl'
+        templateUrl: "templates/usuario/easybeauty.html",
+		controller: 'EasyBeautyUsuarioCtrl'
       }
     }
   })
 
-  .state('app.conversas', {
-    url: "/conversas",
+  .state('usuario.conversas', {
+    url: "/usuario/conversas",
     views: {
       'menuContent': {
-        templateUrl: "templates/conversas.html",
-		controller: 'ConversasCtrl'
+        templateUrl: "templates/usuario/conversas.html",
+		controller: 'ConversasUsuarioCtrl'
       }
     }
   })
 
-  .state('app.mapa', {
-    url: "/mapa",
+  .state('usuario.mapa', {
+    url: "/usuario/mapa",
     views: {
       'menuContent': {
-        templateUrl: "templates/mapa.html",
-		controller: 'MapaCtrl'
+        templateUrl: "templates/usuario/mapa.html",
+		controller: 'MapaUsuarioCtrl'
       }
     }
   })
 
-  .state('app.lista', {
-    url: "/lista",
+  .state('usuario.lista', {
+    url: "/usuario/lista",
     views: {
       'menuContent': {
-        templateUrl: "templates/lista.html",
-		controller: 'ListaCtrl'
+        templateUrl: "templates/usuario/lista.html",
+		controller: 'ListaUsuarioCtrl'
       }
     }
   })
 
-  .state('app.perfil', {
-    url: "/perfil/:id",
+  .state('usuario.perfil', {
+    url: "/usuario/perfil/:id",
     views: {
       'menuContent': {
-        templateUrl: "templates/perfil.html",
-		controller: 'PerfilCtrl'
+        templateUrl: "templates/usuario/perfil.html",
+		controller: 'PerfilUsuarioCtrl'
       }
     }
   })
 
-  .state('app.chat', {
+  .state('usuario.rota', {
+    url: "/usuario/rota/:id",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/usuario/rota.html",
+		controller: 'RotaUsuarioCtrl'
+      }
+    },
+		params: {
+			funcionaria: null
+		}
+  })
+
+  .state('usuario.perto', {
+    url: "/usuario/perto",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/usuario/perto.html",
+		controller: 'PertoUsuarioCtrl'
+      }
+    }
+  })
+
+  .state('usuario.portipo', {
+    url: "/usuario/portipo",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/usuario/portipo.html",
+		controller: 'PortipoUsuarioCtrl'
+      }
+    }
+  })
+
+  .state('usuario.sugestoes', {
+    url: "/usuario/sugestoes",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/usuario/sugestoes.html",
+		controller: 'SugestoesUsuarioCtrl'
+      }
+    }
+  })
+
+  .state('usuario.atendimentos', {
+    url: "/usuario/atendimentos",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/usuario/atendimentos.html",
+		controller: 'AtendimentosUsuarioCtrl'
+      }
+    }
+  })
+  
+  
+  
+  
+  /**
+  * Rotas para o cliente (prestador)
+  */
+
+   .state('cliente.home', {
+    url: "/cliente/home",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/home.html",
+		controller: 'HomeClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.todascategorias', {
+    url: "/cliente/todascategorias",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/todas_categorias.html",
+		controller: 'CategoriasClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.configuracoes', {
+    url: "/cliente/configuracoes",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/configuracoes.html",
+		controller: 'ConfiguracoesClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.agenda', {
+    url: "/cliente/agenda",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/agenda.html",
+		controller: 'AgendaClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.easyclub', {
+    url: "/cliente/easyclub",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/easyclub.html",
+		controller: 'EasyClubClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.easybeauty', {
+    url: "/cliente/easybeauty",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/easybeauty.html",
+		controller: 'EasyBeautyClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.conversas', {
+    url: "/cliente/conversas",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/conversas.html",
+		controller: 'ConversasClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.mapa', {
+    url: "/cliente/mapa",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/mapa.html",
+		controller: 'MapaClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.lista', {
+    url: "/cliente/lista",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/lista.html",
+		controller: 'ListaClienteCtrl'
+      }
+    }
+  })
+
+  .state('cliente.perfil', {
+    url: "/cliente/perfil/:id",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/cliente/perfil.html",
+		controller: 'PerfilClienteCtrl'
+      }
+    }
+  })
+
+  .state('chat', {
     url: "/chat/:id",
     views: {
       'menuContent': {
@@ -177,12 +349,12 @@ angular.module('easyspa', [
 		}
   })
 
-  .state('app.rota', {
-    url: "/rota/:id",
+  .state('cliente.rota', {
+    url: "/cliente/rota/:id",
     views: {
       'menuContent': {
-        templateUrl: "templates/rota.html",
-		controller: 'RotaCtrl'
+        templateUrl: "templates/cliente/rota.html",
+		controller: 'RotaClienteCtrl'
       }
     },
 		params: {
@@ -190,50 +362,58 @@ angular.module('easyspa', [
 		}
   })
 
-  .state('app.perto', {
-    url: "/perto",
+  .state('cliente.perto', {
+    url: "/cliente/perto",
     views: {
       'menuContent': {
-        templateUrl: "templates/perto.html",
-				controller: 'PertoCtrl'
+        templateUrl: "templates/cliente/perto.html",
+		controller: 'PertoClienteCtrl'
       }
     }
   })
 
-  .state('app.portipo', {
-    url: "/portipo",
+  .state('cliente.portipo', {
+    url: "/cliente/portipo",
     views: {
       'menuContent': {
-        templateUrl: "templates/portipo.html",
-		controller: 'PortipoCtrl'
+        templateUrl: "templates/cliente/portipo.html",
+		controller: 'PortipoClienteCtrl'
       }
     }
   })
 
-  .state('app.sugestoes', {
-    url: "/sugestoes",
+  .state('cliente.sugestoes', {
+    url: "/cliente/sugestoes",
     views: {
       'menuContent': {
-        templateUrl: "templates/sugestoes.html",
-		controller: 'SugestoesCtrl'
+        templateUrl: "templates/cliente/sugestoes.html",
+		controller: 'SugestoesClienteCtrl'
       }
     }
   })
 
-  .state('app.atendimentos', {
-    url: "/atendimentos",
+  .state('cliente.atendimentos', {
+    url: "/cliente/atendimentos",
     views: {
       'menuContent': {
-        templateUrl: "templates/atendimentos.html",
-		controller: 'AtendimentosCtrl'
+        templateUrl: "templates/cliente/atendimentos.html",
+		controller: 'AtendimentosClienteCtrl'
       }
     }
-  })
+  });
 
 
-	if ( !localStorage.hasOwnProperty('login_easyspa') )
+	if ( !localStorage.hasOwnProperty('login_easyspa_usuario') )
 	{
-		$urlRouterProvider.otherwise('/login');
+		if ( !localStorage.hasOwnProperty('login_easyspa_cliente') )
+		{
+			$urlRouterProvider.otherwise('/loginusuario');
+		} else
+		{
+			$urlRouterProvider.otherwise('/cliente/home');
+		}
 	} else
-		$urlRouterProvider.otherwise('/app/home');
+	{
+		$urlRouterProvider.otherwise('/usuario/home');
+	}
 });
