@@ -49,7 +49,7 @@ angular.module('easyspa.controllers')
 		if ( !$rootScope.offline )
 		{
 
-			$http.post( URL_EASYSPA + 'logincomercial/',
+			$http.post( URL_EASYSPA + 'logincomercial',
 			{
 				email: dados.email,
 				senha: dados.senha
@@ -57,7 +57,6 @@ angular.module('easyspa.controllers')
 			.then(function(response)
 			{
 				$ionicLoading.hide();
-				console.log(response);
 				var json = response.data
 				if ( json.status == 'OK' )
 				{
@@ -108,10 +107,9 @@ angular.module('easyspa.controllers')
 
 					localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
 					localStorage.login_easyspa_cliente = true;
-					console.log(localStorage);
+					dados.email = '';
+					dados.senha = '';
 					$location.path("/cliente/home");
-
-
 				} else
 				{
 					$ionicPopup.alert({

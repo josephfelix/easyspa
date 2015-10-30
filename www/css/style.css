@@ -64,7 +64,7 @@
 	color: #fff;
 	border: none;
 }
-.button-login-background {
+.button-login-background, .button-login-background.activated {
 	background: url('../img/btn-login.jpg');
     background-repeat: no-repeat;
     background-color: #AB3565;

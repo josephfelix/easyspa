@@ -1,6 +1,6 @@
 angular.module('easyspa.controllers')
 .controller('LoginUsuarioCtrl',
-	function( $scope, $rootScope, $location, $ionicPopup, $ionicLoading, $http, $cordovaOauth )
+	function( $scope, $rootScope, $location, $ionicPopup, $ionicLoading, $http, $cordovaOauth, $state )
 	{
 		$scope.dados = {};
 		if ( localStorage.hasOwnProperty('login_easyspa_usuario') === true )
@@ -134,7 +134,9 @@ angular.module('easyspa.controllers')
 						$rootScope.$apply();
 						localStorage.usuario_easyspa = JSON.stringify( $rootScope.usuario );
 						localStorage.login_easyspa_usuario = true;
-						$location.path("/usuario/home");
+						dados.email = '';
+						dados.senha = '';
+						$state.go('usuario.home');
 					} else
 					{
 						$ionicPopup.alert({
