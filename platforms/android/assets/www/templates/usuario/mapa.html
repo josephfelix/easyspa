@@ -1,0 +1,44 @@
+<ion-view view-title="{{tituloTela}}" hide-back-button="true">
+	<ion-nav-buttons side="left">
+		<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<a href="#" ng-click="todasCategorias()" class="button button-icon color-white icon ion-location"></a>
+	</ion-nav-buttons>
+	<!-- <div class="tabs-striped tabs-top tabs-background-easyspa tabs-color-white">
+		<div class="tabs tabs-icon-left">
+			<a class="tab-item" href="#" ng-click="mudarZoom()">
+				<i class="icon ion-location"></i>
+				Localiza&ccedil;&atilde;o
+			</a>
+			<a class="tab-item" href="#">
+				<i class="icon ion-funnel"></i>
+				Filtros de busca
+			</a>
+		</div>
+	</div> -->
+	<ion-content class="mapa-content" ng-init="init()">
+		<div id="maps-todas" data-tap-disabled="true"></div>
+	</ion-content>
+	<div class="tabs-striped tabs-color-home">
+		<div class="tabs tabs-icon-left">
+			<a class="tab-item" href="#" ng-click="verSugestoes()">
+				<i class="icon ion-star color-yellow"></i><br />
+				SUGEST&Otilde;ES
+			</a>
+			<a class="tab-item active" href="#" ng-click="verMapa()">
+				<i class="icon ion-map"></i><br />
+				MAPA
+			</a>
+			<a class="tab-item" href="#" ng-click="verPerto()">
+				<i class="icon ion-pin"></i><br />
+				PERTO
+			</a>
+			<a class="tab-item" href="#" ng-click="verLista()">
+				<i class="icon ion-grid"></i><br />
+				LISTA
+			</a>
+		</div>
+	</div>
+</ion-view>

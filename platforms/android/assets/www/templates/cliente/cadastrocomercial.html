@@ -1,0 +1,357 @@
+<ion-view view-title="easySpa - Comercial">
+	<ion-nav-bar class="bar-easyspa" align-title="center">
+		<ion-nav-back-button class="button-clear">
+			<i class="ion-arrow-left-c"></i>
+		</ion-nav-back-button>
+	</ion-nav-bar>
+	<ion-content class="gray-background has-header" scroll="true" overflow-scroll="true">
+		<ion-slide-box show-pager="false" auto-play="false" ng-init="disableSwipe()" peey-level-ion-slides slide-child-class="pages-class">
+			<ion-slide class="pages-class" ng-class="data.currSlide == 0?'pages-class-active':''" >
+				<div >
+				<div class="list list-inset card">
+					<div class="item item-divider">
+						<h2>Tipo</h2>
+					</div>
+					<label class="item item-radio">
+						<input type="radio" name="tipo" value="PF" ng-model="cadastro.tipo" checked="checked" />
+						<div class="item-content">
+							Pessoa f&iacute;sica
+						</div>
+						<i class="radio-icon ion-checkmark"></i>
+					</label>
+					<label class="item item-radio">
+						<input type="radio" name="tipo" value="PJ" ng-model="cadastro.tipo" />
+						<div class="item-content">
+							Pessoa jur&iacute;dica
+						</div>
+						<i class="radio-icon ion-checkmark"></i>
+					</label>
+					<div class="item item-divider">
+						<h2>Sobre voc&ecirc;</h2>
+					</div>
+					<label class="item item-input">
+						<input type="text" ng-model="cadastro.nome" placeholder="Nome" />
+					</label>
+					<label class="item item-input">
+						<input type="email" ng-model="cadastro.email" ng-blur="validOnServer('email',cadastro.email)" placeholder="E-mail" />
+					</label>
+					<label class="item item-input">
+						<input type="password" ng-model="cadastro.senha" placeholder="Senha" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
+						<input type="tel" ng-model="cadastro.cpf"  ng-blur="validOnServer('cpfcnpj',cadastro.cpf)" mask='999.999.999-99' placeholder="Digite seu CPF" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
+						<input type="text" ng-model="cadastro.dataNascimento" mask='39/19/9999' placeholder="00/00/0000"/>
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
+						<input type="text" ng-model="cadastro.razaosocial" placeholder="Raz&atilde;o social" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
+						<input type="text" ng-model="cadastro.nomefantasia" placeholder="Nome fantasia" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
+						<input type="tel" ng-model="cadastro.cnpj"  ng-blur="validOnServer('cpfcnpj',cadastro.cnpj)" mask="99.999.999/9999-99" placeholder="Digite seu CNPJ" />
+					</label>
+					<label class="item item-input">
+						<input type="number" ng-model="cadastro.idafiliado" placeholder="Código do afiliado (caso tenha)" />
+					</label>
+
+				</div>
+				<div class="list list-inset card">
+					<div class="item item-divider">
+						<h2>Endere&ccedil;o</h2>
+					</div>
+					<label class="item item-input">
+						<input type="text" ng-model="cadastro.rua" placeholder="Rua" />
+					</label>
+					<label class="item item-input">
+						<input type="text" ng-model="cadastro.complemento" placeholder="Complemento" />
+					</label>
+					<label class="item item-input">
+						<input type="text" ng-model="cadastro.bairro" placeholder="Bairro" ng-disabled="localizou" />
+					</label>
+					<label class="item item-input" ng-if="localizou">
+						<input type="text" ng-model="cadastro.cidade" placeholder="Cidade" ng-disabled="localizou" />
+					</label>
+					<label class="item item-input" ng-if="localizou">
+						<input type="text" ng-model="cadastro.estado" placeholder="Estado" ng-disabled="localizou" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PF'">
+						<input type="tel" ng-model="cadastro.celcpf" mask="(99) 9?9999-9999" mask-clean="true" placeholder="Telefone celular" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
+						<input type="tel" ng-model="cadastro.telcnpj" mask="(99) 9?9999-9999" mask-clean="true" placeholder="Telefone fixo" />
+					</label>
+					<label class="item item-input" ng-show="cadastro.tipo == 'PJ'">
+						<input type="tel" ng-model="cadastro.celcnpj" mask="(99) 9?9999-9999" mask-clean="true" placeholder="Telefone celular" />
+					</label>
+				</div>
+				<div class="list">
+					<div class="item">
+						<div class="row">
+							<div class="col" align="left">
+							</div>
+							<div class="col" align="right">
+								<button type="button" class="button button-pink" ng-click="proximo()">
+									Pr&oacute;ximo&nbsp;<i class="ion-chevron-right"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				</div>
+			</ion-slide>
+			<ion-slide class="pages-class" ng-class="data.currSlide == 1?'pages-class-active':''">
+				<div >
+				<div class="list list-inset card">
+					<div class="item item-divider">
+						<h2>Sobre voc&ecirc;</h2>
+					</div>
+					<label class="item item-input">
+						<textarea rows="7" ng-model="cadastro.apresentacao.value" placeholder="Apresenta&ccedil;&atilde;o"></textarea>
+					</label>
+					<label class="item item-input item-text-wrap">
+						<textarea rows="7" ng-model="cadastro.especialidades.value" placeholder="Escreva sobre suas especialidades"></textarea>
+					</label>
+					<div class="item item-divider">
+						<h2>Atendimento</h2>
+					</div>
+					<ul class="list">
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="segunda_feira.value" checked="checked" />
+							</label>
+							Segunda-feira
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_segunda_feira.value" ng-blur="alert(de_segunda_feira)" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_segunda_feira.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="terca_feira.value" checked="checked" />
+							</label>
+							Ter&ccedil;a-feira
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_terca_feira.value" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_terca_feira.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="quarta_feira.value" checked="checked" />
+							</label>
+							Quarta-feira
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_quarta_feira.value" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_quarta_feira.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="quinta_feira.value" checked="checked" />
+							</label>
+							Quinta-feira
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_quinta_feira.value" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_quinta_feira.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="sexta_feira.value" checked="checked" />
+							</label>
+							Sexta-feira
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_sexta_feira.value" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_sexta_feira.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="sabado.value">
+							</label>
+							S&aacute;bado
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_sabado.value" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_sabado.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="domingo.value">
+							</label>
+							Domingo
+						</li>
+						<li class="item no-padding">
+							<div class="row">
+								<div class="col">
+									De: <input type="time" class="inline-normal" ng-model="de_domingo.value" placeholder="09:00" />
+								</div>
+								<div class="col">
+									At&eacute;: <input type="time" class="inline-normal" ng-model="ate_domingo.value" placeholder="18:00" />
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				</div>
+				<div class="list">
+					<div class="item">
+						<div class="row">
+							<div class="col" align="left">
+								<button type="button" class="button button-pink" ng-click="anterior()">
+									<i class="ion-chevron-left"></i>&nbsp;Voltar
+								</button>
+							</div>
+							<div class="col" align="right">
+								<button type="button" class="button button-pink" ng-click="proximo()">
+									Pr&oacute;ximo&nbsp;<i class="ion-chevron-right"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ion-slide>
+			<ion-slide class="pages-class" ng-class="data.currSlide == 2?'pages-class-active':''">
+				<div >
+				<div class="list list-inset card">
+					<div class="item item-divider" ng-show="cadastro.categorias.length">
+						<h2>Especialidades</h2>
+					</div>
+					<div class="item item-button-left item-delete" ng-repeat="categoria in cadastro.categorias">
+						<button class="button icon button-icon ion-minus-circled" ng-click="removerCategoria(categoria)"></button>
+						{{categoria.nome}}
+					</div>
+
+					<div class="item item-divider" ng-show="!categoriasocultas">
+						<h2>Selecione sua especialidade</h2>
+					</div>
+
+					<a class="item" href="#" ng-repeat="categoria in categorias" ng-click="marcarCategoria(categoria.id, categoria.nome)" ng-show="!categoria.oculto">
+						{{categoria.nome}}
+					</a>
+				</div>
+
+				<div class="list">
+					<div class="item">
+						<div class="row">
+							<div class="col" align="left">
+								<button type="button" class="button button-pink" ng-click="anterior()">
+									<i class="ion-chevron-left"></i>&nbsp;Voltar
+								</button>
+							</div>
+							<div class="col" align="right">
+								<button type="button" class="button button-pink" ng-click="proximo()">
+									Pr&oacute;ximo&nbsp;<i class="ion-chevron-right"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				</div>
+			</ion-slide>
+			<ion-slide class="pages-class" ng-class="data.currSlide == 3?'pages-class-active':''">
+				<div >
+				<div class="list list-inset card">
+					<div class="item item-divider">
+						<h2>Foto de perfil</h2>
+					</div>
+
+					<div class="item item-thumbnail-left">
+						<img ng-src="{{fotoUsuario.value}}" error-src="img/anonimo.jpg" />
+						<button type="button" class="button button-hardpink button-block" ng-click="selecionarFoto()">
+							<i class="ion-camera"></i>&nbsp;Selecionar foto
+						</button>
+					</div>
+
+
+					<div class="item item-divider">
+						<h2>Termos de uso</h2>
+					</div>
+					<div class="item">
+						<button type="button" class="button button-hardpink button-block" ng-click="verTermos()">
+							Ver termos de uso
+						</button>
+					</div>
+					<div class="item item-toggle">
+						Eu li e aceito<br /> os termos de uso
+						 <label class="toggle toggle-pink">
+						   <input type="checkbox" ng-model="cadastro.aceitou_termos">
+						   <div class="track">
+							 <div class="handle"></div>
+						   </div>
+						 </label>
+					</div>
+				</div>
+
+
+
+
+				</div>				<div class="list">
+					<div class="item">
+						<div class="row">
+							<div class="col" align="left">
+								<button type="button" class="button button-pink" ng-click="anterior()">
+									<i class="ion-chevron-left"></i>&nbsp;Voltar
+								</button>
+							</div>
+							<div class="col" align="right">
+								<button type="button" class="button button-hardpink" ng-click="finalizarCadastro(cadastro)">
+									Finalizar&nbsp;<i class="ion-checkmark"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ion-slide>
+		</ion-slide-box>
+	</ion-content>
+</ion-view>
