@@ -1,0 +1,915 @@
+/* line 3, ../sass/authenty.scss */
+.authenty {
+  font-family: 'Open Sans', sans-serif;
+}
+/* line 6, ../sass/authenty.scss */
+/* line 9, ../sass/authenty.scss */
+.authenty ul {
+  list-style-type: none;
+}
+/* line 12, ../sass/authenty.scss */
+.authenty h1, .authenty h2, .authenty h3, .authenty h4, .authenty h5, .authenty h6 {
+  font-weight: 400;
+}
+/* line 15, ../sass/authenty.scss */
+.authenty h1 {
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+/* line 19, ../sass/authenty.scss */
+.authenty a:hover {
+  text-decoration: none;
+}
+/* line 22, ../sass/authenty.scss */
+.authenty .btn {
+  border-radius: 0;
+}
+/* line 24, ../sass/authenty.scss */
+.authenty .btn:active {
+  box-shadow: none;
+  border-radius: 0px !important;
+}
+/* line 28, ../sass/authenty.scss */
+.authenty .btn:focus {
+  outline: thin dotted #fff;
+  outline-offset: 0;
+}
+/* line 32, ../sass/authenty.scss */
+.authenty .btn:hover, .authenty .btn:focus {
+  color: #fff;
+}
+/* line 43, ../sass/authenty.scss */
+.authenty .wrap {
+  width: 100%;
+}
+/* line 46, ../sass/authenty.scss */
+.authenty .top-buffer {
+  margin-top: 20px;
+}
+
+/* line 53, ../sass/authenty.scss */
+.authenty.signin-main .title {
+  text-align: center;
+  margin-bottom: 22px;
+}
+/* line 56, ../sass/authenty.scss */
+.authenty.signin-main .title h1 {
+  font-size: 40pt;
+}
+/* line 60, ../sass/authenty.scss */
+.authenty.signin-main .wrap {
+  padding-top: 80px;
+}
+/* line 63, ../sass/authenty.scss */
+.authenty.signin-main .form-wrap {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 400px;
+}
+/* line 68, ../sass/authenty.scss */
+.authenty.signin-main .form-header {
+  padding: 20px 0;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  background-color: #fff;
+}
+/* line 73, ../sass/authenty.scss */
+.authenty.signin-main .form-header .fa-user {
+  font-size: 50px;
+  color: #fff;
+  border-radius: 50%;
+  border: 3px solid #E7E7E7;
+  padding: 15px 20px;
+  background: #f6f8f9;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #f6f8f9), color-stop(50%, #e5ebee), color-stop(51%, #d7dee3), color-stop(100%, #f5f7f9));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+  /* IE10+ */
+  background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */
+}
+/* line 88, ../sass/authenty.scss */
+.authenty.signin-main .form-header .fa-user.fail {
+  color: #FF8479;
+  border: 3px solid #FF8479;
+  -webkit-transition: color 200ms linear;
+  -moz-transition: color 200ms linear;
+  -o-transition: color 200ms linear;
+  -ms-transition: color 200ms linear;
+  transition: color 200ms linear;
+}
+/* line 97, ../sass/authenty.scss */
+.authenty.signin-main .form-header .fa-user.success {
+  color: #98CA4D;
+  border: 3px solid #98CA4D;
+  -webkit-transition: color 700ms linear;
+  -moz-transition: color 700ms linear;
+  -o-transition: color 700ms linear;
+  -ms-transition: color 700ms linear;
+  transition: color 700ms linear;
+}
+/* line 107, ../sass/authenty.scss */
+.authenty.signin-main .form-main {
+  background-color: #505050;
+  padding: 40px 50px;
+}
+/* line 111, ../sass/authenty.scss */
+.authenty.signin-main .form-footer {
+  background-color: #404040;
+  padding: 20px 50px;
+}
+/* line 114, ../sass/authenty.scss */
+.authenty.signin-main .form-footer a {
+  color: #999;
+  font-size: 10pt;
+}
+/* line 117, ../sass/authenty.scss */
+.authenty.signin-main .form-footer a:hover {
+  text-decoration: none;
+}
+/* line 121, ../sass/authenty.scss */
+.authenty.signin-main .form-footer .fa {
+  font-size: 10pt;
+  color: #6f6f6f;
+  border-radius: 50%;
+  background-color: #505050;
+  padding: 5px 8px;
+  margin-right: 7px;
+}
+/* line 129, ../sass/authenty.scss */
+.authenty.signin-main .form-footer .fa-check {
+  padding: 5px;
+}
+/* line 138, ../sass/authenty.scss */
+.authenty.signin-main .signin {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #1CAF9A;
+  color: #fff;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 148, ../sass/authenty.scss */
+.authenty.signin-main .signin:hover {
+  background-color: #1BA28E;
+}
+/* line 161, ../sass/authenty.scss */
+.authenty.signin-main .bounceIn {
+  opacity: 1;
+}
+/* line 164, ../sass/authenty.scss */
+.authenty.signin-main .fail {
+  animation: shake .5s linear;
+  -webkit-animation: shake .5s linear;
+  -moz-animation: shake .5s linear;
+}
+
+@media screen and (max-width: 991px) {
+  /* line 174, ../sass/authenty.scss */
+  .authenty.signin-main .wrap {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  /* line 183, ../sass/authenty.scss */
+  .authenty.signin-main .form-main {
+    padding: 40px 30px;
+  }
+  /* line 186, ../sass/authenty.scss */
+  .authenty.signin-main .form-footer {
+    padding: 20px 30px;
+  }
+}
+/* line 193, ../sass/authenty.scss */
+.authenty.signin-alt {
+  background-color: #373746;
+  color: #eaeaea;
+}
+/* line 196, ../sass/authenty.scss */
+.authenty.signin-alt .section-content {
+  padding: 0;
+}
+/* line 199, ../sass/authenty.scss */
+.authenty.signin-alt .title {
+  margin-bottom: 50px;
+  text-align: left;
+}
+/* line 203, ../sass/authenty.scss */
+.authenty.signin-alt label {
+  font-weight: normal;
+}
+/* line 206, ../sass/authenty.scss */
+.authenty.signin-alt .wrap {
+  padding-top: 250px;
+}
+/* line 209, ../sass/authenty.scss */
+.authenty.signin-alt .bottom-wrap {
+  padding-top: 30px;
+  border-top: 1px solid #7A8086;
+}
+/* line 212, ../sass/authenty.scss */
+.authenty.signin-alt .bottom-wrap.top-buffer {
+  margin-top: 130px;
+}
+/* line 214, ../sass/authenty.scss */
+.authenty.signin-alt .bottom-wrap.top-buffer a {
+  color: #fff;
+  -webkit-transition: color 300ms linear;
+  -moz-transition: color 300ms linear;
+  -o-transition: color 300ms linear;
+  -ms-transition: color 300ms linear;
+  transition: color 300ms linear;
+}
+/* line 221, ../sass/authenty.scss */
+.authenty.signin-alt .bottom-wrap.top-buffer a:hover {
+  color: #ff7000;
+}
+/* line 228, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin .un-wrap {
+  position: relative;
+}
+/* line 230, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin .un-wrap .fa-user {
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  color: #515561;
+  font-size: 14pt;
+  padding: 10px 14px;
+  background-color: #1C1F25;
+}
+/* line 240, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin .pw-wrap {
+  position: relative;
+}
+/* line 242, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin .pw-wrap .fa-lock {
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  color: #515561;
+  font-size: 14pt;
+  padding: 10px 16px;
+  background-color: #1C1F25;
+}
+/* line 252, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin input[type="text"], .authenty.signin-alt .normal-signin input[type="password"] {
+  padding-left: 60px;
+  border-radius: 0;
+  border: 1px solid #7A8086;
+  margin-bottom: 20px;
+  color: #ccc;
+  background-color: #282A38;
+  height: 42px;
+}
+/* line 261, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin .signin {
+  padding: 10px 15px;
+  background-color: #3e4764;
+  border: 1px solid #7A8086;
+  color: #fff;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 271, ../sass/authenty.scss */
+.authenty.signin-alt .normal-signin .signin:hover {
+  background-color: #1E2B46;
+}
+/* line 276, ../sass/authenty.scss */
+.authenty.signin-alt .horizontal-divider {
+  margin: 0 auto;
+  position: relative;
+  width: 0px;
+  top: 0;
+  background-color: #fff;
+}
+/* line 282, ../sass/authenty.scss */
+.authenty.signin-alt .horizontal-divider:before {
+  content: 'OR';
+  position: absolute;
+  top: 110px;
+  left: -30px;
+  padding: 20px;
+  font-size: 18px;
+  background: #3e4764;
+  border-radius: 50%;
+  color: #fff;
+}
+/* line 294, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin {
+  margin-top: 94px;
+}
+/* line 296, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin a {
+  margin-bottom: 22px;
+  display: block;
+  color: #fff;
+}
+/* line 300, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin a span {
+  margin-left: 30px;
+}
+/* line 304, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin .facebook {
+  background-color: #3e4764;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 311, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin .facebook:hover {
+  background-color: #235B97;
+}
+/* line 314, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin .facebook .fa-facebook {
+  color: #505050;
+  background-color: #eaeaea;
+  padding: 15px 19px 15px 18px;
+}
+/* line 320, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin .google-plus {
+  background-color: #e66060;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 327, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin .google-plus:hover {
+  background-color: #EC574B;
+}
+/* line 330, ../sass/authenty.scss */
+.authenty.signin-alt .sns-signin .google-plus .fa-google-plus {
+  color: #505050;
+  background-color: #eaeaea;
+  padding: 15px;
+}
+
+@media screen and (max-width: 991px) {
+  /* line 342, ../sass/authenty.scss */
+  .authenty.signin-alt .horizontal-divider:before {
+    top: 10px;
+    left: -30px;
+    padding: 20px;
+    font-size: 16px;
+  }
+  /* line 348, ../sass/authenty.scss */
+  .authenty.signin-alt .bottom-wrap.top-buffer {
+    margin-top: 50px;
+  }
+  /* line 351, ../sass/authenty.scss */
+  .authenty.signin-alt .container {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+/* line 359, ../sass/authenty.scss */
+.authenty.signup-window {
+  background-color: #eaeaea;
+}
+/* line 361, ../sass/authenty.scss */
+.authenty.signup-window .title {
+  text-align: left;
+  color: #ccc;
+}
+/* line 365, ../sass/authenty.scss */
+.authenty.signup-window .wrap {
+  padding-top: 250px;
+}
+/* line 368, ../sass/authenty.scss */
+.authenty.signup-window .form-wrap {
+  background-color: #333;
+  padding: 50px 50px 100px 50px;
+  position: relative;
+}
+/* line 372, ../sass/authenty.scss */
+.authenty.signup-window .form-wrap .fa-times-circle {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: #000;
+}
+/* line 380, ../sass/authenty.scss */
+/* line 387, ../sass/authenty.scss */
+/* line 397, ../sass/authenty.scss */
+.authenty.signup-window .checkbox label {
+  color: #505050;
+  font-size: 10pt;
+}
+/* line 401, ../sass/authenty.scss */
+.authenty.signup-window .sns-signin {
+  margin-top: 100px;
+}
+/* line 403, ../sass/authenty.scss */
+.authenty.signup-window .sns-signin a {
+  display: block;
+  text-align: left;
+  border-radius: 50px;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 412, ../sass/authenty.scss */
+.authenty.signup-window .sns-signin a .fa-facebook {
+  color: #fff;
+  padding: 7px 15px 7px 10px;
+  font-size: 16px;
+  margin-right: 20px;
+  margin-left: 10px;
+  border-right: 1px solid #fff;
+}
+/* line 422, ../sass/authenty.scss */
+.authenty.signup-window .horizontal-divider {
+  margin: 0 auto;
+  position: relative;
+  width: 1px;
+  height: 250px;
+  background-color: #505050;
+}
+/* line 428, ../sass/authenty.scss */
+.authenty.signup-window .horizontal-divider:before {
+  content: 'OR';
+  position: absolute;
+  top: 40%;
+  left: -11px;
+  padding: 5px 0;
+  font-size: 16px;
+  background: #333;
+  color: #ccc;
+}
+/* line 439, ../sass/authenty.scss */
+.authenty.signup-window .normal-signup {
+  margin-top: 30px;
+}
+/* line 441, ../sass/authenty.scss */
+.authenty.signup-window .normal-signup a {
+  line-height: 2.5;
+  color: #ccc;
+  -webkit-transition: color 300ms linear;
+  -moz-transition: color 300ms linear;
+  -o-transition: color 300ms linear;
+  -ms-transition: color 300ms linear;
+  transition: color 300ms linear;
+}
+/* line 449, ../sass/authenty.scss */
+.authenty.signup-window .normal-signup a:hover {
+  color: #78B310;
+}
+/* line 453, ../sass/authenty.scss */
+.authenty.signup-window .normal-signup .signup {
+  padding: 8px 15px;
+  background-color: #78B310;
+  color: #fff;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 462, ../sass/authenty.scss */
+.authenty.signup-window .normal-signup .signup:hover {
+  background-color: #5B910C;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 471, ../sass/authenty.scss */
+  .authenty.signup-window .title {
+    margin-left: 15px;
+  }
+  /* line 474, ../sass/authenty.scss */
+  .authenty.signup-window .form-wrap {
+    padding: 30px 20px 60px 20px;
+  }
+  /* line 477, ../sass/authenty.scss */
+  .authenty.signup-window .sns-signin {
+    margin-top: 40px;
+  }
+  /* line 479, ../sass/authenty.scss */
+  .authenty.signup-window .sns-signin a {
+    font-size: 13px;
+  }
+  /* line 481, ../sass/authenty.scss */
+  .authenty.signup-window .sns-signin a .fa-facebook {
+    padding: 7px 10px 7px 10px;
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+  /* line 488, ../sass/authenty.scss */
+  .authenty.signup-window .horizontal-divider {
+    width: 100%;
+    height: 1px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  /* line 493, ../sass/authenty.scss */
+  .authenty.signup-window .horizontal-divider:before {
+    content: 'OR';
+    top: -11px;
+    left: 46%;
+    padding: 0 5px;
+  }
+}
+/* line 505, ../sass/authenty.scss */
+/* line 507, ../sass/authenty.scss */
+.authenty.signup-wizard .wrap {
+  padding-top: 250px;
+}
+/* line 510, ../sass/authenty.scss */
+.authenty.signup-wizard .form-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+/* line 526, ../sass/authenty.scss */
+/* line 530, ../sass/authenty.scss */
+.authenty.signup-wizard .nav-step {
+  margin-bottom: 10px;
+}
+/* line 533, ../sass/authenty.scss */
+.authenty.signup-wizard .nav-step > div > span {
+  display: block;
+  margin: 0 auto;
+  background-color: #505050;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+}
+/* line 541, ../sass/authenty.scss */
+.authenty.signup-wizard .nav-step-label {
+  text-align: center;
+  margin-bottom: 20px;
+}
+/* line 545, ../sass/authenty.scss */
+.authenty.signup-wizard .nav-step > .active > span {
+  background-color: #B13973;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 553, ../sass/authenty.scss */
+.authenty.signup-wizard .current {
+  z-index: 100;
+}
+/* line 557, ../sass/authenty.scss */
+.authenty.signup-wizard .page-container {
+  padding: 0 60px;
+  background-color: #444;
+  text-align: center;
+  margin: 0;
+  color: #ccc;
+}
+/* line 565, ../sass/authenty.scss */
+.authenty.signup-wizard .page-footer {
+  text-align: center;
+}
+/* line 568, ../sass/authenty.scss */
+.authenty.signup-wizard .step-confirm {
+  text-align: left;
+  padding: 10px;
+  margin-top: 13px;
+  border: 1px solid #505050;
+  background-color: #333;
+}
+/* line 575, ../sass/authenty.scss */
+.authenty.signup-wizard .step-confirm div {
+  font-size: 13px;
+  margin: 5px;
+}
+/* line 579, ../sass/authenty.scss */
+.authenty.signup-wizard .step-confirm div div:first-child {
+  color: #999;
+}
+/* line 582, ../sass/authenty.scss */
+.authenty.signup-wizard .step-wrap {
+  padding: 20px;
+  background-color: #E0E0E0;
+}
+/* line 586, ../sass/authenty.scss */
+.authenty.signup-wizard .step-wrap span {
+  color: #fff;
+}
+/* line 589, ../sass/authenty.scss */
+.authenty.signup-wizard .btn-wrap div {
+  padding: 0;
+}
+/* line 592, ../sass/authenty.scss */
+/* line 603, ../sass/authenty.scss */
+/* line 606, ../sass/authenty.scss */
+.authenty.signup-wizard .invisible {
+  visibility: hidden;
+}
+/* line 609, ../sass/authenty.scss */
+.authenty.signup-wizard .remove {
+  display: none;
+}
+/* line 612, ../sass/authenty.scss */
+.authenty.signup-wizard .visible {
+  visibility: visible;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 619, ../sass/authenty.scss */
+  .authenty.signup-wizard .page-container {
+    padding: 60px 30px;
+  }
+  /* line 622, ../sass/authenty.scss */
+  .authenty.signup-wizard .step-confirm {
+    padding: 5px;
+    margin-top: 13px;
+  }
+  /* line 626, ../sass/authenty.scss */
+  .authenty.signup-wizard .step-confirm div {
+    margin: 5px 2px;
+  }
+}
+/* line 633, ../sass/authenty.scss */
+.authenty.password-recovery {
+  background-color: #E9E8DA;
+}
+/* line 635, ../sass/authenty.scss */
+.authenty.password-recovery .wrap {
+  padding-top: 250px;
+}
+/* line 638, ../sass/authenty.scss */
+.authenty.password-recovery .form-wrap {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+/* line 643, ../sass/authenty.scss */
+/* line 647, ../sass/authenty.scss */
+.authenty.password-recovery input[type="email"] {
+  box-shadow: none;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  height: 45px;
+  color: #505050;
+}
+/* line 654, ../sass/authenty.scss */
+.authenty.password-recovery .brand {
+  text-align: center;
+  margin-top: 40px;
+}
+/* line 657, ../sass/authenty.scss */
+.authenty.password-recovery .brand h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #C0BFB5;
+}
+/* line 662, ../sass/authenty.scss */
+.authenty.password-recovery .brand p {
+  color: #C0BDB0;
+  font-size: 13px;
+}
+/* line 668, ../sass/authenty.scss */
+.authenty.password-recovery .main h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+/* line 672, ../sass/authenty.scss */
+.authenty.password-recovery .main form {
+  margin-top: 30px;
+}
+/* line 676, ../sass/authenty.scss */
+.authenty.password-recovery .horizontal-divider {
+  margin: 0 auto;
+  position: relative;
+  width: 1px;
+  height: 250px;
+  background-color: #ccc;
+}
+/* line 683, ../sass/authenty.scss */
+.authenty.password-recovery .reset {
+  padding: 10px 15px;
+  border-radius: 3px;
+  background-color: #78B310;
+  color: #fff;
+  -webkit-transition: background-color 300ms linear;
+  -moz-transition: background-color 300ms linear;
+  -o-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+/* line 693, ../sass/authenty.scss */
+.authenty.password-recovery .reset:hover {
+  background-color: #8CC735;
+}
+/* line 696, ../sass/authenty.scss */
+.authenty.password-recovery .reset:active {
+  border-radius: 3px !important;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 704, ../sass/authenty.scss */
+  .authenty.password-recovery .brand {
+    text-align: right;
+  }
+  /* line 706, ../sass/authenty.scss */
+  .authenty.password-recovery .brand h2 {
+    margin-bottom: 0;
+  }
+  /* line 710, ../sass/authenty.scss */
+  .authenty.password-recovery .main {
+    margin-top: 50px;
+  }
+}
+/* embeded animation */
+@keyframes shake {
+  /* line 723, ../sass/authenty.scss */
+  8%, 41% {
+    transform: translateX(-10px);
+  }
+
+  /* line 726, ../sass/authenty.scss */
+  25%, 58% {
+    transform: translateX(10px);
+  }
+
+  /* line 729, ../sass/authenty.scss */
+  75% {
+    transform: translateX(-5px);
+  }
+
+  /* line 732, ../sass/authenty.scss */
+  92% {
+    transform: translateX(5px);
+  }
+
+  /* line 735, ../sass/authenty.scss */
+  0%, 100% {
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes shake {
+  /* line 741, ../sass/authenty.scss */
+  8%, 41% {
+    -webkit-transform: translateX(-10px);
+  }
+
+  /* line 744, ../sass/authenty.scss */
+  25%, 58% {
+    -webkit-transform: translateX(10px);
+  }
+
+  /* line 747, ../sass/authenty.scss */
+  75% {
+    -webkit-transform: translateX(-5px);
+  }
+
+  /* line 750, ../sass/authenty.scss */
+  92% {
+    -webkit-transform: translateX(5px);
+  }
+
+  /* line 753, ../sass/authenty.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+  }
+}
+
+@-moz-keyframes shake {
+  /* line 759, ../sass/authenty.scss */
+  8%, 41% {
+    -moz-transform: translateX(-10px);
+  }
+
+  /* line 762, ../sass/authenty.scss */
+  25%, 58% {
+    -moz-transform: translateX(10px);
+  }
+
+  /* line 765, ../sass/authenty.scss */
+  75% {
+    -moz-transform: translateX(-5px);
+  }
+
+  /* line 768, ../sass/authenty.scss */
+  92% {
+    -moz-transform: translateX(5px);
+  }
+
+  /* line 771, ../sass/authenty.scss */
+  0%, 100% {
+    -moz-transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes fadeInLeft {
+  /* line 777, ../sass/authenty.scss */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+
+  /* line 782, ../sass/authenty.scss */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+
+@-moz-keyframes fadeInLeft {
+  /* line 788, ../sass/authenty.scss */
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+
+  /* line 793, ../sass/authenty.scss */
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+
+@-o-keyframes fadeInLeft {
+  /* line 799, ../sass/authenty.scss */
+  0% {
+    opacity: 0;
+    -o-transform: translateX(-20px);
+  }
+
+  /* line 804, ../sass/authenty.scss */
+  100% {
+    opacity: 1;
+    -o-transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  /* line 810, ../sass/authenty.scss */
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  /* line 815, ../sass/authenty.scss */
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* line 820, ../sass/authenty.scss */
+.authenty.signup-wizard .current {
+  -webkit-animation-name: fadeInLeft;
+  -moz-animation-name: fadeInLeft;
+  -o-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+
+.alert-login {
+	border-radius: 0;
+    margin: 0;
+    border: 0;
+}
+
+.select-cadastro {
+	background-color: #FFF;
+    color: #A0A0A0;
+    border: solid 1px #CCCCCC;
+    padding: 10px;
+    height: 43px;
+}
+
+.textarea-cadastro {
+	background-color: #FFF;
+    color: #A0A0A0;
+    padding: 10px;
+    border: solid 1px #CCCCCC;
+    margin: 0px;
+	width: 400px;
+    height: 110px;
+}
+
+.passos-cadastro {
+	width: 500px;
+    margin: auto;
+    margin-top: 18px;
+}

@@ -1,0 +1,108 @@
+<ion-view view-title="{{tituloTela}}" hide-back-button="true">
+
+	<ion-content style="background-color: #f4f6f7;" scroll="true" overflow-scroll="true" id="pagamento-planos">
+    <div class="row plano-basic title-plan">
+      <div class="col">Plano Basic</div>
+    </div>
+    <div class="row plano-basic description-plan">
+      <div class="col">
+        <h1>Sem custo <br> fixo mensal</h1>
+        <p>Você paga apenas pelos atendimentos
+					<br>
+					que realizar em nosso sistema</p>
+      </div>
+    </div>
+    <div class="row plano-basic register-now">
+      <div class="col">
+        <h4>ASSINAR AGORA</h4>
+        <p>Ideal para profissionais autônomos</p>
+      </div>
+    </div>
+		<ul class="collapse-plan-basic">
+			<li ng-click="openCollapse('basic')">Incluso no Plano <i class="icon" ng-class="{'ion-arrow-down-b' : openBasic, 'ion-arrow-up-b' : !openBasic}"></i></li>
+			<li ng-if="openBasic">Limite de quatro fotos em seu perfil pessoal.</li>
+			<li ng-if="openBasic">Taxas variáveis de acordo com a quantidade de atendimentos prestados.</li>
+			<li ng-if="openBasic">Pagamento feito exclusivamente por cartão de crédito. </li>
+			<li ng-if="openBasic">Chat disponível apenas após aceitação de novo atendimento. </li>
+		</ul>
+		<div class="row plano-premium title-plan">
+      <div class="col">Plano Premium</div>
+    </div>
+    <div class="row plano-premium description-plan">
+      <div class="col">
+        <p>Ideal para profissionais que desejam ter todos os benefícios do sistema.
+				Você paga um valor mensal e pode usar sem limites!</p>
+      </div>
+    </div>
+		<ul class="list plano-premium options-register">
+			<li class="item item-text-wrap row item-icon-right">
+				<div class="row" ng-click="selecionarPagamento(planoMensal)">
+					<div class="col col-33">
+		      	<h3>{{planoMensal}}</h3>
+						<p>MENSAL</p>
+		      </div>
+					<div class="col col-50">
+						ASSINAR
+						<br>
+						( Sem desconto )
+					</div>
+				</div>
+				<i class="ion-chevron-right icon"></i>
+			</li>
+			<li class="item item-text-wrap row item-icon-right">
+				<div class="row" ng-click="selecionarPagamento(planoTrimestral)">
+					<div class="col col-33">
+		      	<h3>{{planoTrimestral}}</h3>
+						<p>TRIMESTRAL</p>
+		      </div>
+					<div class="col col-50">
+						ASSINAR C/ 10%
+						<br>
+						DE DESCONTO
+					</div>
+				</div>
+				<i class="ion-chevron-right icon"></i>
+			</li>
+			<li class="item item-text-wrap row item-icon-right">
+				<div class="row" ng-click="selecionarPagamento(planoSemestral)">
+					<div class="col col-33">
+		      	<h3>{{planoSemestral}}</h3>
+						<p>SEMESTRAL</p>
+		      </div>
+					<div class="col col-50">
+						ASSINAR C/ 20%
+						<br>
+						DE DESCONTO
+					</div>
+				</div>
+				<i class="ion-chevron-right icon"></i>
+			</li>
+			<li class="item item-text-wrap row item-icon-right option-anual">
+				<div class="row">
+					<div class="col">
+						ASSINE E GANHE 30% <br>
+						DE DESCONTO <br>
+						NO PLANO ANUAL
+					</div>
+				</div>
+			</li>
+			<li class="item item-text-wrap row item-icon-right option-anual-value">
+				<div class="row" ng-click="selecionarPagamento(planoAnua)">
+					<div class="col col-50">
+		      	<h3>{{planoAnual}}</h3>
+						<p>ANUAL</p>
+		      </div>
+				</div>
+				<i class="ion-chevron-right icon"></i>
+			</li>
+		</ul>
+
+		<ul class="collapse-plan-premium">
+			<li ng-click="openCollapse('premium')">Incluso no Plano <i class="icon" ng-class="{'ion-arrow-down-b' : openPremium, 'ion-arrow-up-b' : !openPremium}"></i></li>
+			<li ng-if="openPremium">Extensão do limite para doze fotos em seu perfil pessoal.</li>
+			<li ng-if="openPremium">Mensalidade fixa, independente da quantidade de atendimentos.</li>
+			<li ng-if="openPremium">Pagamento pode ser feito por cartão de crédito, boleto bancário ou depósito/transferência em conta.</li>
+			<li ng-if="openPremium">Chat ilimitado.</li>
+		</ul>
+  </ion-content>
+</ion-view>

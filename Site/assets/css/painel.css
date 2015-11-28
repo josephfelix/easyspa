@@ -1,0 +1,162 @@
+
+#foto-usuario {
+	position: absolute;
+    right: 0;
+    z-index: 2;
+    font-size: 38px;
+    text-align: right;
+    opacity: 0;
+    width: 100%;
+    cursor: pointer;
+    filter: alpha(opacity=0);
+}
+
+.page-container-login {
+	padding: 0 60px;
+    background-color: #FFF !important;
+    margin: 0;
+    color: #000 !important;
+}
+
+#lista-todas tr td a, #lista-escolhida tr td a  {
+	background-color: #EAEAEA;
+    padding: 10px;
+    width: 100%;
+    display: block;
+    border-bottom: solid 1px #fff;
+    color: #8A8A8A;
+}
+
+.title-easyspa {
+	font-size: 21px;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    font-weight: bold;
+    color: #CC6F93;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+
+.border-left {
+	border-left: solid 1px #BDBDBD;
+}
+.border-right {
+	border-right: solid 1px #BDBDBD;
+}
+
+.btn-login-left {
+	height: 96px;
+    width: 358px;
+    margin: auto;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+.btn-login-left .fa {
+	font-size: 3em;
+	display: block;
+}
+
+.no-padding-left {
+	padding-left: 0 !important;
+}
+
+.no-padding-right {
+	padding-right: 0 !important;
+}
+
+.btn {
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
+.sidebar-box {
+    background-color: #fff;
+	font-size: 16px;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.sidebar-box h3 {
+	font-size: 20px;
+	margin: 0;
+    margin-bottom: 7px;
+}
+
+.sidebar-box hr {
+	margin: 8px 0 8px;
+    border-top: solid 1px #DEDEDE;
+}
+
+.sidebar-box a {
+	text-decoration: none;
+	color: #666;
+}
+
+.item-busca {
+	background: #fff;
+	color: #CACACA;
+	margin-bottom: 10px;
+}
+.item-busca a {
+	color: #CACACA;
+}
+.item-busca h2 {
+	font-size: 19px;
+	color: #8C1741;
+}
+.item-busca h3 {
+	font-size: 12px;
+	margin: 0;
+}
+
+.cover-perfil {
+	width: 100%;
+	min-height: 500px;
+	max-height: 500px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.pagina-perfil {
+	margin-top: -152px;
+	margin-bottom: 90px;
+}
+
+.botao-agendar-perfil {
+	height: 150px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.avaliacao-container .star-positive {
+	color: #AB3663;
+}
+
+.avaliacao-container .star-negative {
+	color: #E4E4E4;
+}
+
+.btn-favoritar i {
+	color: #943056;
+	font-size: 23px;
+}
+
+.itens-conta .item-categoria-conta {
+	float: left;
+	width: 30%;
+	text-align: center;
+	font-size: 17px;
+	margin: 1.66%;
+	color: #666;
+	background-color: #CCCCCC;
+	height: 100px;
+	padding-top: 13px;
+}
+.itens-conta .item-categoria-conta button {
+	color: #666;
+	background: none;
+	border: none;
+	text-decoration: none;
+}

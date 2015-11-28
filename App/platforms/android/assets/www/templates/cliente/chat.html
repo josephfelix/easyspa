@@ -1,0 +1,76 @@
+<style>
+  #bar-chat-footer button{
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    padding: 0px;
+    color: #703F7E;
+    font-size: 20px;
+  }
+  #bar-chat-footer input[type="text"]{
+    border: 1px solid #E2D3E6;
+    height: 25px;
+    width: 100%;
+    padding: 0px 10px;
+    border-radius: 5px;
+  }
+</style>
+<ion-view view-title="{{tituloTela}}" align="center" id="userMessagesView" cache-view="false">
+  <div class="bar bar-subheader row">
+    <div class="col"></div>
+    <div class="col" style="line-height: 40px;">
+      {{contato.nome}}
+    </div>
+    <div class="col">
+      <a href="#">
+        <i class="ion-key"></i>
+      </a>
+      <img ng-src="{{contato.foto}}" error-src="/img/anonimo.jpg" alt="">
+    </div>
+  </div>
+	<div class="loader-center" ng-if="!doneLoading">
+		<div class="loader">
+		  <i class="icon ion-loading-c"></i>
+		</div>
+	</div>
+	<ion-content has-bouncing="true" class="has-header has-subheader has-footer content-chat"   delegate-handle="userMessageScroll" id="chat-messages">
+    <ul class="list">
+      <li class="item item-text-wrap messages" ng-repeat="data in messages" ng-class="{'you-message': 1 != data.userid, 'me-message': 1 == data.userid}">
+        {{data.msg}}
+      </li>
+
+      <li class="item item-text-wrap me-message messages sound">
+        <i class="ion-play"></i>
+        <i class="ion-pause"></i>
+        <small class="range-sound"></small>
+      </li>
+      <li class="item item-text-wrap me-message messages">
+        <img src="/img/anonimo.jpg" alt="">
+      </li>
+      <li class="item item-text-wrap me-message messages">
+        <img src="/img/anonimo.jpg" alt="">
+      </li>
+      <li class="item item-text-wrap me-message messages">
+        <img src="/img/anonimo.jpg" alt="">
+      </li>
+    </ul>
+	</ion-content>
+  <div class="bar bar-footer row" id="bar-chat-footer">
+    <div class="col col-10">
+      <button ng-click="showMoreOptions()">
+        <i class="ion-android-more-vertical"></i>
+      </button>
+    </div>
+    <div class="col">
+      <input type="text" class="">
+    </div>
+    <div class="col col-20">
+      <button>
+        <i class="ion-paper-airplane"></i>
+      </button>
+    </div>
+  </div>
+
+</ion-view>

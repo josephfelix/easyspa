@@ -1,0 +1,64 @@
+<ion-view view-title="{{tituloTela}}" align="center">
+	<div class="tabs-striped tabs-top tabs-background-easyspa tabs-color-white tabs-perfil">
+		<div class="tabs">
+			<a class="tab-item active" href="#">
+				INFO
+			</a>
+			<a class="tab-item" href="#" ng-click="iniciarChat(funcionaria)">
+				CHAT
+			</a>
+			<a class="tab-item" href="#" ng-click="iniciarRota(funcionaria)">
+				ROTA
+			</a>
+		</div>
+	</div>
+	<ion-content class="content-perfil">
+		<div class="container-perfil" align="center">
+			<h3>{{nome}}</h3>
+			<div class="uppercase gill-sans categoria-perfil">{{categoria}}</div>
+			<div class="distancia-prestadora">
+				<i class="ion-ios-location"></i>&nbsp;
+				{{distance}}
+			</div>
+			<br />
+		</div>
+		<ion-slide-box>
+			<ion-slide>
+				<img src="img/manicure.png" width="100%" />
+			</ion-slide>
+			<ion-slide>
+				<img src="img/manicure.png" width="100%" />
+			</ion-slide>
+			<ion-slide>
+				<img src="img/manicure.png" width="100%" />
+			</ion-slide>
+		</ion-slide-box>
+		<div class="list card list-perfil">
+			<div class="item item-perfil-1">
+				<i class="ion-record online-status"></i>&nbsp;Hor&aacute;rio dispon&iacute;vel
+				<span class="item-note">
+					<i class="ion-star star-positive"></i>
+					<i class="ion-star star-positive"></i>
+					<i class="ion-star star-positive"></i>
+					<i class="ion-star star-negative"></i>
+					<i class="ion-star star-negative"></i>
+				</span>
+			</div>
+			<div class="item item-text-wrap item-perfil-2">
+				<strong>Apresenta&ccedil;&atilde;o</strong><br />
+				{{apresentacao}}
+			</div>
+			<div class="item item-text-wrap item-perfil-1">
+				<strong>Atendimento</strong><br />
+				{{atendimento}}
+			</div>
+			<div class="item item-text-wrap item-perfil-2">
+				<strong>Localidade</strong><br />
+				{{bairro}}, {{cidade}}
+				<span class="item-note">
+					<img ng-src="{{'http://maps.googleapis.com/maps/api/staticmap?center='+latitude+','+longitude+'&zoom=7&size=60x60&sensor=false&&markers=color:red%7Clabel:C%7C'+latitude+','+longitude}}" width="60px" height="60px" class="img-mapa-perfil" />
+				</span>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
