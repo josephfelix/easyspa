@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/easyspa/';
+$config['base_url']	= 'http://easyspa.dev/';
 
 /*
 |--------------------------------------------------------------------------
