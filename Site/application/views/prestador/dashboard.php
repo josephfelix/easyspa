@@ -319,15 +319,6 @@
                         <div class="visible-xs visible-sm visible-md"><br></div>
                         <div class="col-md-12" style="padding-left:10px; padding-top:16px;">
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2 mb15">
-                                <div style="text-align:center;">
-                                    <i class="fa fa-th-list" style="font-size:30px; color:#edd23b;"> 15</i>
-                                </div>
-                                <div style="text-align:center; line-height:14px; font-size:12px; color:#999;">
-                                    Mensagens <br>
-                                    recebidas
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2 mb15">
                                 <div style="text-align:center;"><i class="fa fa-comments-o"
                                                                    style="font-size:30px; color:#89c936;"> 6</i></div>
                                 <div style="text-align:center; line-height:14px; font-size:12px; color:#999;"> Novos
