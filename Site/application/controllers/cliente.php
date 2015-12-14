@@ -139,8 +139,9 @@ class Cliente extends CI_Controller
 	{
 		if ( $this->session->userdata('tipo') == 'prestador' )
 		{
+			$dados = $this->funcionarias_model->pegar_funcionaria(array('id' => $this->session->userdata('id')));
 			$this->load->view('prestador/header_painel');
-			$this->load->view('prestador/configuracoes');
+			$this->load->view('prestador/configuracoes', array('dados' => $dados));
 			$this->load->view('prestador/footer_painel');
 		} else
 			header('Location: ' . base_url() . 'login');
