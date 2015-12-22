@@ -135,13 +135,67 @@ class Cliente extends CI_Controller
 		}
 	}
 	
-	public function configuracoes()
+	public function configuracoes($section = '')
 	{
 		if ( $this->session->userdata('tipo') == 'prestador' )
 		{
+			$sucesso_senha = false;
+			$sucesso_dados = false;
+			if ( strtoupper($this->input->server('REQUEST_METHOD')) == 'POST' )
+			{
+				if ( $section == 'senha' )
+				{
+					if ($this->input->post('senha') && !empty($this->input->post('senha')))
+					{
+						$this->funcionarias_model->alterar(
+							array(
+								'senha' => md5($this->input->post('senha'))
+							),
+							array(
+								'id' => $this->session->userdata('id')
+							)
+						);
+						$sucesso_senha = true;
+					}
+				} elseif ( $section == 'dados' )
+				{
+					$update = array();
+					if ($this->input->post('datanascimento'))
+					{
+						list($dia, $mes, $ano) = explode('/', $this->input->post('datanascimento'));
+						$update['datanascimento'] = join('-', array($ano, $mes, $dia));
+					}
+					if ($this->input->post('tipo'))
+					{
+						$update['tipo'] = $this->input->post('tipo');
+					}
+					if ($this->input->post('cpfcnpj'))
+					{
+						$update['cpfcnpj'] = $this->input->post('cpfcnpj');
+					}
+					if ($this->input->post('tipo') == 'PJ' && $this->input->post('razaosocial'))
+					{
+						$update['razaosocial'] = $this->input->post('razaosocial');
+					}
+					if ($this->input->post('tipo') == 'PJ' && $this->input->post('nomefantasia'))
+					{
+						$update['nomefantasia'] = $this->input->post('nomefantasia');
+					}
+					if (!empty($update))
+					{
+						$this->funcionarias_model->alterar($update, array('id' => $this->session->userdata('id')));
+					}
+					$sucesso_dados = true;
+				}
+			}
+			
 			$dados = $this->funcionarias_model->pegar_funcionaria(array('id' => $this->session->userdata('id')));
 			$this->load->view('prestador/header_painel');
-			$this->load->view('prestador/configuracoes', array('dados' => $dados));
+			$this->load->view('prestador/configuracoes', array(
+				'dados' => $dados,
+				'sucesso_senha' => $sucesso_senha,
+				'sucesso_dados' => $sucesso_dados
+			));
 			$this->load->view('prestador/footer_painel');
 		} else
 			header('Location: ' . base_url() . 'login');
@@ -155,6 +209,37 @@ class Cliente extends CI_Controller
 			$this->load->view('prestador/nova_publicidade');
 			$this->load->view('prestador/footer_painel');
 		}
+	}
+	
+	public function cupom($section = '', $param1 = 0)
+	{
+		if ($section == 'novo' && $param1 == 0)
+		{
+			$this->load->view('prestador/header_painel');
+			$this->load->view('prestador/novo_cupom');
+			$this->load->view('prestador/footer_painel');
+		}
+	}
+	
+	public function financeiro()
+	{	
+		$this->load->view('prestador/header_painel');
+		$this->load->view('prestador/financeiro');
+		$this->load->view('prestador/footer_painel');
+	}
+	
+	public function central()
+	{
+		$this->load->view('prestador/header_painel');
+		$this->load->view('prestador/central_cliente');
+		$this->load->view('prestador/footer_painel');
+	}
+	
+	public function ajuda()
+	{
+		$this->load->view('prestador/header_painel');
+		$this->load->view('prestador/central_ajuda');
+		$this->load->view('prestador/footer_painel');
 	}
 }
 ?>

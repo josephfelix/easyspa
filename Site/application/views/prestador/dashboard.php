@@ -314,49 +314,6 @@
                     </div>
                 </div>
 
-                <div class="panel-body panel-default nopadding" style="background-color:#f1f4f7;">
-                    <div class="row">
-                        <div class="visible-xs visible-sm visible-md"><br></div>
-                        <div class="col-md-12" style="padding-left:10px; padding-top:16px;">
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2 mb15">
-                                <div style="text-align:center;"><i class="fa fa-comments-o"
-                                                                   style="font-size:30px; color:#89c936;"> 6</i></div>
-                                <div style="text-align:center; line-height:14px; font-size:12px; color:#999;"> Novos
-                                    chats <br>
-                                    iniciados
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2 mb15">
-                                <div style="text-align:center;"><i class="fa fa-bullhorn"
-                                                                   style="font-size:30px; color:#ed7e3b;"> 6</i></div>
-                                <div style="text-align:center; line-height:14px; font-size:12px; color:#999;"> Exibição
-                                    e cliques <br>
-                                    em publicidades
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2 mb15">
-                                <div style="text-align:center;"><i class="fa fa-ticket"
-                                                                   style="font-size:30px; color:#ed3b76;"> 6</i></div>
-                                <div style="text-align:center; line-height:14px; font-size:12px; color:#999;"> Cliques
-                                    em
-                                    cupons <br>promocionais
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2 mb15">
-                                <div style="text-align:center;">
-                                    <i class="fa fa-life-ring" style="font-size:30px; color:#ed3b3b;"> 6</i>
-                                </div>
-                                <div style="text-align:center; line-height:14px; font-size:12px; color:#999;">
-                                    Mensagens da<br>
-                                    Central do Cliente
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="visible-xs visible-sm visible-md"><br></div>
-                </div>
-
             </div>
 
 
