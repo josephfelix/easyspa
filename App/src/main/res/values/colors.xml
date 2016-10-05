@@ -5,4 +5,8 @@
     <color name="login_button_text">#FFFFFF</color>
     <!-- -->
 
+    <!-- Main -->
+    <color name="main_topbar_background">#703F7E</color>
+    <!-- -->
+
 </resources>

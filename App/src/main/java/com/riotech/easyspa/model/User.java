@@ -6,6 +6,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private int status;
 
     public void setName(String name) {
         this.name = name;
@@ -23,18 +24,13 @@ public class User {
         return email;
     }
 
-    public boolean isValidEmail() {
-        if (TextUtils.isEmpty(email)) {
-            return false;
-        }
-
-        if (!email.contains("@")) {
-            return false;
-        }
-
-        return true;
+    public int getStatus() {
+        return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -42,18 +38,5 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public boolean isValidPassword() {
-
-        if (TextUtils.isEmpty(password)) {
-            return false;
-        }
-
-        if (password.length() <= 4) {
-            return false;
-        }
-
-        return true;
     }
 }
