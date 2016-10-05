@@ -29,6 +29,7 @@ public class Session {
     public void destroy() {
         SharedPreferences.Editor editor = session.edit();
         editor.clear();
+        editor.commit();
     }
 
     public String getString(String key) {

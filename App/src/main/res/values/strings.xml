@@ -22,6 +22,11 @@
     <string name="menu_5">Sair</string>
     <!-- -->
 
+    <!-- Mensagens de confirmação -->
+    <string name="msg_confirm_exit_title">Sair</string>
+    <string name="msg_confirm_exit_message">Tem certeza que deseja sair?</string>
+    <!-- -->
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>

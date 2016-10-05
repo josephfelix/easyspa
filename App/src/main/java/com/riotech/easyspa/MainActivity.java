@@ -1,5 +1,8 @@
 package com.riotech.easyspa;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
 
         TextView menu_nome = (TextView) hView.findViewById(R.id.menu_name);
         menu_nome.setText(user.getName());
@@ -99,7 +102,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        setTitle(item.getTitle());
 
         if (id == R.id.embelezar) {
         } else if (id == R.id.conversas) {
@@ -109,11 +111,38 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.configuracoes) {
 
         } else if (id == R.id.sair) {
-
+            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Faz logout da aplicação easySpa
+     */
+    private void logout() {
+        (new AlertDialog.Builder(this)
+            .setTitle(getString(R.string.msg_confirm_exit_title))
+            .setMessage(getString(R.string.msg_confirm_exit_message))
+            .setIcon(R.drawable.ic_menu_5)
+
+            .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    session.destroy();
+                    Intent loginPage = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(loginPage);
+                    dialog.dismiss();
+                }
+
+            })
+
+            .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            })
+        ).create().show();
     }
 }
