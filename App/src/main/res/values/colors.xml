@@ -3,6 +3,8 @@
     <!-- Login -->
     <color name="login_button_background">#AB3565</color>
     <color name="login_button_text">#FFFFFF</color>
+    <color name="cadastro_button_background">#AB3565</color>
+    <color name="cadastro_button_text">#FFFFFF</color>
     <!-- -->
 
     <!-- Main -->

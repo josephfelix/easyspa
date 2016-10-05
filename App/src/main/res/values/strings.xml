@@ -4,9 +4,8 @@
     <!-- Login -->
     <string name="login_label_email">E-mail</string>
     <string name="login_label_password">Senha</string>
-    <string name="login_action_login">Efetuar login</string>
+    <string name="login_action_login">Entrar</string>
     <string name="login_action_signin">Cadastrar</string>
-    <string name="login_client_access">Acesso comercial</string>
     <string name="login_require_email">Digite seu e-mail.</string>
     <string name="login_require_password">Digite sua senha.</string>
     <string name="login_invalid_email">Digite um e-mail válido.</string>
