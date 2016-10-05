@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.others.UserLoginTask;
+import com.riotech.easyspa.util.Constants;
 import com.riotech.easyspa.util.Session;
 import com.riotech.easyspa.web.EasySpaAPI;
 
@@ -43,10 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * LoginActivity
  * Este é o controlador da tela de Login
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
-    private UserLoginTask mAuthTask = null;
-
-    public final String BASE_URL = "http://ethadsense.com/easyspa/";
+public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, Constants {
     public final int LOGIN_SUCCESS = 1;
     public final int INVALID_USER = 2;
 
@@ -96,6 +94,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    /**
+     * Identifica se o usuário já se autenticou on sistema
+     */
     private void detectUserLoggedIn() {
         if (session.isLoggedIn()) {
             Intent main = new Intent(this, MainActivity.class);
@@ -108,9 +109,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * Este método será chamado sempre que o usuário tentar realizar um login
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         fieldEmail.setError(null);
@@ -135,11 +133,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         showProgress(true);
-        //mAuthTask = new UserLoginTask(email, password);
-        //mAuthTask.execute();
         loginProcess(email, password);
     }
 
+    /**
+     * Valida se a senha informada é válida
+     *
+     * @param password
+     * @return boolean
+     */
     public boolean isValidPassword(String password) {
 
         if (TextUtils.isEmpty(password)) {
@@ -153,6 +155,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         return true;
     }
 
+    /**
+     * Valida se o e-mail informado é válido
+     *
+     * @param email
+     * @return boolean
+     */
     private boolean isValidEmail(String email) {
         if (TextUtils.isEmpty(email)) {
             return false;
@@ -166,7 +174,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     /**
-     * Shows the progress UI and hides the login form.
+     * Exibe o loading e oculta o formulário
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -214,14 +222,25 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     public void onLoaderReset(Loader<Cursor> loader) {
     }
 
+    /**
+     * Inicia uma instancia Retrofit
+     *
+     * @return EasySpaAPI
+     */
     private EasySpaAPI getInterfaceService() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(EasySpaAPI.class);
     }
 
+    /**
+     * Inicia o processo de login
+     *
+     * @param email
+     * @param password
+     */
     private void loginProcess(String email, String password) {
         EasySpaAPI mApiService = this.getInterfaceService();
         Call<User> mService = mApiService.login(email, password);
