@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "973575539617",
+    "project_id": "firebase-easyspa"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973575539617:android:19d8f6c721405d8f",
+        "android_client_info": {
+          "package_name": "com.riotech.easyspa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "973575539617-9smt4fcnlnqkeudb2u6hses9e5a9254r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.riotech.easyspa",
+            "certificate_hash": "D94852FBD92FA5BCAB9798C9FCB05D51BCB6605C"
+          }
+        },
+        {
+          "client_id": "973575539617-7k8tnjr8s3fs8bimoqtf98g05a2u6fqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIdCpM1z5bFdy9ibeBBVGoN7fgZ2Zdov8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
