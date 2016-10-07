@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.util.Session;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +66,17 @@ public class MainActivity extends AppCompatActivity
 
         TextView menu_email = (TextView) hView.findViewById(R.id.menu_email);
         menu_email.setText(user.getEmail());
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.tabs_busca);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                //if (tabId == R.id.tab_favorites) {
+                    // The tab with id R.id.tab_favorites was selected,
+                    // change your content accordingly.
+               // }
+            }
+        });
     }
 
     @Override
