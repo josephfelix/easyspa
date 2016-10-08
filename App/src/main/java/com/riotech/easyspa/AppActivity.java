@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,14 +19,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.util.Session;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-public class MainActivity extends AppCompatActivity
+public class AppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session;
@@ -33,13 +34,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_app);
         session = new Session(this);
         user = new User();
         session.convertToUser(user);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +48,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -72,9 +73,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 //if (tabId == R.id.tab_favorites) {
-                    // The tab with id R.id.tab_favorites was selected,
-                    // change your content accordingly.
-               // }
+                // The tab with id R.id.tab_favorites was selected,
+                // change your content accordingly.
+                // }
             }
         });
     }
@@ -116,12 +117,28 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
         if (id == R.id.embelezar) {
+
+            EmbelezarFragment embelezarFragment = new EmbelezarFragment();
+            transaction.replace(R.id.easyspa_content, embelezarFragment, embelezarFragment.getTag()).commit();
+
         } else if (id == R.id.conversas) {
+
+            ConversasFragment conversasFragment = new ConversasFragment();
+            transaction.replace(R.id.easyspa_content, conversasFragment, conversasFragment.getTag()).commit();
 
         } else if (id == R.id.atendimentos) {
 
+            AtendimentosFragment atendimentosFragment = new AtendimentosFragment();
+            transaction.replace(R.id.easyspa_content, atendimentosFragment, atendimentosFragment.getTag()).commit();
+
         } else if (id == R.id.configuracoes) {
+
+            ConfiguracoesFragment configuracoesFragment = new ConfiguracoesFragment();
+            transaction.replace(R.id.easyspa_content, configuracoesFragment, configuracoesFragment.getTag()).commit();
 
         } else if (id == R.id.sair) {
             logout();
@@ -137,25 +154,25 @@ public class MainActivity extends AppCompatActivity
      */
     private void logout() {
         (new AlertDialog.Builder(this)
-            .setTitle(getString(R.string.msg_confirm_exit_title))
-            .setMessage(getString(R.string.msg_confirm_exit_message))
-            .setIcon(R.drawable.ic_menu_5)
+                .setTitle(getString(R.string.msg_confirm_exit_title))
+                .setMessage(getString(R.string.msg_confirm_exit_message))
+                .setIcon(R.drawable.ic_menu_5)
 
-            .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    session.destroy();
-                    Intent loginPage = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(loginPage);
-                    dialog.dismiss();
-                }
+                .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        session.destroy();
+                        Intent loginPage = new Intent(AppActivity.this, LoginActivity.class);
+                        startActivity(loginPage);
+                        dialog.dismiss();
+                    }
 
-            })
+                })
 
-            .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            })
+                .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
         ).create().show();
     }
 }

@@ -29,7 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.riotech.easyspa.model.User;
-import com.riotech.easyspa.others.UserLoginTask;
 import com.riotech.easyspa.util.Constants;
 import com.riotech.easyspa.util.Session;
 import com.riotech.easyspa.web.EasySpaAPI;
@@ -66,7 +65,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
         session = new Session(this);
 
         // Se o usuário já tiver feito login anteriormente, ele será redirecionado
-        // para a MainActivity
+        // para a AppActivity
         detectUserLoggedIn();
 
         fieldEmail = (EditText) findViewById(R.id.email);
@@ -99,7 +98,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
      */
     private void detectUserLoggedIn() {
         if (session.isLoggedIn()) {
-            Intent main = new Intent(this, MainActivity.class);
+            Intent main = new Intent(this, AppActivity.class);
             startActivity(main);
         }
     }
@@ -260,7 +259,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
                     session.set("email", user.getEmail());
 
                     // Redireciona para a tela principal
-                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent loginIntent = new Intent(LoginActivity.this, AppActivity.class);
                     startActivity(loginIntent);
 
                 } else if (userStatus == INVALID_USER) {

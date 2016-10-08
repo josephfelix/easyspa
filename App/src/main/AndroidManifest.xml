@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -22,9 +22,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".AppActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EmbelezarActivity" />
+        <activity
+            android:name=".ConversasActivity"
+            android:label="@string/title_activity_conversas"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AtendimentosActivity" />
+        <activity android:name=".ConfiguracoesActivity" />
+        <activity android:name=".InicioActivity"></activity>
     </application>
 
 </manifest>
