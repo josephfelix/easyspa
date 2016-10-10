@@ -18,17 +18,14 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.riotech.easyspa.model.User;
+import com.riotech.easyspa.model.UserStatus;
+import com.riotech.easyspa.social.EasySpaFacebookCallback;
 import com.riotech.easyspa.util.Constants;
 import com.riotech.easyspa.util.Session;
 import com.riotech.easyspa.web.EasySpaAPI;
@@ -39,55 +36,39 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.login.widget.LoginButton;
+
+
 /**
  * LoginActivity
  * Este é o controlador da tela de Login
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, Constants {
-    public final int LOGIN_SUCCESS = 1;
-    public final int INVALID_USER = 2;
 
-    // Campos do formulário.
-    private EditText fieldEmail;
-    private EditText fieldPassword;
     private View mProgressView;
     private View mLoginFormView;
 
-    private String email;
-    private String password;
-
     private Session session;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
+
         session = new Session(this);
 
         // Se o usuário já tiver feito login anteriormente, ele será redirecionado
         // para a AppActivity
         detectUserLoggedIn();
 
-        fieldEmail = (EditText) findViewById(R.id.email);
-        fieldPassword = (EditText) findViewById(R.id.password);
-        fieldPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.login_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.login_facebook);
+        facebookLoginButton.setReadPermissions("email");
+        facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this));
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -101,75 +82,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
             Intent main = new Intent(this, AppActivity.class);
             startActivity(main);
         }
-    }
-
-
-    /**
-     * Este método será chamado sempre que o usuário tentar realizar um login
-     */
-    private void attemptLogin() {
-
-        // Reset errors.
-        fieldEmail.setError(null);
-        fieldPassword.setError(null);
-
-        // Store values at the time of the login attempt.
-        email = fieldEmail.getText().toString();
-        password = fieldPassword.getText().toString();
-
-        // Checa se o e-mail inserido é um e-mail válido
-        if (!isValidEmail(email)) {
-            fieldEmail.setError(getString(R.string.login_invalid_email));
-            fieldEmail.requestFocus();
-            return;
-        }
-
-        // Checa se a senha inserida é uma senha válida
-        if (!isValidPassword(password)) {
-            fieldPassword.setError(getString(R.string.login_require_password));
-            fieldPassword.requestFocus();
-            return;
-        }
-
-        showProgress(true);
-        loginProcess(email, password);
-    }
-
-    /**
-     * Valida se a senha informada é válida
-     *
-     * @param password
-     * @return boolean
-     */
-    public boolean isValidPassword(String password) {
-
-        if (TextUtils.isEmpty(password)) {
-            return false;
-        }
-
-        if (password.length() <= 4) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Valida se o e-mail informado é válido
-     *
-     * @param email
-     * @return boolean
-     */
-    private boolean isValidEmail(String email) {
-        if (TextUtils.isEmpty(email)) {
-            return false;
-        }
-
-        if (!email.contains("@")) {
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -236,50 +148,70 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
 
     /**
      * Inicia o processo de login
-     *
-     * @param email
-     * @param password
      */
-    private void loginProcess(String email, String password) {
+    public void loginUpsert(final User user, int method) {
         EasySpaAPI mApiService = this.getInterfaceService();
-        Call<User> mService = mApiService.login(email, password);
-        mService.enqueue(new Callback<User>() {
+        Call<UserStatus> mService = null;
+        if (method == LOGIN_WITH_FACEBOOK) {
+            mService = mApiService.loginFacebook(user.getUniqueID(), user.getEmail());
+        } else if (method == LOGIN_WITH_GOOGLE) {
+            mService = mApiService.loginGoogle(user.getUniqueID(), user.getEmail());
+        }
+
+        if (mService == null) {
+            return;
+        }
+
+        // Exibe a barra de progresso
+        showProgress(true);
+
+        mService.enqueue(new Callback<UserStatus>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
+            public void onResponse(Call<UserStatus> call, Response<UserStatus> response) {
 
                 // Status do usuário
-                int userStatus = user.getStatus();
+                int userStatus = response.body().getStatus();
 
-                if (userStatus == LOGIN_SUCCESS) {
+                if (userStatus == UserStatus.LOGIN_SUCCESS) {
 
                     // Guarda os dados do usuário logado
                     session.set("logged", session.LOGIN);
-                    session.set("name", user.getName());
+                    session.set("uniqueid", user.getUniqueID());
+                    session.set("firstname", user.getFirstname());
+                    session.set("lastname", user.getLastname());
                     session.set("email", user.getEmail());
 
                     // Redireciona para a tela principal
-                    Intent loginIntent = new Intent(LoginActivity.this, AppActivity.class);
-                    startActivity(loginIntent);
+                    Intent appIntent = new Intent(LoginActivity.this, AppActivity.class);
+                    startActivity(appIntent);
 
-                } else if (userStatus == INVALID_USER) {
+                } else if (userStatus == UserStatus.INVALID_USER) {
 
                     // Esconde o loading
                     showProgress(false);
 
-                    // Exibe o erro de usuário incorreto
-                    fieldEmail.setError(getString(R.string.login_or_password_incorrect));
-                    fieldEmail.requestFocus();
+                    // Sai do facebook
+                    LoginManager.getInstance().logOut();
+
+                    // Exibe a mensagem
+                    Toast.makeText(LoginActivity.this, "Este usuário foi desabilitado do sistema", Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<UserStatus> call, Throwable t) {
                 call.cancel();
-                Toast.makeText(LoginActivity.this, "Please check your network connection and internet permission", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Cheque sua internet para continuar", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
 

@@ -1,8 +1,7 @@
 package com.riotech.easyspa.web;
 
 import com.riotech.easyspa.model.User;
-
-import java.util.List;
+import com.riotech.easyspa.model.UserStatus;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,8 +14,13 @@ import retrofit2.http.Query;
 
 public interface EasySpaAPI {
 
-    // user/login
+    // user/facebook
     @FormUrlEncoded
     @POST("login.json")
-    Call<User> login(@Field("email") String email, @Field("password") String password);
+    Call<UserStatus> loginFacebook(@Field("uniqueid") String uniqueid, @Field("email") String email);
+
+    // user/google
+    @FormUrlEncoded
+    @POST("login.json")
+    Call<UserStatus> loginGoogle(@Field("uniqueid") String uniqueid, @Field("email") String email);
 }

@@ -32,5 +32,6 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     testCompile 'junit:junit:4.12'
 }

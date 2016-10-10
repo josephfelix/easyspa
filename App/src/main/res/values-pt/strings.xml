@@ -2,14 +2,8 @@
     <string name="app_name">easySpa</string>
 
     <!-- Login -->
-    <string name="login_label_email">E-mail</string>
-    <string name="login_label_password">Senha</string>
-    <string name="login_action_login">Entrar</string>
-    <string name="login_action_signin">Cadastrar</string>
-    <string name="login_require_email">Digite seu e-mail.</string>
-    <string name="login_require_password">Digite sua senha.</string>
-    <string name="login_invalid_email">Digite um e-mail válido.</string>
-    <string name="login_or_password_incorrect">E-mail ou senha inválido.</string>
+    <string name="login_with_facebook">Entrar com o Facebook</string>
+    <string name="login_with_google">Entrar com o Google</string>
     <!-- -->
 
     <!-- Menu -->

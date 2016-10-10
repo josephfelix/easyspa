@@ -1,19 +1,39 @@
 package com.riotech.easyspa.model;
 
-import android.text.TextUtils;
-
 public class User {
-    private String name;
+    private String uniqueID;
+    private String firstname;
+    private String lastname;
     private String email;
-    private String password;
     private int status;
 
-    public void setName(String name) {
-        this.name = name;
+
+    public String getUniqueID() {
+        return uniqueID;
     }
 
-    public String getName() {
-        return name;
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getFullName() {
+        return firstname + " " + lastname;
     }
 
     public void setEmail(String email) {
@@ -30,13 +50,5 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

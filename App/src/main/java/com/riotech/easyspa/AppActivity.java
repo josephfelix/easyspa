@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.util.Session;
 import com.roughike.bottombar.BottomBar;
@@ -36,8 +37,7 @@ public class AppActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
         session = new Session(this);
-        user = new User();
-        session.convertToUser(user);
+        user = session.getUser();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +63,7 @@ public class AppActivity extends AppCompatActivity
         View hView = navigationView.getHeaderView(0);
 
         TextView menu_nome = (TextView) hView.findViewById(R.id.menu_name);
-        menu_nome.setText(user.getName());
+        menu_nome.setText(user.getFullName());
 
         TextView menu_email = (TextView) hView.findViewById(R.id.menu_email);
         menu_email.setText(user.getEmail());
@@ -161,9 +161,18 @@ public class AppActivity extends AppCompatActivity
 
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+
+                        // Mata a sessão atual
                         session.destroy();
+
+                        // Faz logout do facebook
+                        LoginManager.getInstance().logOut();
+
+                        // Redireciona para a activity de login
                         Intent loginPage = new Intent(AppActivity.this, LoginActivity.class);
                         startActivity(loginPage);
+
+                        // Fecha o diálogo
                         dialog.dismiss();
                     }
 

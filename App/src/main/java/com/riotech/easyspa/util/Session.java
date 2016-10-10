@@ -44,8 +44,12 @@ public class Session {
         return getInt("logged") == LOGIN;
     }
 
-    public void convertToUser(User user) {
-        user.setName(this.getString("name"));
+    public User getUser() {
+        User user = new User();
+        user.setFirstname(this.getString("firstname"));
+        user.setLastname(this.getString("lastname"));
         user.setEmail(this.getString("email"));
+        user.setUniqueID(this.getString("uniqueid"));
+        return user;
     }
 }

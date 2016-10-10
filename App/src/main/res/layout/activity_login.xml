@@ -27,80 +27,16 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent">
 
-        <LinearLayout
-            android:id="@+id/email_login_form"
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/login_with_facebook"
+            android:paddingBottom="14dp"
+            android:paddingTop="14dp" />
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <AutoCompleteTextView
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/login_label_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="teste@example.com" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/login_label_password"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/login_require_password"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="thejoker" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/login_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/login_button_background"
-                android:text="@string/login_action_login"
-                android:textColor="@color/login_button_text"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/cadastro_button_background"
-                android:clickable="true"
-                android:layout_marginTop="7dp">
-                <Button
-                    android:id="@+id/cadastro_button"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/ic_add"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:duplicateParentState="true"
-                    android:drawablePadding="6dp"
-                    android:text="@string/login_action_signin"
-                    android:textColor="@color/cadastro_button_text"
-                    android:textStyle="bold"
-                    android:background="@android:color/transparent"/>
-            </RelativeLayout>
-
-        </LinearLayout>
     </ScrollView>
 </RelativeLayout>
