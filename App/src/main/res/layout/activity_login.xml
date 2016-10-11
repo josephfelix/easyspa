@@ -25,18 +25,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:text="@string/login_with_facebook"
-            android:paddingBottom="14dp"
-            android:paddingTop="14dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_facebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/login_with_facebook"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/login_google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_with_google" />
+
+        </RelativeLayout>
 
     </ScrollView>
 </RelativeLayout>

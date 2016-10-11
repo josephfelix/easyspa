@@ -23,6 +23,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.model.UserStatus;
 import com.riotech.easyspa.social.EasySpaFacebookCallback;
@@ -52,6 +57,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
 
     private Session session;
     private CallbackManager callbackManager;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,28 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.login_facebook);
         facebookLoginButton.setReadPermissions("email");
         facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this));
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+
+        SignInButton googleLoginButton = (SignInButton) findViewById(R.id.login_google);
+        googleLoginButton.setSize(SignInButton.SIZE_STANDARD);
+        googleLoginButton.setScopes(gso.getScopeArray());
+        googleLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch(view.getId()) {
+                    case R.id.login_google:
+                        Toast.makeText(LoginActivity.this, "Google", Toast.LENGTH_SHORT).show();
+                        //Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                        //startActivityForResult(signInIntent, 101);
+                        break;
+                }
+
+            }
+        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
