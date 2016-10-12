@@ -6,6 +6,7 @@
  * @author Joseph F.
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 package com.riotech.easyspa;
 
 import android.animation.Animator;
@@ -18,19 +19,26 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.model.UserStatus;
 import com.riotech.easyspa.social.EasySpaFacebookCallback;
+import com.riotech.easyspa.social.GoogleConnectionFailed;
 import com.riotech.easyspa.util.Constants;
 import com.riotech.easyspa.util.Session;
 import com.riotech.easyspa.web.EasySpaAPI;
@@ -50,7 +58,7 @@ import com.facebook.login.widget.LoginButton;
  * LoginActivity
  * Este é o controlador da tela de Login
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, Constants {
+public class LoginActivity extends FragmentActivity implements LoaderCallbacks<Cursor>, Constants {
 
     private View mProgressView;
     private View mLoginFormView;
@@ -77,22 +85,23 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
         facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this));
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestProfile()
                 .requestEmail()
                 .build();
-
-
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, new GoogleConnectionFailed())
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         SignInButton googleLoginButton = (SignInButton) findViewById(R.id.login_google);
         googleLoginButton.setSize(SignInButton.SIZE_STANDARD);
         googleLoginButton.setScopes(gso.getScopeArray());
+        setGooglePlusButtonText(googleLoginButton, getString(R.string.login_with_google));
         googleLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch(view.getId()) {
-                    case R.id.login_google:
-                        Toast.makeText(LoginActivity.this, "Google", Toast.LENGTH_SHORT).show();
-                        //Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                        //startActivityForResult(signInIntent, 101);
-                        break;
+                if (view.getId() == R.id.login_google) {
+                    Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                    startActivityForResult(signInIntent, LOGIN_WITH_GOOGLE);
                 }
 
             }
@@ -100,6 +109,24 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    /**
+     * Altera o texto do botão de login com google
+     *
+     * @param signInButton
+     * @param buttonText
+     */
+    protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
+        for (int i = 0; i < signInButton.getChildCount(); i++) {
+            View v = signInButton.getChildAt(i);
+
+            if (v instanceof TextView) {
+                TextView tv = (TextView) v;
+                tv.setText(buttonText);
+                return;
+            }
+        }
     }
 
     /**
@@ -221,6 +248,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
                     // Sai do facebook
                     LoginManager.getInstance().logOut();
 
+                    // Sai do google
+                    Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+
                     // Exibe a mensagem
                     Toast.makeText(LoginActivity.this, "Este usuário foi desabilitado do sistema", Toast.LENGTH_LONG).show();
 
@@ -239,7 +269,28 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LOGIN_WITH_GOOGLE) {
+            Log.v("TAG", data.getStringExtra("Note"));
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                GoogleSignInAccount acct = result.getSignInAccount();
+                if (acct != null) {
+                    String mFullName = acct.getDisplayName();
+                    String mEmail = acct.getEmail();
+                    Toast.makeText(this, "Hello " + mFullName + " Email: " + mEmail, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Status status = result.getStatus();
+                Toast.makeText(this, status.getStatusCode(), Toast.LENGTH_SHORT).show();
+            }
+
+
+        } else if (requestCode == LOGIN_WITH_FACEBOOK) {
+
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        }
     }
 }
 

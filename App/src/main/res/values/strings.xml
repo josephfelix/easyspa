@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">easySpa</string>
     <string name="facebook_app_id">861472953939142</string>
+    <string name="google_client_id">726054881005-hl6tnt0nmlfvafat29t3fepu7cr8hgak.apps.googleusercontent.com</string>
 
     <!-- Login -->
     <string name="login_with_facebook">Entrar com o Facebook</string>
