@@ -112,24 +112,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        /*OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            GoogleSignInResult result = opr.get();
-            (new EasySpaGoogleCallback(this)).process(result);
-        } else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    (new EasySpaGoogleCallback(LoginActivity.this)).process(googleSignInResult);
-                }
-            });
-        }*/
-    }
-
     /**
      * Altera o texto do botão de login com google
      * @param signInButton

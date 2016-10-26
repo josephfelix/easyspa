@@ -9,6 +9,10 @@
 
     <!-- Main -->
     <color name="main_topbar_background">#703F7E</color>
+    <color name="main_button_section1_background">#E0E6EA</color>
+    <color name="main_background">#EEF0F1</color>
+    <color name="main_section1_background">#F4F6F7</color>
+    <color name="main_section2_background">#F4F6F7</color>
     <!-- -->
 
 </resources>

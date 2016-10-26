@@ -41,15 +41,6 @@ public class AppActivity extends AppCompatActivity
         session = new Session(this);
         user = session.getUser();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,7 +61,7 @@ public class AppActivity extends AppCompatActivity
         TextView menu_email = (TextView) hView.findViewById(R.id.menu_email);
         menu_email.setText(user.getEmail());
 
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.tabs_busca);
+       /* BottomBar bottomBar = (BottomBar) findViewById(R.id.tabs_busca);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -79,7 +70,7 @@ public class AppActivity extends AppCompatActivity
                 // change your content accordingly.
                 // }
             }
-        });
+        });*/
     }
 
     @Override
