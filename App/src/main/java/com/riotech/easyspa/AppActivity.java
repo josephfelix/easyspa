@@ -22,10 +22,8 @@ import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.riotech.easyspa.model.User;
-import com.riotech.easyspa.social.GoogleConnectionFailed;
 import com.riotech.easyspa.util.Session;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -35,7 +33,6 @@ public class AppActivity extends AppCompatActivity
 
     private Session session;
     private User user;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +80,6 @@ public class AppActivity extends AppCompatActivity
                 // }
             }
         });
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_client_id))
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, new GoogleConnectionFailed())
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
     }
 
     @Override
@@ -181,9 +169,6 @@ public class AppActivity extends AppCompatActivity
 
                         // Faz logout do facebook
                         LoginManager.getInstance().logOut();
-
-                        // Faz logout do google
-                        Auth.GoogleSignInApi.signOut(mGoogleApiClient);
 
                         // Redireciona para a activity de login
                         Intent loginPage = new Intent(AppActivity.this, LoginActivity.class);

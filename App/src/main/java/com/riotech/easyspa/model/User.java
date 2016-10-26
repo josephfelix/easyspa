@@ -5,6 +5,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String email;
+    private int loginMethod;
     private int status;
 
 
@@ -50,5 +51,13 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getLoginMethod() {
+        return loginMethod;
+    }
+
+    public void setLoginMethod(int loginMethod) {
+        this.loginMethod = loginMethod;
     }
 }

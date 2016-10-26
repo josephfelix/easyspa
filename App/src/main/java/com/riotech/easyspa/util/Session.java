@@ -50,6 +50,7 @@ public class Session {
         user.setLastname(this.getString("lastname"));
         user.setEmail(this.getString("email"));
         user.setUniqueID(this.getString("uniqueid"));
+        user.setLoginMethod(this.getInt("loginmethod"));
         return user;
     }
 }

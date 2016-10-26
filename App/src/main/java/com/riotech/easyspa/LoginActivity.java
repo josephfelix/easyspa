@@ -12,33 +12,27 @@ package com.riotech.easyspa;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Status;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.model.UserStatus;
 import com.riotech.easyspa.social.EasySpaFacebookCallback;
-import com.riotech.easyspa.social.GoogleConnectionFailed;
+import com.riotech.easyspa.social.EasySpaGoogleCallback;
 import com.riotech.easyspa.util.Constants;
 import com.riotech.easyspa.util.Session;
 import com.riotech.easyspa.web.EasySpaAPI;
@@ -58,7 +52,7 @@ import com.facebook.login.widget.LoginButton;
  * LoginActivity
  * Este é o controlador da tela de Login
  */
-public class LoginActivity extends FragmentActivity implements LoaderCallbacks<Cursor>, Constants {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, Constants {
 
     private View mProgressView;
     private View mLoginFormView;
@@ -80,22 +74,29 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
         // para a AppActivity
         detectUserLoggedIn();
 
+        /**
+         * Integração: Login com facebook
+         */
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.login_facebook);
         facebookLoginButton.setReadPermissions("email");
         facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this));
 
+        /**
+         * Integração: Login com Google
+         */
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestProfile()
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, new GoogleConnectionFailed())
+                .enableAutoManage(this, new EasySpaGoogleCallback(this))
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
         SignInButton googleLoginButton = (SignInButton) findViewById(R.id.login_google);
         googleLoginButton.setSize(SignInButton.SIZE_STANDARD);
         googleLoginButton.setScopes(gso.getScopeArray());
         setGooglePlusButtonText(googleLoginButton, getString(R.string.login_with_google));
+
         googleLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,9 +112,26 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        /*OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        if (opr.isDone()) {
+            GoogleSignInResult result = opr.get();
+            (new EasySpaGoogleCallback(this)).process(result);
+        } else {
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+                    (new EasySpaGoogleCallback(LoginActivity.this)).process(googleSignInResult);
+                }
+            });
+        }*/
+    }
+
     /**
      * Altera o texto do botão de login com google
-     *
      * @param signInButton
      * @param buttonText
      */
@@ -204,12 +222,12 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     /**
      * Inicia o processo de login
      */
-    public void loginUpsert(final User user, int method) {
+    public void loginUpsert(final User user) {
         EasySpaAPI mApiService = this.getInterfaceService();
         Call<UserStatus> mService = null;
-        if (method == LOGIN_WITH_FACEBOOK) {
+        if (user.getLoginMethod() == LOGIN_WITH_FACEBOOK) {
             mService = mApiService.loginFacebook(user.getUniqueID(), user.getEmail());
-        } else if (method == LOGIN_WITH_GOOGLE) {
+        } else if (user.getLoginMethod() == LOGIN_WITH_GOOGLE) {
             mService = mApiService.loginGoogle(user.getUniqueID(), user.getEmail());
         }
 
@@ -235,6 +253,7 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
                     session.set("firstname", user.getFirstname());
                     session.set("lastname", user.getLastname());
                     session.set("email", user.getEmail());
+                    session.set("loginmethod", user.getLoginMethod());
 
                     // Redireciona para a tela principal
                     Intent appIntent = new Intent(LoginActivity.this, AppActivity.class);
@@ -245,11 +264,17 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
                     // Esconde o loading
                     showProgress(false);
 
-                    // Sai do facebook
-                    LoginManager.getInstance().logOut();
+                    if (user.getLoginMethod() == LOGIN_WITH_FACEBOOK) {
 
-                    // Sai do google
-                    Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                        // Sai do facebook
+                        LoginManager.getInstance().logOut();
+
+                    } else if (user.getLoginMethod() == LOGIN_WITH_GOOGLE) {
+
+                        // Sai do google
+                        Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+
+                    }
 
                     // Exibe a mensagem
                     Toast.makeText(LoginActivity.this, "Este usuário foi desabilitado do sistema", Toast.LENGTH_LONG).show();
@@ -271,25 +296,10 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == LOGIN_WITH_GOOGLE) {
-            Log.v("TAG", data.getStringExtra("Note"));
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                GoogleSignInAccount acct = result.getSignInAccount();
-                if (acct != null) {
-                    String mFullName = acct.getDisplayName();
-                    String mEmail = acct.getEmail();
-                    Toast.makeText(this, "Hello " + mFullName + " Email: " + mEmail, Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Status status = result.getStatus();
-                Toast.makeText(this, status.getStatusCode(), Toast.LENGTH_SHORT).show();
-            }
-
-
+            (new EasySpaGoogleCallback(this)).process(result);
         } else if (requestCode == LOGIN_WITH_FACEBOOK) {
-
             callbackManager.onActivityResult(requestCode, resultCode, data);
-
         }
     }
 }

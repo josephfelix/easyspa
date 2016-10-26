@@ -37,8 +37,9 @@ public class EasySpaFacebookCallback implements FacebookCallback<LoginResult>, C
                             user.setFirstname(object.getString("first_name"));
                             user.setLastname(object.getString("last_name"));
                             user.setEmail(object.getString("email"));
+                            user.setLoginMethod(LOGIN_WITH_FACEBOOK);
 
-                            instance.loginUpsert(user, LOGIN_WITH_FACEBOOK);
+                            instance.loginUpsert(user);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
