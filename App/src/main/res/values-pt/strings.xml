@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">easySpa</string>
+    <string name="facebook_app_id">861472953939142</string>
+    <string name="google_client_id">726054881005-hl6tnt0nmlfvafat29t3fepu7cr8hgak.apps.googleusercontent.com</string>
 
     <!-- Login -->
     <string name="login_with_facebook">Entrar com o Facebook</string>
@@ -7,12 +9,26 @@
     <!-- -->
 
     <!-- Menu -->
+    <string name="menu_toyou_title">Para você</string>
     <string name="menu_1">Quero me embelezar</string>
     <string name="menu_2">Conversas</string>
-    <string name="menu_3">Atendimentos</string>
-    <string name="others_container_title">Outros</string>
-    <string name="menu_4">Configurações</string>
-    <string name="menu_5">Sair</string>
+    <string name="menu_3">Agenda</string>
+    <string name="menu_4">Histórico</string>
+
+    <string name="menu_others_title">Outros</string>
+    <string name="menu_5">Configurações</string>
+    <string name="menu_6">Sair</string>
+    <!-- -->
+
+    <!-- Texto dos botões da home -->
+    <string name="home_icon_1">Pés e mãos</string>
+    <string name="home_icon_2">Cabeleireiro</string>
+    <string name="home_icon_3">Depilação</string>
+    <string name="home_icon_4">Sobrancelha</string>
+    <string name="home_icon_5">Maquiagem</string>
+    <string name="home_icon_6">Estética corporal</string>
+    <string name="home_icon_7">Estética facial</string>
+    <string name="home_icon_8">Mais categorias</string>
     <!-- -->
 
     <!-- Mensagens de confirmação -->
@@ -22,5 +38,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_conversas">ConversasActivity</string>
 
 </resources>

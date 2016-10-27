@@ -3,7 +3,7 @@
     android:id="@+id/fragment_conversas_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.riotech.easyspa.ConversasFragment">
+    tools:context="com.riotech.easyspa.fragments.ConversasFragment">
 
     <TextView
         android:layout_width="match_parent"

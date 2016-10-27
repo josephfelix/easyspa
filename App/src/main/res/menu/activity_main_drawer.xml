@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:title="@string/menu_toyou_title" android:checkableBehavior="single">
         <item
             android:id="@+id/embelezar"
             android:icon="@drawable/ic_menu_1"
@@ -11,21 +11,25 @@
             android:icon="@drawable/ic_menu_2"
             android:title="@string/menu_2" />
         <item
-            android:id="@+id/atendimentos"
+            android:id="@+id/agenda"
             android:icon="@drawable/ic_menu_3"
             android:title="@string/menu_3" />
+        <item
+            android:id="@+id/historico"
+            android:icon="@drawable/ic_menu_4"
+            android:title="@string/menu_4" />
     </group>
 
-    <item android:title="@string/others_container_title">
+    <item android:title="@string/menu_others_title">
         <menu>
             <item
                 android:id="@+id/configuracoes"
-                android:icon="@drawable/ic_menu_4"
-                android:title="@string/menu_4" />
-            <item
-                android:id="@+id/sair"
                 android:icon="@drawable/ic_menu_5"
                 android:title="@string/menu_5" />
+            <item
+                android:id="@+id/sair"
+                android:icon="@drawable/ic_menu_6"
+                android:title="@string/menu_6" />
         </menu>
     </item>
 

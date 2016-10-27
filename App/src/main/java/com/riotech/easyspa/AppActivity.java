@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -21,25 +19,25 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.riotech.easyspa.fragments.AgendaFragment;
+import com.riotech.easyspa.fragments.ConfiguracoesFragment;
+import com.riotech.easyspa.fragments.ConversasFragment;
+import com.riotech.easyspa.fragments.HistoricoFragment;
+import com.riotech.easyspa.fragments.InicioFragment;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.util.Session;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 public class AppActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
         session = new Session(this);
-        user = session.getUser();
+        User user = session.getUser();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,6 +59,12 @@ public class AppActivity extends AppCompatActivity
         TextView menu_email = (TextView) hView.findViewById(R.id.menu_email);
         menu_email.setText(user.getEmail());
 
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        InicioFragment inicioFragment = new InicioFragment();
+        transaction.replace(R.id.easyspa_content, inicioFragment, inicioFragment.getTag()).commit();
+
        /* BottomBar bottomBar = (BottomBar) findViewById(R.id.tabs_busca);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -75,9 +79,12 @@ public class AppActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (getFragmentManager().getBackStackEntryCount() != 0) {
+            getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
         }
@@ -98,8 +105,6 @@ public class AppActivity extends AppCompatActivity
         FragmentTransaction transaction = manager.beginTransaction();
 
         if (id == R.id.action_embelezar) {
-            EmbelezarFragment embelezarFragment = new EmbelezarFragment();
-            transaction.replace(R.id.easyspa_content, embelezarFragment, embelezarFragment.getTag()).commit();
             return true;
         }
 
@@ -108,31 +113,52 @@ public class AppActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
+        InicioFragment inicioFragment = new InicioFragment();
+
         if (id == R.id.embelezar) {
 
-            EmbelezarFragment embelezarFragment = new EmbelezarFragment();
-            transaction.replace(R.id.easyspa_content, embelezarFragment, embelezarFragment.getTag()).commit();
+            transaction
+                    .replace(R.id.easyspa_content, inicioFragment, inicioFragment.getTag())
+                    .addToBackStack(inicioFragment.getTag())
+                    .commit();
 
         } else if (id == R.id.conversas) {
 
             ConversasFragment conversasFragment = new ConversasFragment();
-            transaction.replace(R.id.easyspa_content, conversasFragment, conversasFragment.getTag()).commit();
+            transaction
+                    .replace(R.id.easyspa_content, conversasFragment, conversasFragment.getTag())
+                    .addToBackStack(inicioFragment.getTag())
+                    .commit();
 
-        } else if (id == R.id.atendimentos) {
+        } else if (id == R.id.agenda) {
 
-            AtendimentosFragment atendimentosFragment = new AtendimentosFragment();
-            transaction.replace(R.id.easyspa_content, atendimentosFragment, atendimentosFragment.getTag()).commit();
+            AgendaFragment agendaFragment = new AgendaFragment();
+            transaction
+                    .replace(R.id.easyspa_content, agendaFragment, agendaFragment.getTag())
+                    .addToBackStack(inicioFragment.getTag())
+                    .commit();
+
+        } else if (id == R.id.historico) {
+
+            HistoricoFragment historicoFragment = new HistoricoFragment();
+            transaction
+                    .replace(R.id.easyspa_content, historicoFragment, historicoFragment.getTag())
+                    .addToBackStack(inicioFragment.getTag())
+                    .commit();
 
         } else if (id == R.id.configuracoes) {
 
             ConfiguracoesFragment configuracoesFragment = new ConfiguracoesFragment();
-            transaction.replace(R.id.easyspa_content, configuracoesFragment, configuracoesFragment.getTag()).commit();
+            transaction
+                    .replace(R.id.easyspa_content, configuracoesFragment, configuracoesFragment.getTag())
+                    .addToBackStack(inicioFragment.getTag())
+                    .commit();
 
         } else if (id == R.id.sair) {
             logout();
@@ -150,7 +176,7 @@ public class AppActivity extends AppCompatActivity
         (new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.msg_confirm_exit_title))
                 .setMessage(getString(R.string.msg_confirm_exit_message))
-                .setIcon(R.drawable.ic_menu_5)
+                .setIcon(R.drawable.ic_menu_6)
 
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {

@@ -3,11 +3,11 @@
     android:id="@+id/fragment_atendimentos_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.riotech.easyspa.AtendimentosFragment">
+    tools:context="com.riotech.easyspa.fragments.AgendaFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Atendimentos" />
+        android:text="Agenda" />
 
 </FrameLayout>

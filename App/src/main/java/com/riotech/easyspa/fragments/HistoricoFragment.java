@@ -1,4 +1,4 @@
-package com.riotech.easyspa;
+package com.riotech.easyspa.fragments;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.riotech.easyspa.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AtendimentosFragment extends Fragment {
+public class HistoricoFragment extends Fragment {
 
 
-    public AtendimentosFragment() {
+    public HistoricoFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class AtendimentosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_atendimentos, container, false);
+        return inflater.inflate(R.layout.fragment_historico, container, false);
     }
 
 }

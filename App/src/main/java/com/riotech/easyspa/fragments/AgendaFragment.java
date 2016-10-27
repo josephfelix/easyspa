@@ -1,4 +1,4 @@
-package com.riotech.easyspa;
+package com.riotech.easyspa.fragments;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.riotech.easyspa.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConversasFragment extends Fragment {
+public class AgendaFragment extends Fragment {
 
 
-    public ConversasFragment() {
+    public AgendaFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class ConversasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_conversas, container, false);
+        return inflater.inflate(R.layout.fragment_agenda, container, false);
     }
 
 }

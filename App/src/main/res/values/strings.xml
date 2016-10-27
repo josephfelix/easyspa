@@ -9,19 +9,22 @@
     <!-- -->
 
     <!-- Menu -->
+    <string name="menu_toyou_title">Para você</string>
     <string name="menu_1">Quero me embelezar</string>
     <string name="menu_2">Conversas</string>
-    <string name="menu_3">Atendimentos</string>
-    <string name="others_container_title">Outros</string>
-    <string name="menu_4">Configurações</string>
-    <string name="menu_5">Sair</string>
+    <string name="menu_3">Agenda</string>
+    <string name="menu_4">Histórico</string>
+
+    <string name="menu_others_title">Outros</string>
+    <string name="menu_5">Configurações</string>
+    <string name="menu_6">Sair</string>
     <!-- -->
 
     <!-- Texto dos botões da home -->
     <string name="home_icon_1">Pés e mãos</string>
     <string name="home_icon_2">Cabeleireiro</string>
     <string name="home_icon_3">Depilação</string>
-    <string name="home_icon_4">Sombrancelha</string>
+    <string name="home_icon_4">Sobrancelha</string>
     <string name="home_icon_5">Maquiagem</string>
     <string name="home_icon_6">Estética corporal</string>
     <string name="home_icon_7">Estética facial</string>
