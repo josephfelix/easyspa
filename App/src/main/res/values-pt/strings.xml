@@ -2,6 +2,8 @@
     <string name="app_name">easySpa</string>
     <string name="facebook_app_id">861472953939142</string>
     <string name="google_client_id">726054881005-hl6tnt0nmlfvafat29t3fepu7cr8hgak.apps.googleusercontent.com</string>
+    <string name="navigation_drawer_open">Menu aberto</string>
+    <string name="navigation_drawer_close">Fechar menu</string>
 
     <!-- Login -->
     <string name="login_with_facebook">Entrar com o Facebook</string>
@@ -36,8 +38,34 @@
     <string name="msg_confirm_exit_message">Tem certeza que deseja sair?</string>
     <!-- -->
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_conversas">ConversasActivity</string>
+    <!-- Categorias -->
+    <string name="categoria_1">Pés e mãos</string>
+    <string name="categoria_2">Academias</string>
+    <string name="categoria_3">Acupuntura</string>
+    <string name="categoria_4">Cabeleireiro</string>
+    <string name="categoria_5">Cílios</string>
+    <string name="categoria_6">Clínica estética</string>
+    <string name="categoria_7">Dentista</string>
+    <string name="categoria_8">Depilação</string>
+    <string name="categoria_9">Design de sobrancelha</string>
+    <string name="categoria_10">Estética corporal</string>
+    <string name="categoria_11">Estética facial</string>
+    <string name="categoria_12">Fisioterapia</string>
+    <string name="categoria_13">Hidroterapia</string>
+    <string name="categoria_14">Maquiagem</string>
+    <string name="categoria_15">Massagem</string>
+    <string name="categoria_16">Nutricionista</string>
+    <string name="categoria_17">Personal trainer</string>
+    <string name="categoria_18">Piercing</string>
+    <string name="categoria_19">Praticas integrativas</string>
+    <string name="categoria_20">Salão de beleza</string>
+    <string name="categoria_21">Spa</string>
+    <string name="categoria_22">Yoga</string>
+    <!-- -->
+
+    <!-- Títulos -->
+    <string name="title_main">easySpa</string>
+    <string name="title_categorias">Todas as categorias</string>
+    <!-- -->
 
 </resources>

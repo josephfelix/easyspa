@@ -1,6 +1,6 @@
 package com.riotech.easyspa.fragments;
 
-
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,18 +13,9 @@ import android.widget.Toast;
 
 import com.riotech.easyspa.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class InicioFragment extends Fragment {
 
-
-    public InicioFragment() {
-
-    }
-
-    protected View attachButtonEvents(View rootView) {
+    public View onCreateFragment(View rootView) {
         final FragmentManager manager = getFragmentManager();
 
         Button pes_e_maos = (Button) rootView.findViewById(R.id.pes_e_maos);
@@ -56,7 +47,7 @@ public class InicioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inicio, container, false);
-        return attachButtonEvents(rootView);
+        return onCreateFragment(rootView);
     }
 
 }
