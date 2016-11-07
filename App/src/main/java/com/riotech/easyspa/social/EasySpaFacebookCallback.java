@@ -7,9 +7,12 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.riotech.easyspa.LoginActivity;
 import com.riotech.easyspa.model.User;
+import com.riotech.easyspa.permission.EasySpaLocationPermission;
+import com.riotech.easyspa.permission.EasySpaPermissionCallback;
 import com.riotech.easyspa.util.Constants;
 
 import org.json.JSONException;
@@ -18,9 +21,11 @@ import org.json.JSONObject;
 public class EasySpaFacebookCallback implements FacebookCallback<LoginResult>, Constants {
 
     private LoginActivity instance;
+    private EasySpaLocationPermission permission;
 
-    public EasySpaFacebookCallback(LoginActivity instance) {
+    public EasySpaFacebookCallback(LoginActivity instance, EasySpaLocationPermission permission) {
         this.instance = instance;
+        this.permission = permission;
     }
 
     @Override
@@ -32,14 +37,25 @@ public class EasySpaFacebookCallback implements FacebookCallback<LoginResult>, C
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try {
 
-                            User user = new User();
+                            final User user = new User();
                             user.setUniqueID(object.getString("id"));
                             user.setFirstname(object.getString("first_name"));
                             user.setLastname(object.getString("last_name"));
                             user.setEmail(object.getString("email"));
                             user.setLoginMethod(LOGIN_WITH_FACEBOOK);
 
-                            instance.loginUpsert(user);
+                            permission.onRequest(new EasySpaPermissionCallback(){
+
+                                @Override
+                                public void onGranted() {
+                                    instance.loginUpsert(user);
+                                }
+
+                                @Override
+                                public void onDenied() {
+                                    LoginManager.getInstance().logOut();
+                                }
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();

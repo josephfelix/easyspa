@@ -18,7 +18,10 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.model.UserStatus;
+import com.riotech.easyspa.permission.EasySpaLocationPermission;
 import com.riotech.easyspa.social.EasySpaFacebookCallback;
 import com.riotech.easyspa.social.EasySpaGoogleCallback;
 import com.riotech.easyspa.util.Constants;
@@ -52,7 +56,7 @@ import com.facebook.login.widget.LoginButton;
  * LoginActivity
  * Este é o controlador da tela de Login
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, Constants {
+public class LoginActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback, LoaderCallbacks<Cursor>, Constants {
 
     private View mProgressView;
     private View mLoginFormView;
@@ -60,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private Session session;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
+    private EasySpaLocationPermission permission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
 
         session = new Session(this);
+        permission = new EasySpaLocationPermission();
+        permission.setActivity(this);
 
         // Se o usuário já tiver feito login anteriormente, ele será redirecionado
         // para a AppActivity
@@ -79,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
          */
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.login_facebook);
         facebookLoginButton.setReadPermissions("email");
-        facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this));
+        facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this, permission));
 
         /**
          * Integração: Login com Google
@@ -88,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, new EasySpaGoogleCallback(this))
+                .enableAutoManage(this, new EasySpaGoogleCallback(this, permission))
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -114,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     /**
      * Altera o texto do botão de login com google
+     *
      * @param signInButton
      * @param buttonText
      */
@@ -279,10 +287,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         if (requestCode == LOGIN_WITH_GOOGLE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            (new EasySpaGoogleCallback(this)).process(result);
+            (new EasySpaGoogleCallback(this, permission)).process(result);
         } else if (requestCode == LOGIN_WITH_FACEBOOK) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permission.processRequestCode(requestCode, permissions, grantResults);
+    }
+
 }
 

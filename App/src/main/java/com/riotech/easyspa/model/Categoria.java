@@ -6,6 +6,10 @@ public class Categoria {
     private String descricao;
     private int foto = 0;
 
+    public Categoria() {
+
+    }
+
     public Categoria(int id, String nome, String descricao, int foto) {
         this.id = id;
         this.nome = nome;

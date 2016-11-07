@@ -1,8 +1,11 @@
 package com.riotech.easyspa.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +23,10 @@ import java.util.ArrayList;
 public class CategoriasFragment extends Fragment {
 
     public View onCreateFragment(View rootView) {
-        Categorias todasCategorias = new Categorias();
-        Activity activity = getActivity();
+        final FragmentManager manager = getFragmentManager();
+        final Categorias todasCategorias = new Categorias();
+        final Activity activity = getActivity();
+        final Context context = getContext();
         final ArrayList<Categoria> categorias = todasCategorias.get(activity);
 
         CategoriasAdapter categoriasAdapter = new CategoriasAdapter(activity, categorias);
@@ -32,7 +37,13 @@ public class CategoriasFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Categoria categoria = categorias.get(position);
 
-                Toast.makeText(getContext(), "Categoria: " + categoria.getNome(), Toast.LENGTH_SHORT).show();
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                MapaFragment mapaFragment = MapaFragment.createInstance(categoria.getId(), categoria.getNome());
+                transaction
+                        .replace(R.id.easyspa_content, mapaFragment, mapaFragment.getTag())
+                        .addToBackStack(getTag())
+                        .commit();
             }
         });
 
