@@ -5,18 +5,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.riotech.easyspa.R;
 
-public class MapaFragment extends Fragment {
+public class MapaFragment extends Fragment implements OnMapReadyCallback {
     private static final String ARG_CATEGORIA_ID = "id";
     private static final String ARG_CATEGORIA_NOME = "nome";
     private int idcategoria = 0;
     private String nomecategoria = "";
+    private GoogleMap mMap;
 
     /**
-     * Cria a instância do MapaFragment
+     * Factory para criar a instância do MapaFragment
      *
      * @param idcategoria
      * @param nomecategoria
@@ -38,8 +44,9 @@ public class MapaFragment extends Fragment {
      * @return
      */
     protected View onInit(View rootView) {
-        TextView categoria_escolhida = (TextView) rootView.findViewById(R.id.categoria_escolhida);
-        categoria_escolhida.setText("Categoria: " + nomecategoria);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         return rootView;
     }
@@ -58,5 +65,14 @@ public class MapaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_mapa, container, false);
         return onInit(rootView);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
