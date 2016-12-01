@@ -1,5 +1,6 @@
 package com.riotech.easyspa.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     private int idcategoria = 0;
     private String nomecategoria = "";
     private GoogleMap mMap;
+    private ProgressDialog progressDialog;
 
     /**
      * Factory para criar a instância do MapaFragment
@@ -44,9 +46,25 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
      * @return
      */
     protected View onInit(View rootView) {
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(4000);
+                    progressDialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         return rootView;
     }
@@ -74,5 +92,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 }
