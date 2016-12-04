@@ -10,6 +10,8 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.riotech.easyspa.LoginActivity;
+import com.riotech.easyspa.location.EasySpaGPS;
+import com.riotech.easyspa.location.EasySpaLocationCallback;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.permission.EasySpaLocationPermission;
 import com.riotech.easyspa.permission.EasySpaPermissionCallback;
@@ -22,10 +24,12 @@ public class EasySpaFacebookCallback implements FacebookCallback<LoginResult>, C
 
     private LoginActivity instance;
     private EasySpaLocationPermission permission;
+    private EasySpaGPS gps;
 
-    public EasySpaFacebookCallback(LoginActivity instance, EasySpaLocationPermission permission) {
+    public EasySpaFacebookCallback(LoginActivity instance, EasySpaLocationPermission permission, EasySpaGPS gps) {
         this.instance = instance;
         this.permission = permission;
+        this.gps = gps;
     }
 
     @Override
@@ -44,11 +48,27 @@ public class EasySpaFacebookCallback implements FacebookCallback<LoginResult>, C
                             user.setEmail(object.getString("email"));
                             user.setLoginMethod(LOGIN_WITH_FACEBOOK);
 
-                            permission.onRequest(new EasySpaPermissionCallback(){
+                            permission.onRequest(new EasySpaPermissionCallback() {
 
                                 @Override
                                 public void onGranted() {
-                                    instance.loginUpsert(user);
+
+                                    gps.setSuccessCallback(new EasySpaLocationCallback() {
+                                        @Override
+                                        public void run() {
+                                            instance.loginUpsert(user);
+                                        }
+                                    });
+
+                                    gps.setErrorCallback(new EasySpaLocationCallback() {
+                                        @Override
+                                        public void run() {
+                                            LoginManager.getInstance().logOut();
+                                        }
+                                    });
+
+                                    gps.getLocation();
+
                                 }
 
                                 @Override

@@ -9,19 +9,15 @@
 
 package com.riotech.easyspa;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.LoaderManager.LoaderCallbacks;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
-import android.os.Build;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +28,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.riotech.easyspa.location.EasySpaGPS;
+import com.riotech.easyspa.location.EasySpaGeoCoder;
 import com.riotech.easyspa.model.User;
 import com.riotech.easyspa.model.UserStatus;
 import com.riotech.easyspa.permission.EasySpaLocationPermission;
@@ -51,20 +49,22 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 
+import java.io.IOException;
+import java.util.List;
+
 
 /**
  * LoginActivity
  * Este é o controlador da tela de Login
  */
-public class LoginActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback, LoaderCallbacks<Cursor>, Constants {
-
-    private View mProgressView;
-    private View mLoginFormView;
+public class LoginActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback, Constants {
 
     private Session session;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
     private EasySpaLocationPermission permission;
+    private EasySpaGPS gps;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
+
+        gps = new EasySpaGPS(this);
 
         session = new Session(this);
         permission = new EasySpaLocationPermission();
@@ -84,9 +86,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
         /**
          * Integração: Login com facebook
          */
-        LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.login_facebook);
+        final LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.login_facebook);
         facebookLoginButton.setReadPermissions("email");
-        facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(this, permission));
+        facebookLoginButton.registerCallback(callbackManager, new EasySpaFacebookCallback(LoginActivity.this, permission, gps));
 
         /**
          * Integração: Login com Google
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, new EasySpaGoogleCallback(this, permission))
+                .enableAutoManage(this, new EasySpaGoogleCallback(this, permission, gps))
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -115,8 +117,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     /**
@@ -148,55 +151,6 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
     }
 
     /**
-     * Exibe o loading e oculta o formulário
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-    }
-
-    /**
      * Inicia uma instancia Retrofit
      *
      * @return EasySpaAPI
@@ -225,51 +179,13 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
             return;
         }
 
-        // Exibe a barra de progresso
-        showProgress(true);
+        // Exibe o loading
+        progressDialog.show();
 
         mService.enqueue(new Callback<UserStatus>() {
             @Override
             public void onResponse(Call<UserStatus> call, Response<UserStatus> response) {
-
-                // Status do usuário
-                int userStatus = response.body().getStatus();
-
-                if (userStatus == UserStatus.LOGIN_SUCCESS) {
-
-                    // Guarda os dados do usuário logado
-                    session.set("logged", session.LOGIN);
-                    session.set("uniqueid", user.getUniqueID());
-                    session.set("firstname", user.getFirstname());
-                    session.set("lastname", user.getLastname());
-                    session.set("email", user.getEmail());
-                    session.set("loginmethod", user.getLoginMethod());
-
-                    // Redireciona para a tela principal
-                    Intent appIntent = new Intent(LoginActivity.this, AppActivity.class);
-                    startActivity(appIntent);
-
-                } else if (userStatus == UserStatus.INVALID_USER) {
-
-                    // Esconde o loading
-                    showProgress(false);
-
-                    if (user.getLoginMethod() == LOGIN_WITH_FACEBOOK) {
-
-                        // Sai do facebook
-                        LoginManager.getInstance().logOut();
-
-                    } else if (user.getLoginMethod() == LOGIN_WITH_GOOGLE) {
-
-                        // Sai do google
-                        Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-
-                    }
-
-                    // Exibe a mensagem
-                    Toast.makeText(LoginActivity.this, "Este usuário foi desabilitado do sistema", Toast.LENGTH_LONG).show();
-
-                }
+                processResponse(user, response);
             }
 
             @Override
@@ -280,6 +196,59 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
         });
     }
 
+    /**
+     * Processa o retorno do webservice retornado pelo Retrofit
+     *
+     * @param user     Usuário
+     * @param response Response do status do usuário
+     */
+    private void processResponse(User user, Response<UserStatus> response) {
+
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
+        String localidade = EasySpaGeoCoder.translateLocation(this, latitude, longitude);
+
+        // Status do usuário
+        int userStatus = response.body().getStatus();
+
+        if (userStatus == UserStatus.LOGIN_SUCCESS) {
+
+            // Guarda os dados do usuário logado
+            session.set("logged", session.LOGIN);
+            session.set("uniqueid", user.getUniqueID());
+            session.set("firstname", user.getFirstname());
+            session.set("lastname", user.getLastname());
+            session.set("email", user.getEmail());
+            session.set("loginmethod", user.getLoginMethod());
+            session.set("location", localidade);
+
+            // Redireciona para a tela principal
+            Intent appIntent = new Intent(LoginActivity.this, AppActivity.class);
+            startActivity(appIntent);
+
+        } else if (userStatus == UserStatus.INVALID_USER) {
+
+            // Esconde o loading
+            progressDialog.dismiss();
+
+            if (user.getLoginMethod() == LOGIN_WITH_FACEBOOK) {
+
+                // Sai do facebook
+                LoginManager.getInstance().logOut();
+
+            } else if (user.getLoginMethod() == LOGIN_WITH_GOOGLE) {
+
+                // Sai do google
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+
+            }
+
+            // Exibe a mensagem
+            Toast.makeText(LoginActivity.this, "Este usuário foi desabilitado do sistema", Toast.LENGTH_LONG).show();
+
+        }
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -287,7 +256,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
 
         if (requestCode == LOGIN_WITH_GOOGLE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            (new EasySpaGoogleCallback(this, permission)).process(result);
+            (new EasySpaGoogleCallback(this, permission, gps)).process(result);
         } else if (requestCode == LOGIN_WITH_FACEBOOK) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
@@ -297,6 +266,5 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         permission.processRequestCode(requestCode, permissions, grantResults);
     }
-
 }
 

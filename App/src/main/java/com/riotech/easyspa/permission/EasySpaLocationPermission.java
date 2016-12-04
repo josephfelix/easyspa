@@ -22,6 +22,8 @@ public class EasySpaLocationPermission {
     private LoginActivity activity;
     private EasySpaPermissionCallback callback;
 
+    private boolean granted = false;
+
     /**
      * Busca a activity que está sendo usada para buscar permissão
      * @return LoginActivity
@@ -62,8 +64,11 @@ public class EasySpaLocationPermission {
             if (permissionFineLocation == PackageManager.PERMISSION_GRANTED &&
                     permissionCoarseLocation == PackageManager.PERMISSION_GRANTED) {
 
+                granted = true;
+
                 // Se aprovada, vai para o método de aprovação
                 callback.onGranted();
+
             } else {
 
                 // Caso contrário, cria um vetor com as permissões necessárias
@@ -91,6 +96,8 @@ public class EasySpaLocationPermission {
             // Se o usuário tiver permitido
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                granted = true;
+
                 // Executa o onGranted
                 this.callback.onGranted();
             } else {
@@ -99,5 +106,14 @@ public class EasySpaLocationPermission {
                 this.callback.onDenied();
             }
         }
+    }
+
+    public boolean isGranted() {
+        return granted;
+    }
+
+
+    public boolean onDenied() {
+        return !granted;
     }
 }
