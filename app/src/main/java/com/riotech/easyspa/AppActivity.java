@@ -17,8 +17,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.riotech.easyspa.fragments.LocalidadeFragment;
 import com.riotech.easyspa.fragments.AgendaFragment;
 import com.riotech.easyspa.fragments.ConfiguracoesFragment;
 import com.riotech.easyspa.fragments.ConversasFragment;
@@ -38,6 +40,12 @@ public class AppActivity extends AppCompatActivity
         setContentView(R.layout.activity_app);
         session = new Session(this);
         User user = session.getUser();
+
+        // Busca o bairro/cidade do usuário e coloca no título
+        String currentLocation = session.getString("location");
+        if (currentLocation.length() > 0) {
+            setTitle(getTitle() + " - " + currentLocation);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,9 +111,14 @@ public class AppActivity extends AppCompatActivity
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        InicioFragment inicioFragment = new InicioFragment();
 
-        if (id == R.id.action_embelezar) {
-            return true;
+        if (id == R.id.alterar_localidade) {
+            LocalidadeFragment localidadeFragment = new LocalidadeFragment();
+            transaction
+                    .replace(R.id.easyspa_content, localidadeFragment, localidadeFragment.getTag())
+                    .addToBackStack(inicioFragment.getTag())
+                    .commit();
         }
 
         return super.onOptionsItemSelected(item);

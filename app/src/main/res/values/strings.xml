@@ -68,4 +68,11 @@
     <string name="title_categorias">Todas as categorias</string>
     <!-- -->
 
+    <!-- Localização -->
+    <string name="locationDialogTitle">Localização</string>
+    <string name="locationDialogMessage">É necessário ativar a localização para continuar, deseja ativar agora?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
